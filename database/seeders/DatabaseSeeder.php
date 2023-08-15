@@ -63,6 +63,56 @@ class DatabaseSeeder extends Seeder {
                 'password' => Hash::make('adminadmin'), 'role' => 'admin', 'created_at' => date("Y-m-d H:i:s"),
                 'updated_at' => date("Y-m-d H:i:s")]
         ]);
+
+        $data = [
+            ['targa' => 'AB123CD', 'modello' => 'Mitsubishi Mirage', 'marca' => 'Mitsubishi', 'prezzoGiornaliero' => 158.50, 'numeroPorte' => 4, 'tipoCambio' => 'manuale', 'bluetooth' => 0, 'gps' => 0, 'disponibilita' => 1, 'foto' => null],
+            ['targa' => 'CD987RS', 'modello' => 'Nissan Versa', 'marca' => 'Nissan', 'prezzoGiornaliero' => 159.00, 'numeroPorte' => 5, 'tipoCambio' => 'manuale', 'bluetooth' => 0, 'gps' => 0, 'disponibilita' => 1, 'foto' => null],
+            ['targa' => 'DE456FG', 'modello' => 'Toyota Corolla', 'marca' => 'Toyota', 'prezzoGiornaliero' => 161.00, 'numeroPorte' => 5, 'tipoCambio' => 'automatico', 'bluetooth' => 0, 'gps' => 0, 'disponibilita' => 1, 'foto' => null],
+            ['targa' => 'EF321AB', 'modello' => 'Nissan Leaf', 'marca' => 'Nissan', 'prezzoGiornaliero' => 161.50, 'numeroPorte' => 5, 'tipoCambio' => 'automatico', 'bluetooth' => 0, 'gps' => 0, 'disponibilita' => 1, 'foto' => null],
+            ['targa' => 'GH876PQ', 'modello' => 'BMW X3', 'marca' => 'BMW', 'prezzoGiornaliero' => 204.70, 'numeroPorte' => 5, 'tipoCambio' => 'automatico', 'bluetooth' => 1, 'gps' => 1, 'disponibilita' => 1, 'foto' => null],
+            ['targa' => 'IJ654KL', 'modello' => 'Toyota RAV4', 'marca' => 'Toyota', 'prezzoGiornaliero' => 205.00, 'numeroPorte' => 5, 'tipoCambio' => 'automatico', 'bluetooth' => 1, 'gps' => 1, 'disponibilita' => 1, 'foto' => null],
+            ['targa' => 'KL432IJ', 'modello' => 'Toyota Camry', 'marca' => 'Toyota', 'prezzoGiornaliero' => 205.00, 'numeroPorte' => 5, 'tipoCambio' => 'automatico', 'bluetooth' => 1, 'gps' => 1, 'disponibilita' => 1, 'foto' => null],
+            ['targa' => 'MN098OP', 'modello' => 'Toyota Prius', 'marca' => 'Toyota', 'prezzoGiornaliero' => 205.00, 'numeroPorte' => 5, 'tipoCambio' => 'automatico', 'bluetooth' => 1, 'gps' => 1, 'disponibilita' => 1, 'foto' => null],
+            ['targa' => 'OP765MN', 'modello' => 'Toyota Yaris', 'marca' => 'Toyota', 'prezzoGiornaliero' => 205.00, 'numeroPorte' => 5, 'tipoCambio' => 'automatico', 'bluetooth' => 1, 'gps' => 1, 'disponibilita' => 1, 'foto' => null],
+            ['targa' => 'PQ543GH', 'modello' => 'Toyota Corolla', 'marca' => 'Toyota', 'prezzoGiornaliero' => 205.00, 'numeroPorte' => 5, 'tipoCambio' => 'automatico', 'bluetooth' => 1, 'gps' => 1, 'disponibilita' => 1, 'foto' => null]        
+        ];
+        
+        DB::table('auto')->insert($data);
+
+        $data = [
+            [
+                'nome' => 'Luca', 'cognome' => 'Luca',
+                'email' => 'luca@example.com',
+                'username' => 'lucaluca',
+                'password' => Hash::make('lucaluca'),
+                'role' => 'utente',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s")
+            ],
+            [
+                'nome' => 'Anto',
+                'cognome' => 'Anto',
+                'email' => 'anto@example.com',
+                'username' => 'antoanto',
+                'password' => Hash::make('antoanto'),
+                'role' => 'staff',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s")
+            ],
+            [
+                'nome' => 'Admin',
+                'cognome' => 'Administrator',
+                'email' => 'admin@example.com',
+                'username' => 'adminadmin',
+                'password' => Hash::make('adminadmin'),
+                'role' => 'admin',
+                'email_verified_at' => now(),
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s")
+            ],
+        ];
+
+        DB::table('utenti')->insert($data);
     }
 
 }

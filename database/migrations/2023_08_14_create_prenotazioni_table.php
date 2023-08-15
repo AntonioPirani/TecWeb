@@ -11,14 +11,14 @@ class CreatePrenotazioniTable extends Migration
         Schema::create('prenotazioni', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('userId');
-            $table->unsignedBigInteger('autoId');
+            $table->string('autoTarga', 7);
             $table->date('dataInizio');
             $table->date('dataFine');
             $table->string('statoPrenotazione');
             $table->timestamps();
 
             $table->foreign('userId')->references('id')->on('utenti');  // TODO rivedere il model 
-            $table->foreign('autoId')->references('id')->on('auto');
+            $table->foreign('autoTarga')->references('targa')->on('auto');
         });
     }
 

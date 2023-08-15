@@ -14,7 +14,7 @@ class CreateAutoTable extends Migration
     public function up()    //unsigned = non negativo, index = creazione indice per velocizzare le ricerche
     {
         Schema::create('auto', function (Blueprint $table) {
-            $table->string('targa', 7);
+            $table->string('targa', 7)->primary();
             $table->string('modello', 10);
             $table->string('marca', 20);
             $table->float('prezzoGiornaliero')->unsigned()->index();    
