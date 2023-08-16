@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Authenticatable
 {
     use Notifiable;
-    protected $table = 'utente';
+    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.
