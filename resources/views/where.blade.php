@@ -4,10 +4,14 @@
 
 @section('content')
 <div class="static">
-    <br>
-    <center>
-        <h1>Dove Siamo</h1><br>
-        <iframe width="638" height="525" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.it/maps?f=q&amp;source=s_q&amp;hl=it&amp;geocode=&amp;q=Via+Brecce+Bianche,+12,+Ancona&amp;aq=0&amp;sll=41.442726,12.392578&amp;sspn=23.377375,53.657227&amp;ie=UTF8&amp;hq=&amp;hnear=Via+Brecce+Bianche,+12,+60131+Ancona,+Marche&amp;z=14&amp;ll=43.581248,13.515684&amp;output=embed"></iframe><br /><small><a href="http://maps.google.it/maps?f=q&amp;source=embed&amp;hl=it&amp;geocode=&amp;q=Via+Brecce+Bianche,+12,+Ancona&amp;aq=0&amp;sll=41.442726,12.392578&amp;sspn=23.377375,53.657227&amp;ie=UTF8&amp;hq=&amp;hnear=Via+Brecce+Bianche,+12,+60131+Ancona,+Marche&amp;z=14&amp;ll=43.581248,13.515684" style="color:#0000FF;text-align:left">Visualizzazione ingrandita della mappa</a></small>
-    </center>
+    <h1><center>Dove Siamo<center/></h1>
+    <p>
+        <center>
+            <a href="https://www.google.com/maps/place/Car+Point+-+Concessionaria+BMW+e+MINI+-+Pesaro/@43.9336225,12.840191,17z/data=!4m6!3m5!1s0x132d1ef3bda1386b:0xb3fd4b8e1b21ea97!8m2!3d43.9331788!4d12.8434534!16s%2Fg%2F1ptyc_3mw?entry=ttu" title="Home">Apri mappa
+            </a>
+        </center>
+    </p>
+    <div style="width: 100%"><iframe width="100%" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=strada%20della%20romagna,161%20Pesaro%20Italy+(Nolleggiauto)&amp;t=h&amp;z=17&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe></div>
+
 </div>
 @endsection

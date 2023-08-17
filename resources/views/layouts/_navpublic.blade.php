@@ -1,8 +1,15 @@
 <ul>
+
+    <!-- rotte pubbliche-->
     <li><a href="{{ route('catalog1') }}" title="Home">Catalogo</a></li>
-    <li><a href="{{ route('who') }}" title="Il nostro profilo aziendale">Chi siamo</a></li>
-    <li><a href="{{ route('where') }}" title="Dove trovarci">Dove Siamo</a></li>
-    <li><a href="mailto:info@acme.it" title="Mandaci un messaggio">Contattaci</a></li>
+    <li><a href="{{ route('where') }}" title="Dove trovarci">Dove ci puoi trovare</a></li>
+    <li><a href="mailto:info@acme.it" title="Mandaci un messaggio">Contattaci</a></li> <!-- la messaggistica va su questa rotta-->
+
+    <li><a>Applica filtri auto</a></li>
+    <li><a>Applica filtri data</a></li>
+
+    <!-- rotte per user admin e staff-->
+
     @can('isAdmin')
         <li><a href="{{ route('admin') }}" class="highlight" title="Home Admin">Home Admin</a></li>
     @endcan
@@ -14,8 +21,8 @@
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             {{ csrf_field() }}
         </form>
-    @endauth    
+    @endauth
     @guest
-        <li><a href="{{ route('login') }}" class="highlight" title="Accedi all'area riservata del sito">Accedi</a></li>  
+        <li><a href="{{ route('login') }}" class="highlight" title="Accedi all'area riservata del sito">Accedi</a></li>
     @endguest
 </ul>

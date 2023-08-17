@@ -4,8 +4,32 @@
 
 @section('content')
 <div class="static">
-  <br><center><h1>Chi siamo</h1></center><br>
-  <p>Sed lacus. Donec lectus. Nullam pretium nibh ut turpis. Nam bibendum. In nulla tortor, elementum vel, tempor at, varius non, purus. Mauris vitae nisl nec metus placerat consectetuer. Donec ipsum. Proin imperdiet est. Phasellus dapibus semper urna. Pellentesque ornare, orci in consectetuer hendrerit, urna elit eleifend nunc, ut consectetuer nisl felis ac diam. Etiam non felis. Donec ut ante. In id eros. Suspendisse lacus turpis, cursus egestas at sem. Phasellus pellentesque. Mauris quam enim, molestie in, rhoncus ut, lobortis a, est.</p>
-  <p>Sed lacus. Donec lectus. Nullam pretium nibh ut turpis. Nam bibendum. In nulla tortor, elementum vel, tempor at, varius non, purus. Mauris vitae nisl nec metus placerat consectetuer. Donec ipsum. Proin imperdiet est. Phasellus dapibus semper urna. Pellentesque ornare, orci in consectetuer hendrerit, urna elit eleifend nunc, ut consectetuer nisl felis ac diam. Etiam non felis. Donec ut ante. In id eros. Suspendisse lacus turpis, cursus egestas at sem. Phasellus pellentesque. Mauris quam enim, molestie in, rhoncus ut, lobortis a, est.</p>
-</div>
+<head>
+  <style>
+    table {
+      width: 100%;
+    }
+    td {
+      vertical-align: top;
+      width: 50%;
+    }
+  </style>
+</head>
+<body>
+
+<table>
+  <tr>
+    <td>
+      <h2>Chi siamo</h2>
+      <p>Siamo un team appassionato di esperti nel settore dell'automotive, determinati a rendere il tuo noleggio auto un'esperienza senza stress e piacevole. Con anni di esperienza nel campo, ci dedichiamo a fornire un servizio impeccabile, garantendo la massima comodità e soddisfazione in ogni singolo chilometro.</p>
+    </td>
+    <td>
+      <h2>La nostra missione</h2>
+      <p>La nostra missione è offrirti non solo una semplice auto a noleggio, ma un compagno di viaggio affidabile. Vogliamo rendere ogni viaggio un'avventura senza pensieri, offrendoti veicoli in condizioni ottimali e un servizio clienti sempre pronto ad assisterti.</p>
+    </td>
+  </tr>
+</table>
+ <div><h2><center><a href="{{ route('catalog1') }}" title="Home">  Partiamo! </center></h2></div>
+</body>
+
 @endsection
