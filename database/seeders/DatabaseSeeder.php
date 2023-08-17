@@ -65,16 +65,16 @@ class DatabaseSeeder extends Seeder {
         ]);
 
         $data = [
-            ['targa' => 'AB123CD', 'modello' => 'Mitsubishi Mirage', 'marca' => 'Mitsubishi', 'prezzoGiornaliero' => 158.50, 'numeroPorte' => 4, 'tipoCambio' => 'manuale', 'bluetooth' => 0, 'gps' => 0, 'disponibilita' => 1, 'foto' => null],
-            ['targa' => 'CD987RS', 'modello' => 'Nissan Versa', 'marca' => 'Nissan', 'prezzoGiornaliero' => 159.00, 'numeroPorte' => 5, 'tipoCambio' => 'manuale', 'bluetooth' => 0, 'gps' => 0, 'disponibilita' => 1, 'foto' => null],
-            ['targa' => 'DE456FG', 'modello' => 'Toyota Corolla', 'marca' => 'Toyota', 'prezzoGiornaliero' => 161.00, 'numeroPorte' => 5, 'tipoCambio' => 'automatico', 'bluetooth' => 0, 'gps' => 0, 'disponibilita' => 1, 'foto' => null],
-            ['targa' => 'EF321AB', 'modello' => 'Nissan Leaf', 'marca' => 'Nissan', 'prezzoGiornaliero' => 161.50, 'numeroPorte' => 5, 'tipoCambio' => 'automatico', 'bluetooth' => 0, 'gps' => 0, 'disponibilita' => 1, 'foto' => null],
-            ['targa' => 'GH876PQ', 'modello' => 'BMW X3', 'marca' => 'BMW', 'prezzoGiornaliero' => 204.70, 'numeroPorte' => 5, 'tipoCambio' => 'automatico', 'bluetooth' => 1, 'gps' => 1, 'disponibilita' => 1, 'foto' => null],
-            ['targa' => 'IJ654KL', 'modello' => 'Toyota RAV4', 'marca' => 'Toyota', 'prezzoGiornaliero' => 205.00, 'numeroPorte' => 5, 'tipoCambio' => 'automatico', 'bluetooth' => 1, 'gps' => 1, 'disponibilita' => 1, 'foto' => null],
-            ['targa' => 'KL432IJ', 'modello' => 'Toyota Camry', 'marca' => 'Toyota', 'prezzoGiornaliero' => 205.00, 'numeroPorte' => 5, 'tipoCambio' => 'automatico', 'bluetooth' => 1, 'gps' => 1, 'disponibilita' => 1, 'foto' => null],
-            ['targa' => 'MN098OP', 'modello' => 'Toyota Prius', 'marca' => 'Toyota', 'prezzoGiornaliero' => 205.00, 'numeroPorte' => 5, 'tipoCambio' => 'automatico', 'bluetooth' => 1, 'gps' => 1, 'disponibilita' => 1, 'foto' => null],
-            ['targa' => 'OP765MN', 'modello' => 'Toyota Yaris', 'marca' => 'Toyota', 'prezzoGiornaliero' => 205.00, 'numeroPorte' => 5, 'tipoCambio' => 'automatico', 'bluetooth' => 1, 'gps' => 1, 'disponibilita' => 1, 'foto' => null],
-            ['targa' => 'PQ543GH', 'modello' => 'Toyota Corolla', 'marca' => 'Toyota', 'prezzoGiornaliero' => 205.00, 'numeroPorte' => 5, 'tipoCambio' => 'automatico', 'bluetooth' => 1, 'gps' => 1, 'disponibilita' => 1, 'foto' => null]        
+            ['targa' => 'AB123CD', 'modello' => 'Mirage', 'marca' => 'Mitsubishi', 'prezzoGiornaliero' => 158.50, 'numeroPorte' => 4, 'cilindrata' => 100, 'tipoCambio' => 'manuale', 'optional' => 'bluetooth, gps', 'disponibilita' => 1, 'foto' => null],
+            ['targa' => 'CD987RS', 'modello' => 'Versa', 'marca' => 'Nissan', 'prezzoGiornaliero' => 159.00, 'numeroPorte' => 5, 'cilindrata' => 140, 'tipoCambio' => 'manuale', 'optional' => 'bluetooth, gps', 'disponibilita' => 1, 'foto' => null],
+            ['targa' => 'DE456FG', 'modello' => 'Corolla', 'marca' => 'Toyota', 'prezzoGiornaliero' => 161.00, 'numeroPorte' => 5, 'cilindrata' => 110, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps', 'disponibilita' => 1, 'foto' => null],
+            ['targa' => 'EF321AB', 'modello' => 'Leaf', 'marca' => 'Nissan', 'prezzoGiornaliero' => 161.50, 'numeroPorte' => 5, 'cilindrata' => 120, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps', 'disponibilita' => 1, 'foto' => null],
+            ['targa' => 'GH876PQ', 'modello' => 'BMW X3', 'marca' => 'BMW', 'prezzoGiornaliero' => 204.70, 'numeroPorte' => 5, 'cilindrata' => 100, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps', 'disponibilita' => 1, 'foto' => null],
+            ['targa' => 'IJ654KL', 'modello' => 'RAV4', 'marca' => 'Toyota', 'prezzoGiornaliero' => 205.00, 'numeroPorte' => 5, 'cilindrata' => 110, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps', 'disponibilita' => 1, 'foto' => null],
+            ['targa' => 'KL432IJ', 'modello' => 'Camry', 'marca' => 'Toyota', 'prezzoGiornaliero' => 205.00, 'numeroPorte' => 5, 'cilindrata' => 160, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps', 'disponibilita' => 1, 'foto' => null],
+            ['targa' => 'MN098OP', 'modello' => 'Prius', 'marca' => 'Toyota', 'prezzoGiornaliero' => 205.00, 'numeroPorte' => 5, 'cilindrata' => 110, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps', 'disponibilita' => 1, 'foto' => null],
+            ['targa' => 'OP765MN', 'modello' => 'Yaris', 'marca' => 'Toyota', 'prezzoGiornaliero' => 205.00, 'numeroPorte' => 5, 'cilindrata' => 90, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps', 'disponibilita' => 1, 'foto' => null],
+            ['targa' => 'PQ543GH', 'modello' => 'Corolla', 'marca' => 'Toyota', 'prezzoGiornaliero' => 205.00, 'numeroPorte' => 5, 'cilindrata' => 110, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps', 'disponibilita' => 1, 'foto' => null]        
         ];
         
         DB::table('auto')->insert($data);

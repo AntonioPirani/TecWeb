@@ -19,10 +19,10 @@ class CreateAutoTable extends Migration
             $table->string('marca', 20);
             $table->float('prezzoGiornaliero')->unsigned()->index();    
             $table->bigInteger('numeroPorte')->unsigned()->index();
+            $table->bigInteger('cilindrata')->unsigned();
             //$table->foreign('catId')->references('catId')->on('category');
             $table->string('tipoCambio', 10);
-            $table->boolean('bluetooth');
-            $table->boolean('gps');
+            $table->string('optional', 50);
             $table->boolean('disponibilita')->default(false)->index();
             $table->text('foto')->nullable();
             //allestimento? tabella aggiuntiva? oppure generico note
