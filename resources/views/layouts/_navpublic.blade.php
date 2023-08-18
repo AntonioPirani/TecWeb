@@ -5,9 +5,6 @@
     <li><a href="{{ route('where') }}" title="Dove trovarci">Dove ci puoi trovare</a></li>
     <li><a href="mailto:info@acme.it" title="Mandaci un messaggio">Contattaci</a></li> <!-- la messaggistica va su questa rotta-->
 
-    <li><a>Applica filtri auto</a></li>
-    <li><a>Applica filtri data</a></li>
-
     <!-- rotte per user admin e staff-->
 
     @can('isAdmin')

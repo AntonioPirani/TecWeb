@@ -106,7 +106,7 @@ a:hover {
 	padding: 90px 10px;
 	font: normal 14px Georgia, "Times New Roman", Times, serif;
 	font-style: italic;
-} 
+}
 
 #logo a {
 	border: none;
@@ -357,7 +357,7 @@ a:hover {
 	float: left;
 	width: 25%;
 	padding: 60px 0 0 20px;
-	color: #787878;
+	color: rgba(14, 40, 176, 0.98);
 	border-radius: 4px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -391,15 +391,18 @@ a:hover {
 }
 
 #sidebar h2 {	/*Categorie */
-	height: 32px;
+	height: 44px;
 	padding: 8px 0 0 30px;
-	background: #000;
+	background: rgba(0, 253, 202, 0.24);
 	letter-spacing: -.5px;
-	color: #FFFFFF;
+	color: rgba(14, 40, 176, 0.69);
+    font-style: oblique;
 }
 
 #sidebar p {
-	padding-bottom: 20px;
+    font-style: normal;
+    font-size: small;
+	padding-bottom: 0;
 	text-align: justify;
 }
 
@@ -473,12 +476,12 @@ a:hover {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;
   color: #555555;
-  line-height: 1,5;
+  line-height: 1;
 }
 
 .input {
   display: block;
-  width: 90%; 
+  width: 90%;
   background: #f2f2f2;
   border-radius: 2px;
   font-family: Arial, Helvetica, sans-serif;
