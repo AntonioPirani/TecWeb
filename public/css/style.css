@@ -7,19 +7,21 @@ Released for free under a Creative Commons Attribution 2.5 License
 body {
 	margin: 0;
 	padding: 0;
-	background: #E3E7ED url(images/img01.gif) repeat-x left top;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
-	color: #787878;
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+	line-height: 1.6;
+	color: #333;
+	background: #f7f7f7;
 }
 
 #bodyadmin {
 	margin: 0;
 	padding: 0;
-	background: #dde1e9 url(images/img12.gif) repeat-x left top;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+	line-height: 1.6;
 	color: #787878;
+	background: #f7f7f7;
 }
 
 h1, h2, h3 {
@@ -71,7 +73,9 @@ a:hover {
 	width: 968px;
 	height: 150px;
 	margin: 0 auto;
-	background: url(images/img02.gif) no-repeat left top;
+	background: #53a847;
+	color: #fff;
+	text-align: center;
 }
 
 /* Logo */
@@ -82,7 +86,7 @@ a:hover {
 	height: 60px;
 	color: #616161;
 }
-
+/* Da centrare o lasciare cosi? + immagine*/
 #logo h1, #logo p {
 	margin: 0;
 	padding: 0;
@@ -150,20 +154,23 @@ a:hover {
 	height: 50px;
 	margin: 0 auto;
 	padding: 0;
+	background: #333;
 }
 
 #menu ul {
 	margin: 0;
 	padding: 0;
 	padding-left: 10px;
-	list-style: none;
 	line-height: normal;
+	list-style: none;
+  	overflow: hidden;
 }
 
 #menu li {
 	float: left;
 	height: 50px;
-	background: url(images/img03.gif) no-repeat right top;
+	display: inline;
+	margin-right: 10px;
 }
 
 #menu a {
@@ -176,10 +183,12 @@ a:hover {
 	font-size: 13px;
 	color: #FFFFFF;
 	border: none;
+	font-weight: bold;
+	transition: color 0.3s;
 }
 
 #menu a.highlight {
-	color: #e88c8c;
+	color: #b25beb;
 }
 
 #menu a:hover, #menu .current_page_item a {
@@ -211,34 +220,36 @@ a:hover {
 	padding: 60px 20px 20px 20px;
 }
 
-/* Content */
+/* Content definire dx o sx*/
 
 #content {
 	float: right;
-	width: 700px;
 	padding: 60px 20px 0 0;
+	width: 70%; /*70 qui 22*/
 }
-
+/*Da ridefinire con il prodotto la disposizione immagine e testo*/
 .prod {
 	margin-bottom: 8px;
-	background: url(images/img09.jpg) repeat-y left top;
+	background-image: linear-gradient(rgb(192, 225, 211), rgb(196, 242, 185));
 }
 
-.prod-bgtop {
+/* .prod-bgtop {
 	background: url(images/img08.jpg) no-repeat left top;
 }
 
 .prod-bgbtm {
 	background: url(images/img10.jpg) no-repeat left bottom;
-}
+} */
 
-.prod .oneitem {
+.prod .oneitem {		/*oneitem contiene image, title, pricebox, meta (quest ultima è la desc breve)*/
 	padding: 10px 20px 15px 20px;
 	height:100px;
 	border-bottom: 2px dashed #B5DEF4;
 }
 
 .prod .title {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 33px;
 	padding-top: 15px;
 	padding-left: 20px;
 	color: #000000;
@@ -251,18 +262,19 @@ a:hover {
 
 .prod .meta {
 	padding-left: 20px;
-	padding-bottom: 5px;
+	padding-bottom: 10px;
 	text-align: left;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 11px;
 	font-style: italic;
+	color: #666;
 }
 
-.prod .entry {
+.prod .entry {	/*descrizione lunga*/
 	padding: 10px 20px 15px 20px;
 	text-align: justify;
 }
-
+/*da rivedere*/
 .prod .image {
 	float:left;
 	text-align: left;
@@ -301,7 +313,7 @@ a:hover {
     font-weight: bold;
     text-align: right;
 }
-
+/*ci serve?*/
 .prod .pricebox .discprice{
     color: #CC0000;
     font-family: Verdana;
@@ -343,9 +355,11 @@ a:hover {
 
 #sidebar {
 	float: left;
-	width: 220px;
+	width: 25%;
 	padding: 60px 0 0 20px;
 	color: #787878;
+	border-radius: 4px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 #sidebar ul {
@@ -368,7 +382,7 @@ a:hover {
 	border-bottom: 1px dashed #D2D4C9;
 }
 
-#sidebar li li span {
+#sidebar li li span { /*Span tra Sottotitolo Computer e Elenco*/
 	display: block;
 	margin-top: -20px;
 	padding: 0;
@@ -376,10 +390,10 @@ a:hover {
 	font-style: italic;
 }
 
-#sidebar h2 {
+#sidebar h2 {	/*Categorie */
 	height: 32px;
 	padding: 8px 0 0 30px;
-	background: url(images/img11.gif) no-repeat left top;
+	background: #000;
 	letter-spacing: -.5px;
 	color: #FFFFFF;
 }
@@ -390,7 +404,7 @@ a:hover {
 }
 
 #sidebar a {
-	color: #417FDA;
+	color: #6041da;
 	border: none;
 }
 
