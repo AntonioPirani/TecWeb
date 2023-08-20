@@ -73,19 +73,33 @@ a:hover {
 	width: 968px;
 	height: 150px;
 	margin: 0 auto;
-	background: #53a847;
+	background: #caead3;
 	color: #fff;
 	text-align: center;
 }
 
 /* Logo */
 
-#logo {
-	float: left;
-	width: 968px;
-	height: 60px;
-	color: #616161;
+#logoImg {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    text-align: center; /* Center the content horizontally */
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
 }
+
+#logoImg img {
+    width: 450px;
+    height: auto;
+}
+
+#logoImg img {
+    max-width: 100%; /* Set the image's maximum width to 100% of its container */
+    height: auto; /* Allow the image's height to adjust proportionally */
+}
+
 /* Da centrare o lasciare cosi? + immagine*/
 #logo h1, #logo p {
 	margin: 0;
@@ -444,7 +458,8 @@ a:hover {
 	margin: 0 auto;
 	padding: 0px 0 15px 0;
 	font-family: Arial, Helvetica, sans-serif;
-	color: #B2B2B2;
+	color: #000000;
+	background-color: #caead3;
 }
 
 #footer p {

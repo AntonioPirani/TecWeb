@@ -8,9 +8,8 @@
     <body>
         <div id="wrapper">
             <div id="header">
-                <div id="logo">
-                    <h1><a href=""> Nolleggiauto  </a></h1>
-                    <p>Le migliori auto per te</p>
+                <div id="logoImg">
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo">
                 </div>
             </div>
 
@@ -30,33 +29,12 @@
             </div>
 
             <!-- end #content -->
-            <footer>
-                <div class="container">
-                    <div class="footer-content">
-                        </div>
-                            <center>
-                                <p> Guida verso il tuo destino con stile e comfort.<br>Scopri la libertà su strada con i nostri veicoli di qualità.<br> Scegli <i>Nolleggiauto</i> per un viaggio senza confini e senza pensieri.</p>
-                            </center>
-                        </div>
 
-                        <div class="footer-logo">
-                            <img src="logo.png" alt="todo: qui ci va il logo salvato come logo.png">
-                        </div>
-
-                        <div class="footer-links">
-                            <ul>
-                                <li><a href="{{ route('catalog1') }}" title="Home">Catalogo</li>
-                                <li><a href="{{ route('who') }}" title="Il nostro profilo aziendale">Chi siamo</a></li>
-                                <li><a href="#">Services</a></li>
-                                <li><a href="{{ route('who')}}" title="Il nostro profilo aziendale">Contatti</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="footer-bar">
-                        <p>&copy; 2023 No rights reserved. </p>
-                    </div>
-                </div>
-            </footer>
+            <div id="footer">
+                <p><br> Guida verso il tuo destino con stile e comfort.<br>Scopri la libertà su strada con i nostri veicoli di qualità.
+                <br> Scegli <i>Nolleggiauto</i> per un viaggio senza confini e senza pensieri.<br><br>
+                &copy; 2023 No rights reserved.<br> </p>
+            </div>
 
             <!-- end #footer -->
         </div>

@@ -8,9 +8,8 @@
     <body>
         <div id="wrapper">
             <div id="header">
-                <div id="logo">
-                    <h1><a href="">ACME S.p.A  </a></h1>
-                    <p>i migliori prodotti alla portata di un click</p>
+                <div id="logoImg">
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo">
                 </div>
             </div>
 
@@ -31,8 +30,9 @@
 
             <!-- end #content -->
             <div id="footer">
-                <br>
-                <p>universit&agrave; politecnica delle marche - Corso di  <a href="https://learn.univpm.it/course/view.php?id=7098">tecnologie web</a>.</p>
+                <p><br> Guida verso il tuo destino con stile e comfort.<br>Scopri la libertà su strada con i nostri veicoli di qualità.
+                <br> Scegli <i>Nolleggiauto</i> per un viaggio senza confini e senza pensieri.<br><br>
+                &copy; 2023 No rights reserved.<br> </p>
             </div>
             <!-- end #footer -->
         </div>

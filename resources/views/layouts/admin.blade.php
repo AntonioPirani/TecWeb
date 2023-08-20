@@ -27,8 +27,9 @@
 
             <!-- end #content -->
             <div id="footer">
-                <br>
-                <p>universit&agrave; politecnica delle marche - Corso di  <a href="https://learn.univpm.it/course/view.php?id=7098">tecnologie web</a>.</p>
+                <p><br> Guida verso il tuo destino con stile e comfort.<br>Scopri la libertà su strada con i nostri veicoli di qualità.
+                <br> Scegli <i>Nolleggiauto</i> per un viaggio senza confini e senza pensieri.<br><br>
+                &copy; 2023 No rights reserved.<br> </p>
             </div>
             <!-- end #footer -->
         </div>
