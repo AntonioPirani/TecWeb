@@ -15,16 +15,21 @@
                         @include('helpers/productImg', ['attrs' => 'imagefrm', 'imgFile' => $product->image])
                     </div>
                     <div class="info">
-                        <h1 class="title">Prodotto: {{ $product->name }}</h1>
-                        <p class="meta">Descrizione Breve: {{ $product->descShort }}</p>
+                        <h1 class="title">Modello: {{ $product->name }}</h1>
+                        <p class="meta">Numero posti: 5<br>
+                            Cilindrata: 100 cv<br>
+                            Tipo cambio: manuale<br>
+                            Optional: GPS, bluetooth
+                        </p>
+                        <p class="price">Prezzo giornaliero: {{ $product->price }}€</p>
                     </div>
-                    <div class="pricebox">
+                    <!-- <div class="pricebox">
                         @include('helpers/productPrice')
-                    </div>
+                    </div> -->
                 </div>
-                <div class="entry">
+                <!-- <div class="entry">
                     <p>Descrizione Estesa: {!! $product->descLong !!}</p>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
