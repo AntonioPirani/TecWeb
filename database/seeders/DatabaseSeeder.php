@@ -64,6 +64,15 @@ class DatabaseSeeder extends Seeder {
                 'updated_at' => date("Y-m-d H:i:s")]
         ]);
 
+        DB::table('utenti')->insert([
+            ['nome' => 'Antonio', 'cognome' => 'Pirani', 'email' => 'anto@anto.it', 'username' => 'antoanto',
+                'password' => Hash::make('antoanto'), 'role' => 'user'],
+            ['nome' => 'Luca', 'cognome' => 'Sabatini', 'email' => 'luca@luca.it', 'username' => 'lucaluca',
+                'password' => Hash::make('lucaluca'), 'role' => 'user'],
+            ['nome' => 'Mario', 'cognome' => 'Rossi', 'email' => 'mario@rossi.it', 'username' => 'adminadmin',
+                'password' => Hash::make('adminadmin'), 'role' => 'admin',]
+        ]);
+
         $data = [
             ['targa' => 'AB123CD', 'modello' => 'Mirage', 'marca' => 'Mitsubishi', 'prezzoGiornaliero' => 158.50, 'numeroPorte' => 4, 'cilindrata' => 100, 'tipoCambio' => 'manuale', 'optional' => 'bluetooth, gps', 'disponibilita' => 1, 'foto' => null],
             ['targa' => 'CD987RS', 'modello' => 'Versa', 'marca' => 'Nissan', 'prezzoGiornaliero' => 159.00, 'numeroPorte' => 5, 'cilindrata' => 140, 'tipoCambio' => 'manuale', 'optional' => 'bluetooth, gps', 'disponibilita' => 1, 'foto' => null],
@@ -78,41 +87,5 @@ class DatabaseSeeder extends Seeder {
         ];
         
         DB::table('auto')->insert($data);
-
-        $data = [
-            [
-                'nome' => 'Luca', 'cognome' => 'Luca',
-                'email' => 'luca@example.com',
-                'username' => 'lucaluca',
-                'password' => Hash::make('lucaluca'),
-                'role' => 'utente',
-                'created_at' => date("Y-m-d H:i:s"),
-                'updated_at' => date("Y-m-d H:i:s")
-            ],
-            [
-                'nome' => 'Anto',
-                'cognome' => 'Anto',
-                'email' => 'anto@example.com',
-                'username' => 'antoanto',
-                'password' => Hash::make('antoanto'),
-                'role' => 'staff',
-                'created_at' => date("Y-m-d H:i:s"),
-                'updated_at' => date("Y-m-d H:i:s")
-            ],
-            [
-                'nome' => 'Admin',
-                'cognome' => 'Administrator',
-                'email' => 'admin@example.com',
-                'username' => 'adminadmin',
-                'password' => Hash::make('adminadmin'),
-                'role' => 'admin',
-                'email_verified_at' => now(),
-                'created_at' => date("Y-m-d H:i:s"),
-                'updated_at' => date("Y-m-d H:i:s")
-            ],
-        ];
-
-        DB::table('utenti')->insert($data);
-    }
-
+}
 }

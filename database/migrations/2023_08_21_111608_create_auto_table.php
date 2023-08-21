@@ -1,17 +1,17 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateAutoTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()    //unsigned = non negativo, index = creazione indice per velocizzare le ricerche
+    public function up()
     {
         Schema::create('auto', function (Blueprint $table) {
             $table->string('targa', 7)->primary();
@@ -25,7 +25,6 @@ class CreateAutoTable extends Migration
             $table->string('optional', 50);
             $table->boolean('disponibilita')->default(false)->index();
             $table->text('foto')->nullable();
-            //allestimento? tabella aggiuntiva? oppure generico note
         });
     }
 
@@ -38,4 +37,4 @@ class CreateAutoTable extends Migration
     {
         Schema::dropIfExists('auto');
     }
-}
+};

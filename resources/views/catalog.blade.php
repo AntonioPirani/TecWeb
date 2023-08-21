@@ -16,7 +16,7 @@
                     </div>
                     <div class="info">
                         <h1 class="title">Modello: {{ $product->name }}</h1>
-                        <p class="meta">Numero posti: 5<br>
+                        <p class="meta">Numero porte: 5<br>
                             Cilindrata: 100 cv<br>
                             Tipo cambio: manuale<br>
                             Optional: GPS, bluetooth

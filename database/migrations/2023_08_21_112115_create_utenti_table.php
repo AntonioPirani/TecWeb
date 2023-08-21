@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUtentiTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class CreateUtentiTable extends Migration
     public function up()
     {
         Schema::create('utenti', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id(); // Make userId the primary key
             $table->string('nome');
             $table->string('cognome');
             $table->string('email')->unique();
@@ -23,8 +23,8 @@ class CreateUtentiTable extends Migration
             $table->string('password');
             $table->string('role', 10)->default('utente'); //admin, staff, utente
             $table->rememberToken();
-            $table->timestamps();                        
-        });
+            $table->timestamps();
+        });        
     }
 
     /**
@@ -36,4 +36,4 @@ class CreateUtentiTable extends Migration
     {
         Schema::dropIfExists('utenti');
     }
-}
+};
