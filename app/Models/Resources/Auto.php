@@ -15,18 +15,16 @@ class Auto extends Model {
     public $timestamps = false;
 
     protected $fillable = [
-        'prezzo_giornaliero',
-        'carburante',
+        'targa',
         'modello',
-        'numero_posti',
+        'marca',
+        'prezzoGiornaliero',
+        'numeroPorte',
         'cilindrata',
-        'tipo_cambio',
-        'numero_porte',
-        'climatizzazione',
-        'radio',
-        'gps',
-        'cruise_control',
-        'bluetooth',
+        'tipoCambio',
+        'optional',
+        'disponibilita',
+        'foto'
     ];
 
     // Restituisce tutte le auto

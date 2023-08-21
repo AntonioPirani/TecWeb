@@ -18,7 +18,6 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'surname',
-        'data_di_nascita',  //questo campo non c'è nella tabella del db
         'email',
         'username',
         'password',
