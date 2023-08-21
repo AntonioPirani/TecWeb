@@ -10,6 +10,7 @@
             <div id="header">
                 <div id="logoImg">
                     <img src="{{ asset('images/logo.png') }}" alt="Logo">
+                    <!-- TEST -->
                 </div>
             </div>
 
