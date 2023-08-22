@@ -7,7 +7,7 @@
         <div class="prod-bgtop">
             <div class="prod-bgbtm">
                 <div class="oneitem">
-                    <div class="image">
+                    <div>
                         <img src="public/images/autoIMG/Audi_A5_Sportback.jpg" alt="Description of the image">
                     </div>
                     <div class="info">
@@ -19,17 +19,16 @@
                         </p>
                         <p class="price">Prezzo giornaliero: {{ $product->prezzoGiornaliero }}€</p>
                     </div>
-                    <!-- <div class="pricebox">
-                        @include('helpers/productPrice')
-                    </div> -->
+
                 </div>
-                <!-- <div class="entry">
-                    <p>Descrizione Estesa: {!! $product->descLong !!}</p>
-                </div> -->
+
             </div>
         </div>
     </div>
     @endforeach
+
+{{--    penso che questo serva per sistemare la pagina ma non funziona--}}
+{{--    @include('pagination.paginator', ['paginator' => $autos])--}}
   @endisset
 
 
