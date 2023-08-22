@@ -23,7 +23,7 @@
             <div id="page">
                 <div id="page-bgtop">
                     <div id="page-bgbtm">
-                        @yield('content')
+                        @yield('contentAuto')
                         <div style="clear: both;">&nbsp;</div>
                     </div>
                 </div>

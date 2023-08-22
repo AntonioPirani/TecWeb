@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\Resources\Category;
+use App\Models\Resources\Auto;use App\Models\Resources\Category;
 use App\Models\Resources\Product;
 
 class Catalog {
 
+    public function getAll(){
+        return Auto::all();
+    }
     public function getTopCats() {
         return Category::where('parId', 0)->get();
     }

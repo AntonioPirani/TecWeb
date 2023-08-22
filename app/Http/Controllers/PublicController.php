@@ -17,6 +17,8 @@ class PublicController extends Controller
 
     public function showCatalog1() {
 
+        return view('autoCat');
+        /*
         //Categorie Top
         $topCats = $this->_catalogModel->getTopCats();
 
@@ -26,6 +28,7 @@ class PublicController extends Controller
         return view('catalog')
                         ->with('topCategories', $topCats)
                         ->with('products', $prods);
+        */
     }
 
     public function showCatalog2($topCatId) {
