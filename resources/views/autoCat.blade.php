@@ -14,13 +14,13 @@
                         @include('helpers/productImg', ['attrs' => 'imagefrm', 'imgFile' => $product->image])
                     </div>
                     <div class="info">
-                        <h1 class="title">Modello: {{ $product->name }}</h1>
+                        <h1 class="title">Modello: {{ $product->modello }}</h1>
                         <p class="meta">Numero porte: 5<br>
                             Cilindrata: 100 cv<br>
                             Tipo cambio: manuale<br>
                             Optional: GPS, bluetooth
                         </p>
-                        <p class="price">Prezzo giornaliero: {{ $product->price }}€</p>
+                        <p class="price">Prezzo giornaliero: {{ $product->getPrice }}€</p>
                     </div>
                     <!-- <div class="pricebox">
                         @include('helpers/productPrice')

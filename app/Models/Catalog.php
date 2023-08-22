@@ -7,7 +7,7 @@ use App\Models\Resources\Product;
 
 class Catalog {
 
-    public function getAll(){
+    public function getAll():\Illuminate\Database\Eloquent\Collection{
         return Auto::all();
     }
     public function getTopCats() {

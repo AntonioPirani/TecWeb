@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Auto extends Model {
 
-    protected $table = 'auto';  
+    protected $table = 'auto';
     protected $primaryKey = 'targa';    //la targa è l'ID
-    
+
     // targa non modificabile da un HTTP Request (Mass Assignment)
     protected $guarded = ['targa'];
 
@@ -43,6 +43,11 @@ class Auto extends Model {
     public function getAutoByPrezzo($prezzoMinimo, $prezzoMassimo)
     {
         return self::whereBetween('prezzo_giornaliero', [$prezzoMinimo, $prezzoMassimo])->get();
+    }
+
+    public function getPrice(){
+
+        return $this->price;
     }
 
 

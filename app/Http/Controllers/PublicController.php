@@ -17,7 +17,10 @@ class PublicController extends Controller
 
     public function showCatalog1() {
 
-        return view('autoCat');
+        $auto=$this->_catalogModel->getAll();
+        $prods=$auto;
+        return view('autoCat')
+        ->with('products',$prods);
         /*
         //Categorie Top
         $topCats = $this->_catalogModel->getTopCats();
