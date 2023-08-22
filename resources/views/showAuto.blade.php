@@ -1,27 +1,23 @@
 @extends('layouts.public')
-
-@section('title', 'Catalogo Prodotti')
-
-<!-- inizio sezione prodotti -->
-@section('content')
+@section('show')
 <div id="content">
-  @isset($products)
-    @foreach ($products as $product)
+  @isset($autos)
+    @foreach ($autos as $product)
     <div class="prod">
         <div class="prod-bgtop">
             <div class="prod-bgbtm">
                 <div class="oneitem">
                     <div class="image">
-                        @include('helpers/productImg', ['attrs' => 'imagefrm', 'imgFile' => $product->image])
+                        <img src="public/images/autoIMG/Audi_A5_Sportback.jpg" alt="Description of the image">
                     </div>
                     <div class="info">
-                        <h1 class="title">Modello: {{ $product->name }}</h1>
-                        <p class="meta">Numero porte: 5<br>
-                            Cilindrata: 100 cv<br>
-                            Tipo cambio: manuale<br>
-                            Optional: GPS, bluetooth
+                        <h1 class="title">Modello: {{ $product->modello }}</h1>
+                        <p class="meta">Numero porte: {{ $product->numeroPorte }}<br>
+                            Cilindrata: {{ $product->cilindrata }} cv<br>
+                            Tipo cambio: {{ $product->tipoCambio }}<br>
+                            Optional: {{ $product->optional }}
                         </p>
-                        <p class="price">Prezzo giornaliero: {{ $product->price }}€</p>
+                        <p class="price">Prezzo giornaliero: {{ $product->prezzoGiornaliero }}€</p>
                     </div>
                     <!-- <div class="pricebox">
                         @include('helpers/productPrice')
@@ -34,12 +30,8 @@
         </div>
     </div>
     @endforeach
+  @endisset
 
-    <!--Paginazione-->
-    @include('pagination.paginator', ['paginator' => $products])
-
-  @endisset()
-</div>
 
 <!-- fine sezione prodotti -->
 
@@ -80,7 +72,7 @@
 {{--    <br><button onclick="applySeatsFilter()">Applica i Filtri</button>--}}
 
   </div>
-<!--versione vecchia-->
+{{--<!--versione vecchia-->--}}
 {{--    <!----}}
 {{--    <ul>--}}
 {{--        <li>--}}
@@ -107,5 +99,6 @@
 </div>
 <!-- fine sezione laterale -->
 @endsection
+
 
 

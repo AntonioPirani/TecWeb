@@ -27,6 +27,11 @@ class Auto extends Model {
         'foto'
     ];
 
+    protected $casts = [
+        'targa'=>'string',
+
+];
+
     // Restituisce tutte le auto
     public function getAllAuto()
     {

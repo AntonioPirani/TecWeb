@@ -23,7 +23,7 @@
             <div id="page">
                 <div id="page-bgtop">
                     <div id="page-bgbtm">
-                        @yield('resources/views/autoCat.blade.php')
+                        @yield('show')
                         <div style="clear: both;">&nbsp;</div>
                     </div>
                 </div>

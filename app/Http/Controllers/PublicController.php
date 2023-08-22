@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Catalog;
+use App\Models\Resources\Auto;
 use Illuminate\Support\Facades\Log;
 
 
@@ -15,13 +16,15 @@ class PublicController extends Controller
         $this->_catalogModel = new Catalog;
     }
 
+    public function showAuto(){
+        $autos = Auto::whereNotNull('foto')->get(); // Retrieve all records from the Auto table
+
+    return view('showAuto', ['autos' => $autos]);
+    }
     public function showCatalog1() {
 
-        $auto=$this->_catalogModel->getAll();
-        $prods=$auto;
-        return view('autoCat')
-        ->with('products',$prods);
-        /*
+
+
         //Categorie Top
         $topCats = $this->_catalogModel->getTopCats();
 
@@ -31,7 +34,7 @@ class PublicController extends Controller
         return view('catalog')
                         ->with('topCategories', $topCats)
                         ->with('products', $prods);
-        */
+
     }
 
     public function showCatalog2($topCatId) {

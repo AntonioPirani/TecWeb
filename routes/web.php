@@ -16,6 +16,9 @@ use App\Http\Controllers\UserController;
 |
 */
 
+Route::get('/show', [PublicController::class, 'showAuto'])
+        ->name('auto');
+
 Route::get('/', [PublicController::class, 'showCatalog1'])
         ->name('catalog1');
 
