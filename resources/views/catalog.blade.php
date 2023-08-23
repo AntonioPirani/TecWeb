@@ -6,30 +6,26 @@
 @section('content')
 <div id="content">
   @isset($products)
-    @foreach ($products as $product)
+    @foreach ($products as $product)    <!-- $products è un array di oggetti di tipo Auto passati da PublicController-->
     <div class="prod">
         <div class="prod-bgtop">
             <div class="prod-bgbtm">
                 <div class="oneitem">
                     <div class="image">
-                        @include('helpers/productImg', ['attrs' => 'imagefrm', 'imgFile' => $product->image])
+                        @include('helpers/productImg', ['attrs' => 'imagefrm', 'imgFile' => $product->foto])
                     </div>
                     <div class="info">
-                        <h1 class="title">Modello: {{ $product->name }}</h1>
-                        <p class="meta">Numero porte: 5<br>
-                            Cilindrata: 100 cv<br>
-                            Tipo cambio: manuale<br>
-                            Optional: GPS, bluetooth
+                        <h1 class="title">Modello: {{ $product->modello }}</h1>
+                        <p class="meta">Numero porte: {{ $product->numeroPorte }}<br>
+                            Cilindrata: {{ $product->cilindrata }} cv<br>
+                            Tipo cambio: {{ $product->tipoCambio }}<br>
+                            Optional: {{ $product->optional }}<br>
+                            Targa: {{ $product->targa }}
                         </p>
-                        <p class="price">Prezzo giornaliero: {{ $product->price }}€</p>
+                        <p class="price">Prezzo giornaliero: {{ $product->prezzoGiornaliero }}€</p>
                     </div>
-                    <!-- <div class="pricebox">
-                        @include('helpers/productPrice')
-                    </div> -->
+                    
                 </div>
-                <!-- <div class="entry">
-                    <p>Descrizione Estesa: {!! $product->descLong !!}</p>
-                </div> -->
             </div>
         </div>
     </div>
@@ -81,29 +77,6 @@
 
   </div>
 <!--versione vecchia-->
-    <!--
-    <ul>
-        <li>
-            <h2>Filtri</h2>
-            <ul>
-                @foreach ($topCategories as $category)
-                <li><a href="{{ route('catalog2', [$category->catId]) }}">{{ $category->name }}</a><span>{{ $category->desc }}</span></li>
-                @endforeach
-            </ul>
-        </li>
-
-        @isset($selectedTopCat)
-        <li>
-            <h2>In {{ $selectedTopCat->name }}</h2>
-            <ul>
-                @foreach ($subCategories as $subCategory)
-                <li><a href="{{ route('catalog3', [$selectedTopCat->catId, $subCategory->catId]) }}">{{ $subCategory->name }}</a><span>{{ $subCategory->desc }}</span></li>
-                @endforeach
-            </ul>
-        </li>
-        @endisset
-    </ul>
-    -->
 </div>
 <!-- fine sezione laterale -->
 @endsection

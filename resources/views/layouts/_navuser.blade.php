@@ -1,6 +1,6 @@
 <ul>
     <li><a href="{{ route('user') }}" title="Va alla Home di User">Home</a></li>
-    <li><a href="{{ route('catalog1') }}" title="Visualizza il Catalogo Prodotti">Catalogo</a></li>
+    <li><a href="{{ route('auto') }}" title="Visualizza il Catalogo Prodotti">Catalogo</a></li>
     <li><a href="{{ route('user') }}" title="Azione1">Azione1</a></li>
     <li><a href="{{ route('user') }}" title="Azione2">Azione2</a></li>
     <li><a href="{{ route('user') }}" title="Azione3">Azione3</a></li>

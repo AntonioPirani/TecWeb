@@ -10,7 +10,9 @@ class Auto extends Model {
     protected $primaryKey = 'targa';    //la targa è l'ID
     
     // targa non modificabile da un HTTP Request (Mass Assignment)
-    protected $guarded = ['targa'];
+    protected $casts = [
+        'targa'=>'string',
+    ];
 
     public $timestamps = false;
 

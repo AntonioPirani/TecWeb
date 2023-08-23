@@ -16,8 +16,8 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', [PublicController::class, 'showCatalog1'])
-        ->name('catalog1');
+Route::get('/', [PublicController::class, 'showAuto'])
+        ->name('auto');
 
 Route::get('/selTopCat/{topCatId}', [PublicController::class, 'showCatalog2'])
         ->name('catalog2');

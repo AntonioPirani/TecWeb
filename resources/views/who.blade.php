@@ -29,7 +29,7 @@
     </td>
   </tr>
 </table>
- <div><h2><center><a href="{{ route('catalog1') }}" title="Home">  Partiamo! </center></h2></div>
+ <div><h2><center><a href="{{ route('auto') }}" title="Home">  Partiamo! </center></h2></div>
 </body>
 
 @endsection
