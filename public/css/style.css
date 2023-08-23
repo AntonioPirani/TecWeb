@@ -336,18 +336,18 @@ a:hover {
 } */
 
 .prod .oneitem {
-    display: flex; 
-    align-items: center; 
+    display: flex;
+    align-items: center;
 }
 
 .prod .image {
-    flex: 1; 
-    padding: 10px; 
+    flex: 1;
+    padding: 10px;
 }
 
 .prod .info {
-    flex: 2; 
-    padding: 10px; 
+    flex: 2;
+    padding: 10px;
 }
 
 .prod .price{
@@ -605,4 +605,9 @@ a:hover {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;
   color: #555555;
+}
+
+.resized-image {
+    width: 300px; /* Set the width you desire */
+    height: auto; /* Automatically adjust the height to maintain aspect ratio */
 }

@@ -7,4 +7,4 @@
         }
 
 @endphp
-<img src="{{ asset('public/images/autoIMG' . $imgFile) }}" {!! $attrs !!}>
+<img src="{{ asset('images/autoIMG/' . $imgFile) }}" {!! $attrs !!}>
