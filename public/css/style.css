@@ -344,6 +344,11 @@ a:hover {
     flex: 1;
     padding: 10px;
 }
+.prod .image .imagefrm {
+    max-width: 50%;
+    height: auto;
+
+}
 
 .prod .info {
     flex: 2;
@@ -608,6 +613,6 @@ a:hover {
 }
 
 .resized-image {
-    width: 300px; /* Set the width you desire */
+    width: 150px; /* Set the width you desire */
     height: auto; /* Automatically adjust the height to maintain aspect ratio */
 }

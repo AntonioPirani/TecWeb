@@ -1,6 +1,13 @@
 @extends('layouts.public')
 @section('show')
 <div id="content">
+<style>
+        /* Set the maximum width for the image */
+        img {
+            max-width: 100%; /* Adjust the percentage as needed */
+            height: auto; /* Maintain aspect ratio */
+        }
+    </style>
   @isset($autos)
     @foreach ($autos as $product)
         <div class="prod">
@@ -8,7 +15,7 @@
                 <div class="prod-bgbtm">
                     <div class="oneitem">
                         <div class="image">
-                            @include('helpers/productImg', ['attrs' => 'imagefrm', 'imgFile' => $product->foto])
+                            <img class= "imagefrm" src="{{ asset('images/autoIMG/' . $product->foto)}}" >
                         </div>
                         <div class="info">
                             <h1 class="title">Modello: {{ $product->modello }}</h1>
