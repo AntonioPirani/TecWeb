@@ -2,12 +2,45 @@
 
 @section('title', 'Add Staff Member')
 
+@section('scripts')
+
+@parent
+<script src="{{ asset('js/functions.js') }}" ></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#addStaffForm').on('submit', function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                type: "POST",
+                url: "{{ route('storestaff') }}",
+                data: $(this).serialize(),
+                success: function (response) {
+                    // Display the success message
+                    $('#resultMessage').html('<div class="alert alert-success">Staff member added successfully</div>');
+
+                    // Redirect to the /admin page (optional)
+                    window.location.href = "{{ route('admin') }}";
+                },
+                error: function (error) {
+                    // Display the error message
+                    $('#resultMessage').html('<div class="alert alert-danger">Failed to add staff member</div>');
+                }
+            });
+        });
+    });
+</script>
+
+@endsection
+
 @section('content')
 <div class="static">
     <h3>Add New Staff Member</h3>
 
-    <form method="POST" action="{{ route('storestaff') }}">
-        @csrf
+    <form id="addStaffForm" method="POST" action="{{ route('storestaff') }}">
+                @csrf
 
         <div class="form-group">
             <label for="name">Name</label>
@@ -38,5 +71,7 @@
 
         <button type="submit" class="btn btn-primary">Add Staff Member</button>
     </form>
+    <div id="resultMessage" style="margin-top: 20px;"></div>
 </div>
+
 @endsection

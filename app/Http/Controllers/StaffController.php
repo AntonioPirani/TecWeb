@@ -34,11 +34,11 @@ class StaffController extends Controller
         if ($staffMember->save()) {
             // Staff member successfully saved
             Log::info('Staff member added: ' . $staffMember->id);
-            return redirect()->route('admin')->with('success', 'Staff member added successfully');
+            return response()->json(['message' => 'Staff member added successfully']);
         } else {
             // Something went wrong
             Log::error('Failed to add staff member');
-            return redirect()->back()->with('error', 'Failed to add staff member');
+            return response()->json(['message' => 'Failed to add staff member'], 500);
         }
     }
     
