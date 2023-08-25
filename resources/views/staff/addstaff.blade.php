@@ -20,6 +20,8 @@
                 success: function (response) {
                     // Display the success message
                     $('#resultMessage').html('<div class="alert alert-success">Staff member added successfully</div>');
+                    //alert('Staff member added successfully'); //Alert
+
 
                     // Redirect to the /admin page (optional)
                     window.location.href = "{{ route('admin') }}";

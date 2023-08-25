@@ -413,8 +413,8 @@ img {
 
 #sidebar {
 	float: left;
-	width: 25%;
-	padding: 60px 0 0 20px;
+	width: 20%;
+	padding: 60px 20px 10px 20px;
 	color: rgba(14, 40, 176, 0.98);
 	border-radius: 4px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
