@@ -51,7 +51,9 @@ class StaffController extends Controller
     {
         $username = $request->input('username');
 
-        $staffMember = User::where('username', $username)->first();
+        $staffMember = User::where('username', $username)
+        ->where('role', 'staff') // Add this condition to filter by role
+        ->first();
 
         if ($staffMember) {
             // Return the staff member details as JSON
