@@ -41,6 +41,14 @@ Route::get('/admin/addstaff', [StaffController::class, 'add'])
 Route::post('/admin/storestaff', [StaffController::class, 'store'])
         ->name('storestaff');
 
+Route::get('/admin/editstaff', [StaffController::class, 'edit'])
+        ->name('editstaff');
+    
+Route::post('/admin/updatestaff', [StaffController::class, 'update'])
+        ->name('updatestaff');
+
+Route::get('/admin/getstaffdetails', [StaffController::class, 'getStaffDetails'])
+        ->name('getstaffdetails');
 
 Route::get('/user', [UserController::class, 'index'])
         ->name('user')->middleware('can:isUser');

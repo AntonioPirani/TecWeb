@@ -39,10 +39,7 @@
                             <a href="{{ route('addstaff') }}" title="Aggiungi membro dello staff">Aggiungi Staff</a>
                         </li>
                         <li class="list-group-item">
-                            <a href="{{ route('admin') }}" title="Gestisci membri dello staff">Gestisci Staff</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="{{ route('admin') }}" title="Cancella membri dello staff">Cancella Staff</a>
+                            <a href="{{ route('editstaff') }}" title="Gestisci membri dello staff">Gestisci Staff</a>
                         </li>
                     </ul>
                 </div>

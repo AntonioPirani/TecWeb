@@ -47,4 +47,60 @@ class StaffController extends Controller
         return view('staff.addstaff');
     }
 
+    public function getStaffDetails(Request $request)
+    {
+        $username = $request->input('username');
+
+        $staffMember = User::where('username', $username)->first();
+
+        if ($staffMember) {
+            // Return the staff member details as JSON
+            return response()->json($staffMember);
+        } else {
+            // Staff member not found, return a 404 response
+            return response()->json(['message' => 'Staff member not found'], 404);
+        }
+    }
+
+    public function edit()
+    {
+        return view('staff.editstaff');
+    }
+
+    public function update(Request $request)
+    {
+        // Validate the form data
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'surname' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:8',
+        ]);
+
+        // Find the staff member by username
+        $username = $request->input('username');
+        $staffMember = User::where('username', $username)->first();
+
+        if (!$staffMember) {
+            return response()->json(['message' => 'Staff member not found'], 404);
+        }
+
+        // Update staff member details
+        $staffMember->name = $validatedData['name'];
+        $staffMember->surname = $validatedData['surname'];
+        $staffMember->email = $validatedData['email'];
+        $staffMember->password = bcrypt($validatedData['password']);
+
+        if ($staffMember->save()) {
+            // Staff member successfully updated
+            return response()->json(['message' => 'Staff member updated successfully']);
+        } else {
+            // Something went wrong
+            return response()->json(['message' => 'Failed to update staff member'], 500);
+        }
+    }
+
+
+
+
 }
