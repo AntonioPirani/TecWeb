@@ -8,21 +8,18 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('auto', function (Blueprint $table) {
             $table->string('targa', 7)->primary();
-            $table->string('modello', 10);
+            $table->string('modello', 15);
             $table->string('marca', 20);
-            $table->float('prezzoGiornaliero')->unsigned()->index();    
-            $table->bigInteger('numeroPorte')->unsigned()->index();
-            $table->bigInteger('cilindrata')->unsigned();
-            //$table->foreign('catId')->references('catId')->on('category');
+            $table->float('prezzoGiornaliero')->unsigned()->index();
+            $table->bigInteger('posti')->unsigned()->index();
+            $table->bigInteger('potenza')->unsigned();
             $table->string('tipoCambio', 10);
-            $table->string('optional', 50);
+            $table->string('optional', 100);
             $table->boolean('disponibilita')->default(false)->index();
             $table->text('foto')->nullable();
         });
@@ -30,10 +27,8 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('auto');
     }

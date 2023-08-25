@@ -8,12 +8,10 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
-        if(!Schema::hasTable("prenotazioni")){
+//        if(!Schema::hasTable("prenotazioni")){
             Schema::create('prenotazioni', function (Blueprint $table) {
                 $table->id();
                 $table->unsignedBigInteger('userId');
@@ -21,19 +19,17 @@ return new class extends Migration
                 $table->date('dataInizio');
                 $table->date('dataFine');
                 $table->string('statoPrenotazione');
-                $table->foreign('userId')->references('id')->on('utenti');  // TODO rivedere il model 
+                $table->foreign('userId')->references('id')->on('utenti');  // TODO rivedere il model
                 $table->foreign('autoTarga')->references('targa')->on('auto');
             });
-        }
-        
+//        }
+
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('prenotazioni');
     }

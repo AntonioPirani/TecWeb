@@ -17,7 +17,7 @@ class PublicController extends Controller
     }
 
     public function showAuto(){
-        $autos = Auto::whereNotNull('foto')->get(); // Retrieve all records from the Auto table
+        $autos = Auto::class; // Retrieve all records from the Auto table
 
     return view('showAuto', ['autos' => $autos]);
     }

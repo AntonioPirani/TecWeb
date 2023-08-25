@@ -8,10 +8,8 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('utenti', function (Blueprint $table) {
             $table->id(); // Make userId the primary key
@@ -24,7 +22,7 @@ return new class extends Migration
             $table->string('role', 10)->default('utente'); //admin, staff, utente
             $table->rememberToken();
             $table->timestamps();
-        });        
+        });
     }
 
     /**
