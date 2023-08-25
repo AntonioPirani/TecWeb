@@ -32,15 +32,22 @@
                     $('#name').val(response.name);
                     $('#surname').val(response.surname);
                     $('#email').val(response.email);
+
+                    // Populate the hidden input field for username
+                    $('#username').val(username);
+
+                    // Update the success message
+                    $('#resultMessage').html('<div class="alert alert-success">Staff member found</div>');
                 },
                 error: function (error) {
                     // Display an error message if the staff member is not found
+                    $('#staffDetailsSection').hide(); // Hide the edit form
                     $('#resultMessage').html('<div class="alert alert-danger">Staff member not found</div>');
                 }
             });
         });
 
-        // Submit the edit form via AJAX as you did before
+        // Submit the edit form via AJAX when the form is submitted
         $('#editStaffForm').on('submit', function (e) {
             e.preventDefault();
 
@@ -49,6 +56,11 @@
                 url: "{{ route('updatestaff') }}",
                 data: $(this).serialize(),
                 success: function (response) {
+                    // Update the "current" fields with the newly entered values
+                    $('#currentName').val($('#name').val());
+                    $('#currentSurname').val($('#surname').val());
+                    $('#currentEmail').val($('#email').val());
+
                     // Display the success message
                     $('#resultMessage').html('<div class="alert alert-success">Staff member updated successfully</div>');
                 },
@@ -59,6 +71,7 @@
             });
         });
     });
+
 </script>
 
 @endsection
@@ -95,6 +108,9 @@
         <!-- New form for editing staff member details -->
         <form id="editStaffForm" method="POST" action="{{ route('updatestaff') }}">
             @csrf
+
+            <!-- Hidden input field for the username -->
+            <input type="hidden" name="username" id="username">
 
             <!-- Fields to edit staff member details -->
             <div class="form-group">
