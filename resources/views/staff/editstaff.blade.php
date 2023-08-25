@@ -7,8 +7,14 @@
 @parent
 <script src="{{ asset('js/functions.js') }}" ></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 
 <script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     $(document).ready(function () {
         $('#lookupButton').on('click', function () {
             // Get the username entered by the user
@@ -69,6 +75,28 @@
                     $('#resultMessage').html('<div class="alert alert-danger">Failed to update staff member</div>');
                 }
             });
+        });
+
+        $('#deleteStaffButton').on('click', function () {
+            if (confirm("Are you sure you want to delete this staff member?")) {
+                // Get the username from the hidden input field
+                var username = $('#username').val();
+
+                // Make an AJAX request to delete the staff member
+                $.ajax({
+                    type: "DELETE",
+                    url: "{{ route('deletestaff') }}", // Create this route in your routes file
+                    data: { username: username },
+                    success: function (response) {
+                        // Redirect to the /admin page on successful deletion
+                        window.location.href = "{{ route('admin') }}";
+                    },
+                    error: function (error) {
+                        // Display an error message
+                        $('#resultMessage').html('<div class="alert alert-danger">Failed to delete staff member</div>');
+                    }
+                });
+            }
         });
     });
 
@@ -131,6 +159,9 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Update Staff Member</button>
+
+            <button type="button" id="deleteStaffButton" class="btn btn-danger">Delete Staff Member</button>
+
         </form>
     </div>
 

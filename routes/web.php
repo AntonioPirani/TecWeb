@@ -50,6 +50,9 @@ Route::post('/admin/updatestaff', [StaffController::class, 'update'])
 Route::get('/admin/getstaffdetails', [StaffController::class, 'getStaffDetails'])
         ->name('getstaffdetails');
 
+Route::delete('/admin/deletestaff', [StaffController::class, 'delete'])
+        ->name('deletestaff');    
+
 Route::get('/user', [UserController::class, 'index'])
         ->name('user')->middleware('can:isUser');
 

@@ -100,6 +100,27 @@ class StaffController extends Controller
         }
     }
 
+    public function delete(Request $request)
+    {
+        $username = $request->input('username');
+
+        $staffMember = User::where('username', $username)->first();
+
+        if ($staffMember) {
+            // Delete the staff member
+            if ($staffMember->delete()) {
+                // Deletion successful
+                return response()->json(['message' => 'Staff member deleted successfully']);
+            } else {
+                // Something went wrong
+                return response()->json(['message' => 'Failed to delete staff member'], 500);
+            }
+        } else {
+            // Staff member not found
+            return response()->json(['message' => 'Staff member not found'], 404);
+        }
+    }
+
 
 
 
