@@ -8,21 +8,22 @@ use App\Models\User;
 use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller {
-    protected $_userModel;
-
-    public function __construct() {
-        $this->_userModel = new User;
-        $this->middleware('can:isUser');
-    }
 
     public function index() {
         return view('user');
     }
 
-    public function storePrenotazione(NewBookingRequest $request){
+    public function storePrenotazione(NewBookingRequest $request): \Illuminate\Http\JsonResponse
+    {
 
         $booking=new Prenotazione;
-        $booking->fill($request->validated());
+//        $booking->userId=$this->_userModel->username;
+        $booking->fill($request->validate(
+            ['userId' => 'optional|string',
+            'autoTarga' => 'optional|string|max:7',
+            'dataInizio' => 'required|date',
+            'dataFine' => 'required|date',
+            'statoPrenotazione' => 'optional|string']));
 
         if($booking->save()){
 //            Prenotazione inserita
@@ -35,7 +36,7 @@ class UserController extends Controller {
         }
     }
 
-    public function addBooking(){
+    public function addPrenotazione(){
         return view('bookings.addBooking');
     }
 

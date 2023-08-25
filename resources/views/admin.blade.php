@@ -12,7 +12,7 @@
     <ul>
         <li><button><a href="{{ route('newproduct') }}" title="Inserisce nuovi prodotti">Inserisci</a></button></li>
         <li><button><a href="{{ route('admin') }}" title="Inserisce nuovi prodotti"> Modifica</a></button></li>
-        <li><button><a href="{{ route('admin') }}" title="Cancella o prodotti">Cancella</a></li>
+        <li><button><a href="{{ route('admin') }}" title="Cancella o prodotti">Cancella</a></button></li>
     </ul>
 </div>
 @endsection

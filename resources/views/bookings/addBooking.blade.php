@@ -11,7 +11,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "{{ route('newPrenotazione') }}",
+                    url: "{{ route('storePrenotazione') }}",
                     data: $(this).serialize(),
                     success: function (response) {
                         // Display the success message
@@ -33,24 +33,29 @@
 
 @section('content')
     <div class="static">
-        <h3>Add New Staff Member</h3>
+        <h3>Add New Booking</h3>
 
-        <form id="newBookingForm" method="POST" action="{{ route('newPrenotazione') }}">
+        <form id="newBookingForm" method="POST" action="{{ route('storePrenotazione') }}">
             @csrf
 
             <div class="form-group">
                 <label for="startDate">Inizio nolleggio:</label>
-                <input type="date" id="dataInizio" step="1">
+                <input type="date" name="dataInizio" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="finishDate">Fine nolleggio:</label>
-                <input type="date" id="dataFine" step="1">
+                <input type="date" name="dataFine" class="form-control" required>
+            </div>
+
+            {{--<div class="form-group">
+                <label for="userId">Surname</label>
+                <input type="text" name="surname" id="userId" class="form-control" required>
             </div>
 
             <div class="form-group">
                 <label for="surname">Surname</label>
                 <input type="text" name="surname" id="surname" class="form-control" required>
-            </div>
+            </div>--}}
 
 
             <!-- Add more form fields as needed -->

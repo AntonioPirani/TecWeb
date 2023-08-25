@@ -14,13 +14,15 @@ return new class extends Migration
 //        if(!Schema::hasTable("prenotazioni")){
             Schema::create('prenotazioni', function (Blueprint $table) {
                 $table->id();
-                $table->unsignedBigInteger('userId');
-                $table->string('autoTarga', 7);
+                $table->unsignedBigInteger('userId')->default(null);
+                $table->string('autoTarga', 7)->default(null);
                 $table->date('dataInizio');
                 $table->date('dataFine');
-                $table->string('statoPrenotazione');
+                $table->string('statoPrenotazione')->default(null);
                 $table->foreign('userId')->references('id')->on('utenti');  // TODO rivedere il model
                 $table->foreign('autoTarga')->references('targa')->on('auto');
+                $table->rememberToken();
+                $table->timestamps();
             });
 //        }
 

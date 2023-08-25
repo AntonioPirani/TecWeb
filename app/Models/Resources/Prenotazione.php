@@ -10,7 +10,8 @@ use App\Models\User;
 class Prenotazione extends Model{
 
 
-    public $primaryKey = 'id';
+
+    public mixed $userId;
     protected $table = 'prenotazioni';
 
     protected $fillable = ['dataInizio','dataFine'];
