@@ -9,7 +9,8 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable;
-    protected $table = 'users';
+
+    protected $table = 'utenti';
     /**
      * The attributes that are mass assignable.
      *
@@ -52,13 +53,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         //aggiunta
-         /*in realta non serve specificare che questi
-          attributi diventano string perche lo fa
-          automaticamente eloquent
-           
-          'name','surname','username','password', 'email' => 'string',
-          'remember_token' => 'int',
-          'data_di_nascita' => 'date'*/
+        /*in realta non serve specificare che questi
+         attributi diventano string perche lo fa
+         automaticamente eloquent
+
+         'name','surname','username','password', 'email' => 'string',
+         'remember_token' => 'int',
+         'data_di_nascita' => 'date'*/
     ];
 
     /*
@@ -73,7 +74,8 @@ class User extends Authenticatable
     }
     */
 
-    public function hasRole($role) {
+    public function hasRole($role)
+    {
         $role = (array)$role;
         return in_array($this->role, $role);
     }
