@@ -9,7 +9,8 @@ use App\Models\User;
 
 class Prenotazione extends Model{
 
-    //id automaticamente definito dal framework
+
+    public $primaryKey = 'id';
     protected $table = 'prenotazioni';
 
     protected $fillable = ['dataInizio','dataFine'];

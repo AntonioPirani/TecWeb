@@ -19,7 +19,7 @@ use App\Http\Controllers\UserController;
 Route::get('/', [PublicController::class, 'showAuto'])
         ->name('auto');
 
-Route::get('/newBooking',[UserController::class,'newPrenotazione'])
+Route::get('/newBooking',[UserController::class,'addBooking'])
         ->name('newPrenotazione');
 
 Route::get('/admin', [AdminController::class, 'index'])

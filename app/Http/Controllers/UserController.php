@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\NewBookingRequest;
 use App\Models\Resources\Prenotazione;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller {
     protected $_userModel;
@@ -18,12 +19,24 @@ class UserController extends Controller {
         return view('user');
     }
 
-    public function newPrenotazione(NewBookingRequest $request){
+    public function storePrenotazione(NewBookingRequest $request){
 
         $booking=new Prenotazione;
         $booking->fill($request->validated());
-        $booking->save();
-        return view('user');
+
+        if($booking->save()){
+//            Prenotazione inserita
+            Log::info('Prenotazione aggiunta' . $booking->primaryKey);
+            return response()->json(['message' => 'Booking added successfully']);
+        }else{
+//            something is wrong
+            Log::error('Failed to add booking');
+            return response()->json(['message' => 'Failed to add booking'],500);
+        }
+    }
+
+    public function addBooking(){
+        return view('bookings.addBooking');
     }
 
 }
