@@ -80,4 +80,7 @@ class User extends Authenticatable
         return in_array($this->role, $role);
     }
 
+    public function creaPrenotazione(NewBookingRequest $request ){
+
+    }
 }

@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" >
-        <title>LaProj6 | @yield('title', 'Catalogo')</title>
+        <title>{{env('APP_NAME')}} | @yield('title', 'Catalogo')</title>
     </head>
     <body>
         <div id="wrapper">

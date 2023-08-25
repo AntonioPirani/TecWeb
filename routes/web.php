@@ -19,14 +19,8 @@ use App\Http\Controllers\UserController;
 Route::get('/', [PublicController::class, 'showAuto'])
         ->name('auto');
 
-/*Route::get('/', [PublicController::class, 'showCatalog1'])
-        ->name('catalog1');*/
-
-Route::get('/selTopCat/{topCatId}', [PublicController::class, 'showCatalog2'])
-        ->name('catalog2');
-
-Route::get('/selTopCat/{topCatId}/selCat/{catId}', [PublicController::class, 'showCatalog3'])
-        ->name('catalog3');
+Route::get('/newBooking',[UserController::class,'newPrenotazione'])
+        ->name('newPrenotazione');
 
 Route::get('/admin', [AdminController::class, 'index'])
         ->name('admin');

@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Log;
 class PublicController extends Controller
 {
 
-    protected $_catalogModel;
 
     public function showAuto()
     {
