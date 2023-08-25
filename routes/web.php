@@ -56,8 +56,10 @@ Route::delete('/admin/deletestaff', [StaffController::class, 'delete'])
 Route::get('/user', [UserController::class, 'index'])
         ->name('user')->middleware('can:isUser');
 
+Route::get('/staff', [StaffController::class, 'index'])
+        ->name('staff')->middleware('can:isStaff');
 
-Route::view('/where', 'where')
+        Route::view('/where', 'where')
         ->name('where');
 
 Route::view('/who', 'who')

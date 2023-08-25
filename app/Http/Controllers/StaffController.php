@@ -8,6 +8,11 @@ use App\Models\User;
 
 class StaffController extends Controller
 {
+
+    public function index() {
+        return view('staff');
+    }
+
     public function store(Request $request)
     {
         //dd($request->all());
