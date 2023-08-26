@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         DB::table('utenti')->insert([
             ['nome' => 'Antonio', 'cognome' => 'Pirani', 'email' => 'anto@anto.it', 'username' => 'antoanto',
-                'password' => Hash::make('antoanto'), 'role' => 'user'],
+                'password' => Hash::make('antoanto'), 'role' => 'staff'],
             ['nome' => 'Luca', 'cognome' => 'Sabatini', 'email' => 'luca@luca.it', 'username' => 'lucaluca',
                 'password' => Hash::make('lucaluca'), 'role' => 'user'],
             ['nome' => 'Mario', 'cognome' => 'Rossi', 'email' => 'mario@rossi.it', 'username' => 'adminadmin',
@@ -58,5 +58,12 @@ class DatabaseSeeder extends Seeder
         ];
 
         DB::table('auto')->insert($data);
+
+        DB::table('faq')->insert([
+            ['domanda' => 'Come posso prenotare un\'auto sul vostro sito?', 'risposta' => 'Per prenotare un\'auto, basta visitare il nostro sito web, inserire le date e il luogo di ritiro e restituzione dell\'auto, quindi selezionare il veicolo desiderato. Segui le istruzioni per completare la prenotazione.'],
+            ['domanda' => 'Quali documenti devo presentare al momento del ritiro dell\'auto?', 'risposta' => 'Al momento del ritiro dell\'auto, dovrai presentare la tua patente di guida valida, una carta di credito a tuo nome e una conferma di prenotazione.'],
+            ['domanda' => 'È possibile noleggiare un\'auto per un solo giorno?', 'risposta' => 'Sì, offriamo tariffe giornaliere per il noleggio auto. Puoi prenotare un\'auto per il periodo che meglio si adatta alle tue esigenze, che sia un solo giorno o più settimane.'],
+            ['domanda' => 'È possibile noleggiare un\'auto e restituirla in una città diversa?', 'risposta' => 'Sì, offriamo opzioni di noleggio con restituzione in una città diversa. Tuttavia, potrebbe essere applicata una tariffa aggiuntiva per questa opzione, nota come "one-way fee".'],
+        ]);
     }
 }

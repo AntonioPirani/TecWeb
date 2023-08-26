@@ -5,6 +5,7 @@ use App\Http\Controllers\PublicController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FaqController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,6 +71,10 @@ Route::view('/where', 'where')
 
 Route::view('/who', 'who')
         ->name('who');
+
+// routes/web.php
+Route::get('/faqs', [FaqController::class, 'index'])->name('faqs');;
+
 
 /*  Rotte aggiunte da Breeze
 

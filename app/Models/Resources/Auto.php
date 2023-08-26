@@ -21,7 +21,7 @@ class Auto extends Model {
         'modello',
         'marca',
         'prezzoGiornaliero',
-        'numeroPosti',
+        'posti',
         'potenza',
         'tipoCambio',
         'optional',
@@ -29,7 +29,7 @@ class Auto extends Model {
         'foto'
     ];
 
-    // Restituisce tutte le auto
+   /*  // Restituisce tutte le auto
     public function getAllAuto()
     {
         return Auto::select()->get();
@@ -45,7 +45,7 @@ class Auto extends Model {
     public function getAutoByPrezzo($prezzoMinimo, $prezzoMassimo)
     {
         return self::whereBetween('prezzo_giornaliero', [$prezzoMinimo, $prezzoMassimo])->get();
-    }
+    } */
 
 
     // // Realazione One-To-One con Category

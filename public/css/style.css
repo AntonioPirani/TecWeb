@@ -619,3 +619,40 @@ img {
   font-size: 12px;
   color: #555555;
 }
+
+/* Faqs */
+
+.faq-list {
+    list-style: none;
+    padding: 30px;
+}
+
+.faq-item {
+    margin-bottom: 20px;
+}
+
+.faq-question {
+    cursor: pointer;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #f5f5f5;
+}
+
+.faq-answer {
+    display: none;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #fff;
+}
+
+.faq-item.open .faq-answer {
+    display: block;
+}
+
+.faq-title {
+	font-weight: bold;
+    padding: 40px 0 0 10px ;
+	color: black;
+}
+

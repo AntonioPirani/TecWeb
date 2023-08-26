@@ -15,14 +15,14 @@
                         @include('helpers/productImg', ['attrs' => 'imagefrm', 'imgFile' => $product->foto])
                     </div>
                     <div class="info">
-                        <h1 class="title">Modello:{{ $product->marca }} {{ $product->modello }}</h1>
-                        <p class="meta">Numero posti: {{ $product->numeroPosti }}<br>
+                        <h1 class="title">Modello: {{ $product->marca }} {{ $product->modello }}</h1>
+                        <p class="meta">Numero posti: {{ $product->posti }}<br>
                             Potenza: {{ $product->potenza }} cv<br>
                             Tipo cambio: {{ $product->tipoCambio }}<br>
                             Optional: {{ $product->optional }}<br>
-                            Targa: {{ $product->targa }}
+                            <!-- Targa: {{ $product->targa }} -->
                         </p>
-                        <p class="price">Prezzo giornaliero: {{ $product->prezzoGiornaliero }}€</p>
+                        <p class="price">Prezzo giornaliero: {{ $product->prezzoGiornaliero }} €</p>
                     </div>
                     
                 </div>

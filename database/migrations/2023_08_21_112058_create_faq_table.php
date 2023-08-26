@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('faq', function (Blueprint $table) {
             $table->bigIncrements('faqId');
-            $table->string('domanda', 30);
-            $table->string('risposta', 60);
+            $table->string('domanda');
+            $table->text('risposta');
+            $table->timestamps();
         });
     }
 

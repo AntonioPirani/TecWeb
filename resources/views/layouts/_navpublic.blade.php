@@ -5,7 +5,7 @@
     <li><a href="{{ route('where') }}" title="Dove trovarci">Dove ci puoi trovare</a></li>
     <li><a href="{{ route('who') }}" title="Il nostro profilo aziendale">Chi siamo</a></li>
     <li><a href="mailto:info@acme.it" title="Mandaci un messaggio">Contattaci</a></li> <!-- la messaggistica va su questa rotta-->
-
+    <li><a href="{{ route('faqs') }}" title="Le domande più frequenti">Domande Frequenti</a></li>
     <!-- rotte per user admin e staff-->
 
     @can('isAdmin')
