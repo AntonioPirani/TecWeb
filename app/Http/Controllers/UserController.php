@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\NewBookingRequest;
+//use App\Http\Requests\NewBookingRequest;
+use App\Models\Resources\Auto;
 use App\Models\Resources\Prenotazione;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller {
@@ -13,17 +16,18 @@ class UserController extends Controller {
         return view('user');
     }
 
-    public function storePrenotazione(NewBookingRequest $request): \Illuminate\Http\JsonResponse
+    public function storePrenotazione(Request $request,$autoTarga): \Illuminate\Http\JsonResponse
     {
-
-        $booking=new Prenotazione;
-//        $booking->userId=$this->_userModel->username;
-        $booking->fill($request->validate(
-            ['userId' => 'optional|string',
-            'autoTarga' => 'optional|string|max:7',
+        $validatedData = $request->validate([
             'dataInizio' => 'required|date',
             'dataFine' => 'required|date',
-            'statoPrenotazione' => 'optional|string']));
+            'statoPrenotazione' => 'optional|string']);
+
+
+        $booking= new Prenotazione($validatedData);
+        $booking->autoTarga = $autoTarga;
+        $booking->userId = Auth::user()->id;
+        $booking->statoPrenotazione = 'nuova';
 
         if($booking->save()){
 //            Prenotazione inserita

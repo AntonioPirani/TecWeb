@@ -11,7 +11,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "{{ route('storePrenotazione') }}",
+                    url: "{{ route('storePrenotazione', 'AB123CD')}}" ,
                     data: $(this).serialize(),
                     success: function (response) {
                         // Display the success message
@@ -35,7 +35,7 @@
     <div class="static">
         <h3>Add New Booking</h3>
 
-        <form id="newBookingForm" method="POST" action="{{ route('storePrenotazione') }}">
+        <form id="newBookingForm" method="POST" action="{{ route('storePrenotazione','AB123CD') }}">
             @csrf
 
             <div class="form-group">
@@ -46,6 +46,7 @@
                 <label for="finishDate">Fine nolleggio:</label>
                 <input type="date" name="dataFine" class="form-control" required>
             </div>
+{{--            <input type="hidden" name="autoTarga" value="{{ \App\Models\Resources\Auto::class,'targa' }}">--}}
 
             {{--<div class="form-group">
                 <label for="userId">Surname</label>

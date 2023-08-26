@@ -19,17 +19,17 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', [PublicController::class, 'showAuto'])
         ->name('auto');
-/* 
+/*
 Route::get('/selTopCat/{topCatId}', [PublicController::class, 'showCatalog2'])
         ->name('catalog2');
 
 Route::get('/selTopCat/{topCatId}/selCat/{catId}', [PublicController::class, 'showCatalog3'])
         ->name('catalog3'); */
 
-Route::get('/newBooking',[UserController::class,'addPrenotazione'])
+Route::get('/addPrenotazione/{autoTarga}',[UserController::class,'addPrenotazione'])
         ->name('addPrenotazione');
 
-Route::post('/storeBooking',[UserController::class,'storePrenotazione'])
+Route::post('/storePrenotazione/{autoTarga}',[UserController::class,'storePrenotazione'])
     ->name('storePrenotazione');
 
 Route::get('/admin', [AdminController::class, 'index'])
@@ -49,7 +49,7 @@ Route::post('/admin/storestaff', [StaffController::class, 'store'])
 
 Route::get('/admin/editstaff', [StaffController::class, 'edit'])
         ->name('editstaff');
-    
+
 Route::post('/admin/updatestaff', [StaffController::class, 'update'])
         ->name('updatestaff');
 
@@ -57,7 +57,7 @@ Route::get('/admin/getstaffdetails', [StaffController::class, 'getStaffDetails']
         ->name('getstaffdetails');
 
 Route::delete('/admin/deletestaff', [StaffController::class, 'delete'])
-        ->name('deletestaff');    
+        ->name('deletestaff');
 
 Route::get('/user', [UserController::class, 'index'])
         ->name('user')->middleware('can:isUser');

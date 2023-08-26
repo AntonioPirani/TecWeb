@@ -25,7 +25,9 @@
                         <p class="price">Prezzo giornaliero: {{ $product->prezzoGiornaliero }}€</p>
                     </div>
                     @can('isUser')
-                        <button><a href="{{ route('addPrenotazione') }}" class="highlight" title="Prenota questa macchina">Prenota</a></button>
+                        {{--                        input nascosto che seleziona la targa della macchina selezionata--}}
+                        <input type="hidden" name="auto" value="{{ $product->targa }}">
+                        <button><a href="{{ route('addPrenotazione', ['autoTarga' => $product->targa]) }}" class="highlight" title="Prenota questa macchina">Prenota</a></button>
                     @endcan
                 </div>
             </div>
