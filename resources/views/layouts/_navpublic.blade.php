@@ -15,7 +15,9 @@
         <li><a href="{{ route('staff') }}" class="highlight" title="Home Staff">Home Staff</a></li>
     @endcan
     @can('isUser')
-        <li><a href="{{ route('user') }}" class="highlight" title="Home User">Home User</a></li>
+        <li><@can('isUser')
+            <li><a href="{{ route('user') }}" class="highlight" title="Home User">Home User</a></li>
+        @endcan>Home User</a></li>
     @endcan
     @auth
         <li><a href="" title="Esci dal sito" class="highlight" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
