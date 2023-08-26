@@ -15,9 +15,9 @@
                         @include('helpers/productImg', ['attrs' => 'imagefrm', 'imgFile' => $product->foto])
                     </div>
                     <div class="info">
-                        <h1 class="title">Modello: {{ $product->modello }}</h1>
-                        <p class="meta">Numero porte: {{ $product->numeroPorte }}<br>
-                            Cilindrata: {{ $product->cilindrata }} cv<br>
+                        <h1 class="title">Modello:{{ $product->marca }} {{ $product->modello }}</h1>
+                        <p class="meta">Numero posti: {{ $product->numeroPosti }}<br>
+                            Potenza: {{ $product->potenza }} cv<br>
                             Tipo cambio: {{ $product->tipoCambio }}<br>
                             Optional: {{ $product->optional }}<br>
                             Targa: {{ $product->targa }}

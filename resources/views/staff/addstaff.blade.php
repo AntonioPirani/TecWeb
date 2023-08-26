@@ -45,17 +45,17 @@
                 @csrf
 
         <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" name="name" id="name" class="form-control" required>
+            <label for="nome">Nome</label>
+            <input type="text" name="nome" id="nome" class="form-control" required>
         </div>
 
         <div class="form-group">
-            <label for="surname">Surname</label>
-            <input type="text" name="surname" id="surname" class="form-control" required>
+            <label for="cognome">Cognome</label>
+            <input type="text" name="cognome" id="cognome" class="form-control" required>
         </div>
 
         <div class="form-group">
-            <label for="username">Surname</label>
+            <label for="username">Username</label>
             <input type="text" name="username" id="username" class="form-control" required>
         </div>
 

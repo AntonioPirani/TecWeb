@@ -19,17 +19,17 @@ class StaffController extends Controller
 
         // Validate the form data
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'surname' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
+            'nome' => 'required|string|max:255',
+            'cognome' => 'required|string|max:255',
+            'email' => 'required|email|unique:utenti,email',
             'username' => 'required|string|max:255',
             'password' => 'required|string|min:8',
         ]);
 
         // Create a new staff member
         $staffMember = new User;
-        $staffMember->name = $validatedData['name'];
-        $staffMember->surname = $validatedData['surname'];
+        $staffMember->nome = $validatedData['nome'];
+        $staffMember->cognome = $validatedData['cognome'];
         $staffMember->username = $validatedData['username'];
         $staffMember->email = $validatedData['email'];
         $staffMember->password = bcrypt($validatedData['password']);
@@ -78,8 +78,8 @@ class StaffController extends Controller
     {
         // Validate the form data
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'surname' => 'required|string|max:255',
+            'nome' => 'required|string|max:255',
+            'cognome' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'password' => 'required|string|min:8',
         ]);
@@ -93,8 +93,8 @@ class StaffController extends Controller
         }
 
         // Update staff member details
-        $staffMember->name = $validatedData['name'];
-        $staffMember->surname = $validatedData['surname'];
+        $staffMember->nome = $validatedData['nome'];
+        $staffMember->cognome = $validatedData['cognome'];
         $staffMember->email = $validatedData['email'];
         $staffMember->password = bcrypt($validatedData['password']);
 

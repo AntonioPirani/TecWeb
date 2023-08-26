@@ -30,13 +30,13 @@
                     $('#staffDetailsSection').show();
 
                     // Populate the current details
-                    $('#currentName').val(response.name);
-                    $('#currentSurname').val(response.surname);
+                    $('#currentNome').val(response.nome);
+                    $('#currentCognome').val(response.cognome);
                     $('#currentEmail').val(response.email);
 
                     // Populate the fields in the edit form with staff member details
-                    $('#name').val(response.name);
-                    $('#surname').val(response.surname);
+                    $('#nome').val(response.nome);
+                    $('#cognome').val(response.cognome);
                     $('#email').val(response.email);
 
                     // Populate the hidden input field for username
@@ -63,8 +63,8 @@
                 data: $(this).serialize(),
                 success: function (response) {
                     // Update the "current" fields with the newly entered values
-                    $('#currentName').val($('#name').val());
-                    $('#currentSurname').val($('#surname').val());
+                    $('#currentNome').val($('#nome').val());
+                    $('#currentCognme').val($('#cognome').val());
                     $('#currentEmail').val($('#email').val());
 
                     // Display the success message
@@ -112,7 +112,7 @@
     <div class="form-group">
         <label for="username">Username</label>
         <input type="text" id="lookupUsername" class="form-control" required>
-        <button id="lookupButton" class="btn btn-primary">Lookup Staff Member</button>
+        <button id="lookupButton" class="btn btn-primary">Cerca membro staff</button>
     </div>
 
     <!-- Section for displaying staff member details and new form (initially hidden) -->
@@ -121,15 +121,15 @@
 
         <!-- Display staff member details here -->
         <div class="form-group">
-            <label for="currentName">Current Name</label>
-            <input type="text" id="currentName" class="form-control" disabled>
+            <label for="currentNome">Nome Attuale</label>
+            <input type="text" id="currentNome" class="form-control" disabled>
         </div>
         <div class="form-group">
-            <label for="currentSurname">Current Surname</label>
-            <input type="text" id="currentSurname" class="form-control" disabled>
+            <label for="currentCognome">Cognome Attuale</label>
+            <input type="text" id="currentCognome" class="form-control" disabled>
         </div>
         <div class="form-group">
-            <label for="currentEmail">Current Email</label>
+            <label for="currentEmail">Email Attuale</label>
             <input type="email" id="currentEmail" class="form-control" disabled>
         </div>
 
@@ -142,25 +142,25 @@
 
             <!-- Fields to edit staff member details -->
             <div class="form-group">
-                <label for="name">New Name</label>
-                <input type="text" name="name" id="name" class="form-control" required>
+                <label for="nome">Nuovo Nome</label>
+                <input type="text" name="nome" id="nome" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="surname">New Surname</label>
-                <input type="text" name="surname" id="surname" class="form-control" required>
+                <label for="cognome">Nuovo Cognome</label>
+                <input type="text" name="cognome" id="cognome" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="email">New Email</label>
+                <label for="email">Nuova Email</label>
                 <input type="email" name="email" id="email" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="password">New Password</label>
+                <label for="password">Nuova Password</label>
                 <input type="password" name="password" id="password" class="form-control" required>
             </div>
 
-            <button type="submit" class="btn btn-primary">Update Staff Member</button>
+            <button type="submit" class="btn btn-primary">Aggiorna Membro Staff</button>
 
-            <button type="button" id="deleteStaffButton" class="btn btn-danger">Delete Staff Member</button>
+            <button type="button" id="deleteStaffButton" class="btn btn-danger">Elimina Membro Staff</button>
 
         </form>
     </div>
