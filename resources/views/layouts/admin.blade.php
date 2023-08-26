@@ -7,7 +7,7 @@
         @show
         @section('scripts')
         @show
-        <title>LaProj6 | @yield('title', 'Catalogo')</title>
+        <title>{{env('APP_NAME')}} | @yield('title', 'Catalogo')</title>
     </head>
     <body id="bodyadmin">
         <div id="wrapper">

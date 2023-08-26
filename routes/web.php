@@ -26,6 +26,12 @@ Route::get('/selTopCat/{topCatId}', [PublicController::class, 'showCatalog2'])
 Route::get('/selTopCat/{topCatId}/selCat/{catId}', [PublicController::class, 'showCatalog3'])
         ->name('catalog3'); */
 
+Route::get('/newBooking',[UserController::class,'addPrenotazione'])
+        ->name('addPrenotazione');
+
+Route::post('/storeBooking',[UserController::class,'storePrenotazione'])
+    ->name('storePrenotazione');
+
 Route::get('/admin', [AdminController::class, 'index'])
         ->name('admin');
 
