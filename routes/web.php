@@ -59,7 +59,7 @@ Route::get('/user', [UserController::class, 'index'])
 Route::get('/staff', [StaffController::class, 'index'])
         ->name('staff')->middleware('can:isStaff');
 
-        Route::view('/where', 'where')
+Route::view('/where', 'where')
         ->name('where');
 
 Route::view('/who', 'who')
