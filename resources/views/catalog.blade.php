@@ -20,11 +20,13 @@
                             Potenza: {{ $product->potenza }} cv<br>
                             Tipo cambio: {{ $product->tipoCambio }}<br>
                             Optional: {{ $product->optional }}<br>
-                            Targa: {{ $product->targa }}
+{{--                            Targa: {{ $product->targa }}--}}
                         </p>
                         <p class="price">Prezzo giornaliero: {{ $product->prezzoGiornaliero }}€</p>
                     </div>
-                    
+                    @can('isUser')
+                        <button><a href="{{ route('addPrenotazione') }}" class="highlight" title="Prenota questa macchina">Prenota</a></button>
+                    @endcan
                 </div>
             </div>
         </div>
