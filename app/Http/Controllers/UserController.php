@@ -16,32 +16,33 @@ class UserController extends Controller {
         return view('user');
     }
 
-    public function storePrenotazione(Request $request,$autoTarga): \Illuminate\Http\JsonResponse
+    public function storePrenotazione(Request $request): \Illuminate\Http\JsonResponse
     {
         $validatedData = $request->validate([
+            'autoTarga' => 'required|string',
             'dataInizio' => 'required|date',
             'dataFine' => 'required|date',
             'statoPrenotazione' => 'optional|string']);
 
 
-        $booking= new Prenotazione($validatedData);
-        $booking->autoTarga = $autoTarga;
+        $booking= new Prenotazione;
+        $booking->fill($validatedData);
+        $booking->autoTarga = $request->input('autoTarga');
         $booking->userId = Auth::user()->id;
         $booking->statoPrenotazione = 'nuova';
-
         if($booking->save()){
 //            Prenotazione inserita
             Log::info('Prenotazione aggiunta' . $booking->primaryKey);
             return response()->json(['message' => 'Booking added successfully']);
         }else{
-//            something is wrong
+//            Hold on, wait a minute, something ain't right
             Log::error('Failed to add booking');
             return response()->json(['message' => 'Failed to add booking'],500);
         }
     }
 
-    public function addPrenotazione(){
-        return view('bookings.addBooking');
+    public function addPrenotazione($targa){
+        return view('bookings.addBooking',['targa' => $targa]);
     }
 
 }

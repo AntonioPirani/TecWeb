@@ -21,14 +21,14 @@
                             Tipo cambio: {{ $product->tipoCambio }}<br>
                             Optional: {{ $product->optional }}<br>
                             <!-- Targa: {{ $product->targa }} -->
-{{--                            Targa: {{ $product->targa }}--}}
+                            Targa: {{ $product->targa }}
+
                         </p>
                         <p class="price">Prezzo giornaliero: {{ $product->prezzoGiornaliero }} €</p>
                     </div>
+
                     @can('isUser')
-                        {{--                        input nascosto che seleziona la targa della macchina selezionata--}}
-                        <input type="hidden" name="auto" value="{{ $product->targa }}">
-                        <button><a href="{{ route('addPrenotazione', ['autoTarga' => $product->targa]) }}" class="highlight" title="Prenota questa macchina">Prenota</a></button>
+                        <button><a href="{{ route('addPrenotazione', ['targa' => $product->targa])}}" class="highlight" title="Prenota questa macchina">Prenota</a></button>
                     @endcan
                 </div>
             </div>

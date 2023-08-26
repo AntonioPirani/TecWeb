@@ -27,10 +27,10 @@ Route::get('/selTopCat/{topCatId}', [PublicController::class, 'showCatalog2'])
 Route::get('/selTopCat/{topCatId}/selCat/{catId}', [PublicController::class, 'showCatalog3'])
         ->name('catalog3'); */
 
-Route::get('/addPrenotazione/{autoTarga}',[UserController::class,'addPrenotazione'])
+Route::get('/addPrenotazione/{targa}',[UserController::class,'addPrenotazione'])
         ->name('addPrenotazione');
 
-Route::post('/storePrenotazione/{autoTarga}',[UserController::class,'storePrenotazione'])
+Route::post('/storePrenotazione',[UserController::class,'storePrenotazione'])
     ->name('storePrenotazione');
 
 Route::get('/admin', [AdminController::class, 'index'])
