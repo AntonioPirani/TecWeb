@@ -93,18 +93,18 @@
 
 @section('content')
 <div class="static">
-    <h3>Edit FAQ</h3>
+    <h3>Modifica FAQ</h3>
 
     <!-- Input field to enter the FAQ ID for lookup -->
     <div class="form-group">
         <label for="id">FAQ ID</label>
-        <input type="text" id="lookupId" class="form-control" required>
-        <button id="lookupButton" class="btn btn-primary">Search FAQ</button>
+        <input type="text" id="lookupId" class="form-group" required>
+        <button id="lookupButton" class="btn btn-primary">Cerca FAQ</button>
     </div>
 
     <!-- Section for displaying FAQ details and edit form (initially hidden) -->
     <div id="faqDetailsSection" style="display: none;">
-        <h4>FAQ Details</h4>
+        <h4>Dettagli FAQ</h4>
 
         <!-- New form for editing FAQ details -->
         <form id="editFaqForm" method="POST" action="{{ route('updatefaq') }}">
@@ -123,9 +123,9 @@
                 <textarea name="risposta" id="risposta" class="form-control" rows="3" required></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary">Update FAQ</button>
+            <button type="submit" class="btn btn-primary">Aggiorna FAQ</button>
 
-            <button type="button" id="deleteFaqButton" class="btn btn-danger">Delete FAQ</button>
+            <button type="button" id="deleteFaqButton" class="btn btn-danger">Elimina FAQ</button>
 
         </form>
     </div>

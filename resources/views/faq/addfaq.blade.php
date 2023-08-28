@@ -33,22 +33,22 @@
 
 @section('content')
 <div class="static">
-    <h3>Add New Faq</h3>
+    <h3>Aggiungi Nuova FAQ</h3>
 
     <form id="addFaqForm" method="POST" action="{{ route('storefaq') }}">
                 @csrf
 
         <div class="form-group">
             <label for="domanda">Domanda</label>
-            <input type="text" name="domanda" id="domanda" class="form-control" required>
+            <input type="text" name="domanda" id="domanda" class="form-group" required>
         </div>
 
         <div class="form-group">
             <label for="risposta">Risposta</label>
-            <input type="text" name="risposta" id="risposta" class="form-control" required>
+            <input type="text" name="risposta" id="risposta" class="form-group" required>
         </div>
 
-        <button type="submit" class="btn btn-primary">Add New Faq</button>
+        <button type="submit" class="btn btn-primary">Aggiungi</button>
     </form>
     <div id="resultMessage" style="margin-top: 20px;"></div>
 </div>

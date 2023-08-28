@@ -391,6 +391,25 @@ img {
 
 /* Forms */
 
+.form-group {
+    margin-bottom: 20px; /* Add margin at the bottom to separate form elements */
+}
+
+/* Optionally, you can style labels and input fields separately */
+.form-group label {
+    display: block; /* Display labels as blocks to place them above input fields */
+    margin-bottom: 5px; /* Add space below labels */
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+    width: 95%; /* Make input fields expand to full width */
+    padding: 8px; /* Adjust padding for input fields */
+    border: 1px solid #ccc; /* Add a border for input fields */
+    border-radius: 4px; /* Add rounded corners for input fields */
+}
+
+
 .formerror {
     background: none repeat scroll 0 0 #FFECEC;
     border: 3px solid #f93d00;
