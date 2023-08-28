@@ -21,7 +21,7 @@ class User extends Authenticatable
         'email',
         'username',
         'password',
-        'role', 
+        'role',
     ];
 
     //Offset error
@@ -55,7 +55,7 @@ class User extends Authenticatable
          /*in realta non serve specificare che questi
           attributi diventano string perche lo fa
           automaticamente eloquent
-           
+
           'name','surname','username','password', 'email' => 'string',
           'remember_token' => 'int',
           'data_di_nascita' => 'date'*/
@@ -77,5 +77,7 @@ class User extends Authenticatable
         $role = (array)$role;
         return in_array($this->role, $role);
     }
+
+
 
 }

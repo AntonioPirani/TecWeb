@@ -16,7 +16,7 @@ class UserController extends Controller {
         return view('user');
     }
 
-    public function storePrenotazione(Request $request): \Illuminate\Http\JsonResponse
+    public function storePrenotazione(Request $request)
     {
         $validatedData = $request->validate([
             'autoTarga' => 'required|string',
@@ -33,7 +33,7 @@ class UserController extends Controller {
         if($booking->save()){
 //            Prenotazione inserita
             Log::info('Prenotazione aggiunta' . $booking->primaryKey);
-            return response()->json(['message' => 'Booking added successfully']);
+            return view('bookings.completedBooking',['prenotazione' => $booking]);
         }else{
 //            Hold on, wait a minute, something ain't right
             Log::error('Failed to add booking');
@@ -43,6 +43,21 @@ class UserController extends Controller {
 
     public function addPrenotazione($targa){
         return view('bookings.addBooking',['targa' => $targa]);
+    }
+
+    public function getUtentefromID($id){
+        $user = User::find($id);
+        if(!$user){
+            response('User not found',404);
+        }
+        return $user;
+    }
+    public function getAutofromTarga($targa){
+        $auto = Auto::find($targa);
+        if(!$auto){
+            response('Auto not found',404);
+        }
+        return $auto;
     }
 
 }

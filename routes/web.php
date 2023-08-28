@@ -33,6 +33,12 @@ Route::get('/addPrenotazione/{targa}',[UserController::class,'addPrenotazione'])
 Route::post('/storePrenotazione',[UserController::class,'storePrenotazione'])
     ->name('storePrenotazione');
 
+Route::get('/getUtente/{id}',[UserController::class,'getUtentefromID'])
+    ->name('getUtente');
+
+Route::get('/getAuto/{targa}',[UserController::class,'getAutofromTarga'])
+    ->name('getAuto');
+
 Route::get('/admin', [AdminController::class, 'index'])
         ->name('admin');
 

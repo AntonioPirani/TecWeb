@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Auto extends Model {
 
-    protected $table = 'auto';  
+    protected $table = 'auto';
     protected $primaryKey = 'targa';    //la targa è l'ID
-    
+
     // targa non modificabile da un HTTP Request (Mass Assignment)
     protected $casts = [
         'targa'=>'string',
@@ -28,6 +28,8 @@ class Auto extends Model {
         'disponibilita',
         'foto'
     ];
+
+
 
    /*  // Restituisce tutte le auto
     public function getAllAuto()

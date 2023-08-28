@@ -35,7 +35,7 @@
     <div class="static">
         <h3>Add New Booking</h3>
         <div>
-            <p>Your Variable: {{ $targa }}</p>
+            <p>Targa auto: {{ $targa }}</p>
         </div>
 
         <form id="newBookingForm" method="POST" action="{{ route('storePrenotazione') }}">
@@ -50,7 +50,7 @@
                 <input type="date" name="dataFine" class="form-control" required>
             </div>
             <div class="form-group">
-                <input type="text" name="autoTarga" value="{{$targa}}" class="form-control" required>
+                <input type="hidden" name="autoTarga" value="{{$targa}}" class="form-control" required>
             </div>
 
             {{--<div class="form-group">
