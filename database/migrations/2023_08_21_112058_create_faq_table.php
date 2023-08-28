@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('faq', function (Blueprint $table) {
-            $table->bigIncrements('faqId');
+            $table->bigIncrements('id');
             $table->string('domanda');
             $table->text('risposta');
             $table->timestamps();
