@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Log;
 class UserController extends Controller {
 
     public function index() {
-        return view('user');
+        $prenotazione = Prenotazione::where('userId',Auth::user()->id)->get();
+        return view('user',['booking'=>$prenotazione]);
     }
 
     public function storePrenotazione(Request $request)
