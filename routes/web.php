@@ -72,8 +72,28 @@ Route::view('/where', 'where')
 Route::view('/who', 'who')
         ->name('who');
 
-// routes/web.php
-Route::get('/faqs', [FaqController::class, 'index'])->name('faqs');;
+        /* --- FAQS --- */
+
+Route::get('/faqs', [FaqController::class, 'index'])
+        ->name('faqs');;
+
+Route::get('/admin/addfaq', [FaqController::class, 'add'])
+        ->name('addfaq');
+
+Route::post('/admin/storefaq', [FaqController::class, 'store'])
+        ->name('storefaq');
+
+Route::get('/admin/editfaq', [FaqController::class, 'edit'])
+        ->name('editfaq');
+
+Route::post('/admin/updatefaq', [FaqController::class, 'update'])
+        ->name('updatefaq');
+
+Route::get('/admin/getfaqdetails', [FaqController::class, 'getFaqDetails'])
+        ->name('getfaqdetails');
+
+Route::delete('/admin/deletefaq', [FaqController::class, 'delete'])
+        ->name('deletefaq');
 
 
 /*  Rotte aggiunte da Breeze
