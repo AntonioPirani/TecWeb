@@ -46,22 +46,21 @@
             </div>
         </div>
 
-        <!-- FAQ Management Column -->
+        <!-- Statistics Management Column -->
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Gestione Staff</h4>
+                    <h4 class="card-title">Statistiche</h4>
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <a href="{{ route('addfaq') }}" title="Aggiungi una nuova FAQ">Aggiungi FAQ</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="{{ route('editfaq') }}" title="Modifica o elimina delle FAQ esistenti">Gestisci FAQ</a>
+                            <a href="{{ route('monthly-stats') }}" title="Controlla le statistiche mensili">Statistiche mensili</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
+
+
     </div>
 </div>
 @endsection
