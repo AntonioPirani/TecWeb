@@ -6,6 +6,7 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\StatsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,6 +96,10 @@ Route::get('/admin/getfaqdetails', [FaqController::class, 'getFaqDetails'])
 Route::delete('/admin/deletefaq', [FaqController::class, 'delete'])
         ->name('deletefaq');
 
+        /* --- Statistiche --- */
+
+Route::get('/admin/monthly-stats', [StatsController::class, 'monthlyStatistics'])
+        ->name('monthly-stats');
 
 /*  Rotte aggiunte da Breeze
 
