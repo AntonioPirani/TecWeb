@@ -4,12 +4,12 @@
 
 @section('content')
     <div class="static">
-        <h1>Statistiche Mensili per il {{ date('Y') }}</h1>
-        <table>
+        <h1>Monthly Statistiche Mensili per il {{ date('Y') }}</h1>
+        <table style="margin-left: 10px;">
             <thead>
                 <tr>
-                    <th>Mese</th>
-                    <th>Affiti Totali</th>
+                    <th style="padding-right: 20px; text-align: center;">Mese</th>
+                    <th style="text-align: center;">Affitti Totali</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,8 +36,8 @@
                     $totalRentalsForMonth = $monthlyRentals[$monthNumber] ?? 0;
                     @endphp
                     <tr>
-                        <td>{{ $monthName }}</td>
-                        <td>{{ $totalRentalsForMonth }}</td>
+                        <td style="padding-right: 20px; text-align: center;">{{ $monthName }}</td>
+                        <td style="text-align: center;">{{ $totalRentalsForMonth }}</td>
                     </tr>
                 @endforeach
             </tbody>

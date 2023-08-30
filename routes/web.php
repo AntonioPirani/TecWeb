@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\StatsController;
+use App\Http\Controllers\AutoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,6 +101,31 @@ Route::delete('/admin/deletefaq', [FaqController::class, 'delete'])
 
 Route::get('/admin/monthly-stats', [StatsController::class, 'monthlyStatistics'])
         ->name('monthly-stats');
+
+        /* --- Auto --- */
+
+Route::middleware(['checkStaffOrAdmin', 'auth'])->group(function () {
+        // Define the routes that should be accessible by staff and admin here.
+        Route::get('/shared/addauto', [AutoController::class, 'add'])
+        ->name('addauto');
+
+        Route::post('/shared/storeauto', [AutoController::class, 'store'])
+                ->name('storeauto');
+
+        Route::get('/shared/editauto', [AutoController::class, 'edit'])
+                ->name('editauto');
+
+        Route::post('/shared/updateauto', [AutoController::class, 'update'])
+                ->name('updateauto');
+
+        Route::get('/shared/getautodetails', [AutoController::class, 'getAutoDetails'])
+                ->name('getautodetails');
+
+        Route::delete('/shared/deleteauto', [AutoController::class, 'delete'])
+                ->name('deleteauto');
+});
+
+
 
 /*  Rotte aggiunte da Breeze
 
