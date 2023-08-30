@@ -25,14 +25,14 @@ class UserController extends Controller {
             'autoTarga' => 'required|string',
             'dataInizio' => 'required|date',
             'dataFine' => 'required|date',
-            'statoPrenotazione' => 'optional|string']);
+            'statoPrenotazione' => 'required|string']);
 
 
         $booking= new Prenotazione;
         $booking->fill($validatedData);
         $booking->autoTarga = $request->input('autoTarga');
         $booking->userId = Auth::user()->id;
-        $booking->statoPrenotazione = 'nuova';
+//        $booking->statoPrenotazione = 'nuova';
         if($booking->save()){
 //            Prenotazione inserita
             Log::info('Prenotazione aggiunta' . $booking->primaryKey);
@@ -51,9 +51,9 @@ class UserController extends Controller {
         return view('bookings.deletePrenotazione',['id'=>$id]);
 
     }
-    public function cancellaPrenotazione($id){
+    public function cancellaPrenotazione(Request $request){
 
-        if(Prenotazione::where('id',$id)->delete()){
+        if(Prenotazione::where('id',$request->input('id'))->delete()){
 //            Prenotazione cancellata definitivamente
             Log::info('Prenotazione cancellata' );
             session()->flash('message', 'Operation completed successfully.');
@@ -66,6 +66,37 @@ class UserController extends Controller {
             return redirect()->route('user');
         }
     }
+
+    public function modifyPrenotazione($id){
+        return view('bookings.updatePrenotazione',['id'=>$id]);
+    }
+
+    public function updatePrenotazione(Request $request){
+//        $request->validate([
+//            'dataInizio' => 'required|date',
+//            'dataFine' => 'required|date',
+//            'statoPrenotazione' => 'required|string']);
+
+        //TODO verifica che le date non si sovrappongano
+
+        $booking = Prenotazione::where('id',$request->input('id'));
+        if (!$booking) {
+            // Handle the case where the booking record was not found
+            return redirect('/user')->with('error', 'Booking not found');
+        }
+//        $booking->update([
+//            'dataInizio' => $request->input('dataInizio'),
+//            'dataFine' => $request->input('dataFine'),
+//            'statoPrenotazione' => $request->input('statoPrenotazione')]);
+        $booking->update([
+            'dataInizio'=>$request->input('dataInizio'),
+            'dataFine'=>$request->input('dataFine'),
+            'statoPrenotazione'=>$request->input('statoPrenotazione')]);
+
+
+        return redirect('/user')->with('message', 'Prenotazione aggiornata!');
+    }
+
 
     public function getUtentefromID($id){
         $user = User::find($id);

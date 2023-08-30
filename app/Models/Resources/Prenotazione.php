@@ -20,7 +20,7 @@ class Prenotazione extends Model{
 
     protected $table = 'prenotazioni';
 
-    protected $fillable = ['dataInizio','dataFine'];
+    protected $fillable = ['dataInizio','dataFine','statoPrenotazione'];
 
     protected $guarded =['autoTarga','userId'];
 

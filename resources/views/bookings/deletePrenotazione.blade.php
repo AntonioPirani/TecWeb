@@ -39,9 +39,10 @@
             <p><strong>Attenzione! Questa azione è irreversibile.</strong></p>
         </div>
 
-        <form id="cancellaPrenotazione" method="POST" action="{{ route('cancellaPrenotazione',['id'=>$id]) }}">
+        <form id="cancellaPrenotazione" method="POST" action="{{ route('cancellaPrenotazione') }}">
             @csrf
 
+            <input type="hidden" name="id" value="{{$id}}">
 
             <button type="submit" class="btn btn-primary">Cancella definitivamente la tua prenotazione</button>
         </form>

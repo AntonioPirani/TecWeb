@@ -1,27 +1,28 @@
 @extends('layouts.user')
-@section('title','Add Booking')
+@section('title','Update Booking')
 @section('scripts')
-    <script src="{{ asset('js/functions.js') }}" ></script>
+    <script src="{{ asset('js/functions.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script>
         $(document).ready(function () {
-            $('#newBookingForm').on('submit', function (e) {
+            $('#modificaPrenotazione').on('submit', function (e) {
                 e.preventDefault();
 
                 $.ajax({
                     type: "POST",
-                    url: "{{ route('storePrenotazione')}}" ,
+                    url: "{{ route('updatePrenotazione')}}",
                     data: $(this).serialize(),
                     success: function (response) {
                         // Display the success message
-                        $('#resultMessage').html('<div class="alert alert-success">Booking added successfully</div>');
+                        $('#resultMessage').html('<p>Booking modified successfully</p>');
 
-                        window.location.href = "{{ route('user') }}";
+                        window.location.href = "{{ route('auto') }}";
                     },
                     error: function (error) {
                         // Display the error message
-                        $('#resultMessage').html('<div class="alert alert-danger">Failed to add booking</div>');
+                        $('#resultMessage').html('<div class="alert alert-danger">Failed to modify booking</div>');
+                        window.location.href = "{{ route('auto') }}";
                     }
                 });
             });
@@ -33,14 +34,15 @@
 
 @section('content')
     <div class="static">
-        <h3>Add New Booking</h3>
+        <h3>Modifica prenotazione</h3>
         <div>
-            <p>Targa auto: {{ $targa }}</p>
+            <p>Qui puoi modificare la tua prenotazione</p>
         </div>
 
-        <form id="newBookingForm" method="POST" action="{{ route('storePrenotazione') }}">
+        <form id="modificaPrenotazione" method="POST" action="{{ route('updatePrenotazione') }}">
             @csrf
 
+            <input type="hidden" name="id" value="{{$id}}">
             <div class="form-group">
                 <label for="startDate">Inizio nolleggio:</label>
                 <input type="date" name="dataInizio" class="form-control" required>
@@ -49,14 +51,10 @@
                 <label for="finishDate">Fine nolleggio:</label>
                 <input type="date" name="dataFine" class="form-control" required>
             </div>
-            <div class="form-group">
-                <input type="hidden" name="autoTarga" value="{{$targa}}" class="form-control" required>
-            </div>
 
-            <input type="hidden" name="statoPrenotazione" value="nuova">
+            <input type="hidden" name="statoPrenotazione" value="modificata">
 
-
-            <button type="submit" class="btn btn-primary">Add Booking</button>
+            <button type="submit" class="btn btn-primary">Modifica prenotazione</button>
         </form>
         <div id="resultMessage" style="margin-top: 20px;"></div>
     </div>

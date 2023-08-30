@@ -339,6 +339,15 @@ a:hover {
     display: flex;
     align-items: center;
 }
+.prod .product-details {
+    display: flex;
+}
+
+.prod .column {
+    flex: 1;
+    padding: 10px;
+}
+
 
 .prod .image {
     flex: 1;
