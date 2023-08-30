@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
             ['targa' => 'PO112SD', 'modello' => 'Fortwo', 'marca' => 'Smart', 'posti' => 2,
                 'prezzoGiornaliero' => 130.00, 'potenza' => 90, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth', 'disponibilita' => 1, 'foto' => 'Smart_Fortwo.jpg'],
             ['targa' => 'LE299IL', 'modello' => 'ModelX', 'marca' => 'Tesla', 'posti' => 5,
-                'prezzoGiornaliero' => 1450.00, 'potenza' => 130, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps, guida assistita', 'disponibilita' => 1, 'foto' => 'Tesla_Model_X.jpg']
+                'prezzoGiornaliero' => 145.00, 'potenza' => 130, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps, guida assistita', 'disponibilita' => 1, 'foto' => 'Tesla_Model_X.jpg']
 
         ];
 

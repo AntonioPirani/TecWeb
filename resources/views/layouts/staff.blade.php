@@ -9,7 +9,9 @@
         <div id="wrapper">
             <div id="header">
                 <div id="logoImg">
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo">
+                    <a href="{{route('auto')}}">
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo" >
+                    </a>
                 </div>
             </div>
 
