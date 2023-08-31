@@ -140,6 +140,14 @@ Route::middleware(['checkStaffOrAdmin', 'auth'])->group(function () {
                 ->name('deleteauto');
 });
 
+        /* --- Elimina Utente --- */
+
+Route::get('/delete-user', [UserController::class, 'delete'])
+        ->name('delete-user');
+
+Route::delete('/delete-user', [UserController::class, 'deleteUser'])
+        ->name('delete-user');
+
 
 
 /*  Rotte aggiunte da Breeze

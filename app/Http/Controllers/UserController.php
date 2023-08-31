@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -195,5 +196,38 @@ class UserController extends Controller
         }
         return $overlapping;
     }
+
+    public function delete()
+    {
+        return view('delete_user');
+    }
+
+    public function deleteUser(Request $request)
+    {
+        $username = $request->input('username');
+
+        // Find the user by username
+        $user = User::where('username', $username)->first();
+
+        if (!$user) {
+            return back()->with('error', 'Utente non trovato');
+        }
+
+        // Check for references in other tables
+        $references = DB::table('prenotazioni')
+            ->where('userId', $user->id)
+            ->count();
+
+        if ($references > 0) {
+            return back()->with('error', 'L\'utente ha prenotazioni attive, non può essere eliminato');
+        }
+
+        // No references found, proceed with the user deletion
+        $user->delete();
+
+        return redirect('/admin')->with('status', 'User deleted successfully');
+    }
+
+
 
 }

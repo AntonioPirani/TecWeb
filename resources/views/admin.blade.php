@@ -10,7 +10,6 @@
 
     <div class="row">
         <!-- Car Management Column -->
-        <!-- Car Management Column -->
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
@@ -75,6 +74,19 @@
             </div>
         </div>
 
+        <!-- Client Deletion Column -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Eliminazione Utenti Registrati</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a href="{{ route('delete-user') }}" title="Elimina un cliente registrato tramite username">Elimina Utente</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
     </div>
 </div>
