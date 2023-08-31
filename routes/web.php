@@ -105,9 +105,8 @@ Route::get('/admin/monthly-stats', [StatsController::class, 'monthlyStatistics']
         /* --- Auto --- */
 
 Route::middleware(['checkStaffOrAdmin', 'auth'])->group(function () {
-        // Define the routes that should be accessible by staff and admin here.
         Route::get('/shared/addauto', [AutoController::class, 'add'])
-        ->name('addauto');
+                ->name('addauto');
 
         Route::post('/shared/storeauto', [AutoController::class, 'store'])
                 ->name('storeauto');
