@@ -25,39 +25,40 @@ class PublicController extends Controller
     }
 
     public function filters(Request $request){
-        $request->validate([
-            'minPrice','maxPrice','numero_posti'=>'numeric',
-            'dataInizio','dataFine'=>'date',
-        ]);
-        $filteredAuto = collect([]);
-        if ($request->has('numero_posti')) {
-            $itemsToAdd=Auto::where('numero_posti', $request->input('numero_posti'));
-            $filteredAuto->merge($itemsToAdd);
+        //controlla se la form e tutta vuota
+        if($request->isNotFilled('minPrice','maxPrice','posti')){
+            return redirect(route('auto'))->with('error','Attenzione! Nessun filtro è stato inserito, perfavore inserisci i filtri prima di inviare il modulo');
         }
 
-//        $filteredAuto = Auto::whereBetween('prezzoGiornaliero', [$request->input('minPrice'), $request->input('maxPrice')])->paginate(3);
+        $filteredAuto = collect();
+        if ($request->has('minPrice')){$minPrice = $request->input('minPrice');}
+        if ($request->has('maxPrice')){$maxPrice = $request->input('maxPrice');}
+        if ($request->has('posti')){$posti = $request->input('posti');}
+        $query = Auto::query();
+        if($minPrice){$query->where('prezzoGiornaliero', '>=', $request->input('minPrice'));}
+        if($maxPrice){$query->where('prezzoGiornaliero', '<=', $request->input('maxPrice'));}
+        if($posti){$query->where('posti',$request->input('posti'));}
+
+        $filteredAuto = $query->paginate(3);
 
 
-        // Check if minPrice and maxPrice are provided
-//        if ($request->has('numero_posti')) {
-//            $itemsToAdd=Auto::where('numero_posti', $request->input('numero_posti'));
-//            $filteredAuto->add($itemsToAdd);
+
+
+//        elseif($request->has('minPrice') and $request->isNotFilled('maxPrice') and $request->isNotFilled('posti')){
+//            $filteredAuto = Auto::where('prezzoGiornaliero', '>=', $request->input('minPrice'))->paginate(3);
 //        }
-//        if ($request->has('maxPrice')) {
-//            $query->where('price', '<=', $request->input('maxPrice'));
+//        elseif($request->has('maxPrice') and $request->isNotFilled('minPrice') and $request->isNotFilled('posti')){
+//            $filteredAuto = Auto::where('prezzoGiornaliero', '<=', $request->input('maxPrice'))->paginate(3);
 //        }
-//
-//        // Check if minQuantity and maxQuantity are provided
-//        if ($request->has('')) {
-//            $query->where('posti',$request->input('numero_posti'));
+//        elseif($request->has('minPrice') and $request->has('maxPrice') and $request->isNotFilled('posti')){
+//            $filteredAuto = Auto::whereBetween('prezzoGionaliero',[$request->has('minPrice'),$request->input('maxPrice')])->paginate(3);
 //        }
-//        if ($request->has('maxQuantity')) {
-//            $query->where('quantity', '<=', $request->input('maxQuantity'));
+//        elseif($request->has('posti') and $request->isNotFilled('maxPrice') and $request->isNotFilled('minPrice')){
+//            $filteredAuto = Auto::where('posti', $request->input('posti'))->paginate(3);
 //        }
 
-        // Retrieve filtered products
-//        $filteredAuto = $query->get();
-        if ($filteredAuto->isEmpty()){return redirect(route('auto'))->with('error','Nessuna auto soddisfa i filtri');}
+
+        if ($filteredAuto->isEmpty()){return redirect(route('auto'))->with('error','Attenzione! Nessuna auto soddisfa i filtri inseriti');}
         return view('catalog', ['products' => $filteredAuto]);
     }
 

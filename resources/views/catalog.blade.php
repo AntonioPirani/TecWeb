@@ -1,6 +1,6 @@
 @extends('layouts.public')
 @section('scripts')
-    <script src="{{ asset('js/functions.js') }}" ></script>
+    <script src="{{ asset('js/functions.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script>
@@ -10,7 +10,7 @@
 
                 $.ajax({
                     type: "GET",
-                    url: "{{ route('filtri')}}" ,
+                    url: "{{ route('filtri')}}",
                     data: $(this).serialize(),
                     success: function (response) {
                         // Display the success message
@@ -27,95 +27,91 @@
             });
         });
     </script>
+@endsection
 
-@endsection()
+    @section('title', 'Catalogo Prodotti')
 
-@section('title', 'Catalogo Prodotti')
+    <!-- inizio sezione prodotti -->
+    @section('content')
+        <div id="content">
 
-<!-- inizio sezione prodotti -->
-@section('content')
-    <div id="content">
-        @isset($products)
-            @foreach ($products as $product)
-                <!-- $products è un array di oggetti di tipo Auto passati da PublicController-->
-                <div class="prod">
-                    <div class="prod-bgtop">
-                        <div class="prod-bgbtm">
-                            <div class="oneitem">
-                                <div class="image">
-                                    @include('helpers/productImg', ['attrs' => 'imagefrm', 'imgFile' => $product->foto])
+            @isset($products)
+                @foreach ($products as $product)
+                    <!-- $products è un array di oggetti di tipo Auto passati da PublicController-->
+                    <div class="prod">
+                        <div class="prod-bgtop">
+                            <div class="prod-bgbtm">
+                                <div class="oneitem">
+
+                                    <div class="image">
+                                        @include('helpers/productImg', ['attrs' => 'imagefrm', 'imgFile' => $product->foto])
+                                    </div>
+                                    <div class="info">
+                                        <h1 class="title">Modello: {{ $product->marca }} {{ $product->modello }}</h1>
+                                        <p class="meta">Numero posti: {{ $product->posti }}<br>
+                                            Potenza: {{ $product->potenza }} cv<br>
+                                            Tipo cambio: {{ $product->tipoCambio }}<br>
+                                            Optional: {{ $product->optional }}<br>
+                                            <!-- Targa: {{ $product->targa }} -->
+                                            Targa: {{ $product->targa }}
+
+                                        </p>
+                                        <p class="price">Prezzo giornaliero: {{ $product->prezzoGiornaliero }} €</p>
+                                    </div>
+
+                                    @can('isUser')
+                                        <button><a href="{{ route('addPrenotazione', ['targa' => $product->targa])}}"
+                                                   class="highlight" title="Prenota questa macchina">Prenota</a>
+                                        </button>
+                                    @endcan
                                 </div>
-                                <div class="info">
-                                    <h1 class="title">Modello: {{ $product->marca }} {{ $product->modello }}</h1>
-                                    <p class="meta">Numero posti: {{ $product->posti }}<br>
-                                        Potenza: {{ $product->potenza }} cv<br>
-                                        Tipo cambio: {{ $product->tipoCambio }}<br>
-                                        Optional: {{ $product->optional }}<br>
-                                        <!-- Targa: {{ $product->targa }} -->
-                                        Targa: {{ $product->targa }}
-
-                                    </p>
-                                    <p class="price">Prezzo giornaliero: {{ $product->prezzoGiornaliero }} €</p>
-                                </div>
-
-                                @can('isUser')
-                                    <button><a href="{{ route('addPrenotazione', ['targa' => $product->targa])}}"
-                                               class="highlight" title="Prenota questa macchina">Prenota</a></button>
-                                @endcan
                             </div>
                         </div>
                     </div>
+                @endforeach
+
+                <!--Paginazione-->
+                @include('pagination.paginator', ['paginator' => $products])
+
+            @endisset()
+        </div>
+
+        <!-- fine sezione prodotti -->
+
+        <div id="sidebar">
+            <form id="FiltersForm" method="GET" action="{{ route('filtri') }}">
+                @csrf
+
+                <h2>Filtro prezzo</h2>
+                <p>Inserisci il minimo e il massimo prezzo giornaliero che desideri</p>
+                <div class="filter">
+                    {{--            <label for="minPrice"></label>--}}
+                    <label>
+                        <input type="number" name="minPrice" class="form-control" placeholder="Inserisci prezzo minimo">
+                    </label>
                 </div>
-            @endforeach
+                <div class="filter">
+                    {{--            <label for="maxPrice"></label>--}}
+                    <label>
+                        <input type="number" name="maxPrice" class="form-control"
+                               placeholder="Inserisci prezzo massimo">
+                    </label>
+                </div>
 
-            <!--Paginazione-->
-            @include('pagination.paginator', ['paginator' => $products])
+                <h2>Filtro posti</h2>
+                <p>Inserisci il numero di posti che desideri nella tua auto a nolleggio</p>
+                <div class="filter">
+                    {{--            <label for="posti">Numero di posti:</label>--}}
+                    <label>
+                        <input type="number" name="posti" class="form-control" placeholder="esempio: 4">
+                    </label>
+                </div>
 
-        @endisset()
-    </div>
-
-    <!-- fine sezione prodotti -->
-
-    <div id="sidebar">
-        <form id="FiltersForm" method="GET" action="{{ route('filtri') }}">
-            @csrf
-
-        <h2>Filtro prezzo</h2>
-        <p>Inserisci il minimo e il massimo prezzo giornaliero che desideri</p>
-        <div class="filter">
-            <label for="minPrice"></label>
-            <input type="number" id="minPrice" step="5" placeholder="Inserisci prezzo minimo">
+                <br>
+                <button type="submit">Applica i Filtri</button>
+            </form>
         </div>
-        <div class="filter">
-            <label for="maxPrice"></label>
-            <input type="number" id="maxPrice" def step="5" placeholder="Inserisci prezzo massimo">
-        </div>
-
-
-        <h2>Filtro data</h2>
-        <p>Inserisci la data di inizio e fine del tuo nolleggio</p>
-        <div class="filter">
-            <label for="startDate">Inizio nolleggio:</label>
-            <input type="date" id="dataInizio" step="1">
-        </div>
-        <div class="filter">
-            <label for="finishDate">Fine nolleggio:</label>
-            <input type="date" id="dataFine" step="1">
-        </div>
-
-
-        <h2>Filtro posti</h2>
-        <p>Inserisci il numero di posti che desideri nella tua auto a nolleggio</p>
-        <div class="filter">
-            <label for="numPosti">Numero di posti:</label>
-            <input type="number" id="numero_posti" step="1" placeholder="esempio: 4">
-        </div>
-
-        <br>
-        <button type="submit">Applica i Filtri</button>
-        </form>
-    </div>
-    <!-- fine sezione laterale -->
-@endsection
+        <!-- fine sezione laterale -->
+    @endsection
 
 

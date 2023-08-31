@@ -42,12 +42,14 @@
             @csrf
 
             <div class="form-group">
-                <label for="startDate">Inizio nolleggio:</label>
-                <input type="date" name="dataInizio" class="form-control" required>
+                <label for="startDate">Inizio nolleggio:
+                    <input type="date" name="dataInizio" class="form-control" required>
+                </label>
             </div>
             <div class="form-group">
-                <label for="finishDate">Fine nolleggio:</label>
-                <input type="date" name="dataFine" class="form-control" required>
+                <label for="dataFine">Fine nolleggio:
+                    <input type="date" name="dataFine" class="form-control" required>
+                </label>
             </div>
             <div class="form-group">
                 <input type="hidden" name="autoTarga" value="{{$targa}}" class="form-control" required>
