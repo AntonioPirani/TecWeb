@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="static">
-        <h1>Monthly Statistiche Mensili per il {{ date('Y') }}</h1>
+        <h1>Statistiche Mensili per il {{ date('Y') }}</h1>
         <table style="margin-left: 10px;">
             <thead>
                 <tr>

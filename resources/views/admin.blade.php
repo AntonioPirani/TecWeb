@@ -50,10 +50,10 @@
                     <h4 class="card-title">Gestione FAQ</h4>
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <a href="{{ route('addfaq') }}" title="Aggiungi membro dello staff">Aggiungi FAQ</a>
+                            <a href="{{ route('addfaq') }}" title="Aggiungi una nuova FAQ">Aggiungi FAQ</a>
                         </li>
                         <li class="list-group-item">
-                            <a href="{{ route('editfaq') }}" title="Gestisci membri dello staff">Gestisci FAQ</a>
+                            <a href="{{ route('editfaq') }}" title="Gestisci le FAQ esistenti">Gestisci FAQ</a>
                         </li>
                     </ul>
                 </div>
