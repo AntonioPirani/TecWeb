@@ -64,7 +64,7 @@
                 success: function (response) {
                     // Update the "current" fields with the newly entered values
                     $('#currentNome').val($('#nome').val());
-                    $('#currentCognme').val($('#cognome').val());
+                    $('#currentCognome').val($('#cognome').val());
                     $('#currentEmail').val($('#email').val());
 
                     // Display the success message

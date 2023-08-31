@@ -9,9 +9,6 @@ class AutoController extends Controller
 {
     public function store(Request $request)
     {
-        //dd($request->all());
-
-        // Validate the form data
         $validatedData = $request->validate([
             'targa' => 'required|string|unique:auto,targa|max:7',
             'modello' => 'required|string|max:255',
@@ -25,7 +22,6 @@ class AutoController extends Controller
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // Create a new staff member
         $auto = new Auto;
         $auto->targa = $validatedData['targa'];
         $auto->modello = $validatedData['modello'];
@@ -36,15 +32,20 @@ class AutoController extends Controller
         $auto->tipoCambio = $validatedData['tipoCambio'];
         $auto->optional = $validatedData['optional'];
         $auto->disponibilita = 1;
-        $auto->foto = $validatedData['foto'];
+        //$auto->foto = $validatedData['foto'];
 
         if ($request->hasFile('foto')) {
-            $file = $request->file('foto');
-            $filename = $file->getClientOriginalName(); // Use the original filename
-    
-            // Save the file to the public/images/autos directory
-            $file->storeAs('public/images/autos', $filename);
+            $image = $request->file('foto');
+            $imageName = $image->getClientOriginalName();
+        } else {
+            $imageName = NULL;
         }
+        $auto->foto = $imageName;
+        
+        if (!is_null($imageName)) {
+            $destinationPath = public_path() . '/images/autos';
+            $image->move($destinationPath, $imageName);
+        };
 
         if ($auto->save()) {
             return response()->json(['message' => 'Auto added successfully']);
@@ -63,12 +64,13 @@ class AutoController extends Controller
         $targa = $request->input('targa');
 
         $auto = Auto::where('targa', $targa)
+        ->where('disponibilita', 1)
         ->first();
 
         if ($auto) {
             return response()->json($auto);
         } else {
-            return response()->json(['message' => 'Auto targa not found'], 404);
+            return response()->json(['message' => 'Auto non trovata o non modificabile'], 404);
         }
     }
 
@@ -80,7 +82,7 @@ class AutoController extends Controller
     public function update(Request $request)
     {
         $validatedData = $request->validate([
-            'targa' => 'required|string|unique:auto,targa|max:7',
+            'targa' => 'required|string|max:7',
             'modello' => 'required|string|max:255',
             'marca' => 'required|string|max:255',
             'prezzoGiornaliero' => 'required|string|max:255',
@@ -89,7 +91,7 @@ class AutoController extends Controller
             'tipoCambio' => 'required|string|max:255',
             'optional' => 'required|string|max:255',
             //'disponibilita' => 'required|string|max:255',
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'foto' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $targa = $request->input('targa');
@@ -99,7 +101,16 @@ class AutoController extends Controller
             return response()->json(['message' => 'Auto targa not found'], 404);
         }
 
-        // Update staff member details
+        // Check if there's an existing image
+        if (!is_null($auto->foto)) {
+            $existingImagePath = public_path('images/autos/') . $auto->foto;
+            
+            // Delete the existing image file from the server
+            if (file_exists($existingImagePath)) {
+                unlink($existingImagePath);
+            }
+        }
+
         $auto->targa = $validatedData['targa'];
         $auto->modello = $validatedData['modello'];
         $auto->marca = $validatedData['marca'];
@@ -108,15 +119,25 @@ class AutoController extends Controller
         $auto->potenza = $validatedData['potenza'];
         $auto->tipoCambio = $validatedData['tipoCambio'];
         $auto->optional = $validatedData['optional'];
-        $auto->disponibilita = 1;
-        $auto->foto = $validatedData['foto'];
+        //$auto->disponibilita = 1;
+        
+        // Check if 'existingFoto' field exists in the request
+        if ($request->has('existingFoto')) {
+            // Use the existing image filename
+            $auto->foto = $request->input('existingFoto');
+        } else {
+            // Process the uploaded image as you do for a new image
+            if ($request->hasFile('foto')) {
+                $image = $request->file('foto');
+                $imageName = $image->getClientOriginalName();
+                $auto->foto = $imageName;
 
-        if ($request->hasFile('foto')) {
-            $file = $request->file('foto');
-            $filename = $file->getClientOriginalName(); // Use the original filename
-    
-            // Save the file to the public/images/autos directory
-            $file->storeAs('public/images/autos', $filename);
+                $destinationPath = public_path() . '/images/autos';
+                $image->move($destinationPath, $imageName);
+            } else {
+                // Handle the case where no image is provided or needed.
+                // You can decide to leave it as is or perform any other actions.
+            }
         }
 
         if ($auto->save()) {
@@ -126,13 +147,23 @@ class AutoController extends Controller
         }
     }
 
+
     public function delete(Request $request)
     {
         $targa = $request->input('targa');
-
         $auto = Auto::where('targa', $targa)->first();
 
         if ($auto) {
+            // Check if there's an associated image
+            if (!is_null($auto->foto)) {
+                $existingImagePath = public_path('images/autos/') . $auto->foto;
+                
+                // Delete the associated image file from the server
+                if (file_exists($existingImagePath)) {
+                    unlink($existingImagePath);
+                }
+            }
+
             if ($auto->delete()) {
                 return response()->json(['message' => 'Auto deleted successfully']);
             } else {
