@@ -23,6 +23,9 @@ class User extends Authenticatable
         'username',
         'password',
         'role',
+        'dataNascita',
+        'occupazione',
+        'indirizzo',
     ];
 
     //Offset error
