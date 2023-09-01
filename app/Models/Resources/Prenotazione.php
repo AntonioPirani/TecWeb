@@ -28,4 +28,14 @@ class Prenotazione extends Model{
        return $this->orderBy('timestamps','desc')->limit($limit)->get(); //aggiungere al controller delle prenotazion
    }
 
+   public function user()
+    {
+        return $this->belongsTo(User::class, 'userId', 'id');
+    }
+
+    public function auto()
+    {
+        return $this->belongsTo(Auto::class, 'autoTarga', 'targa');
+    }
+
 }

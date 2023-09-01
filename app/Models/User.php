@@ -95,4 +95,9 @@ class User extends Authenticatable
         return in_array($this->role, $role);
     }
 
+    public function prenotazioni()
+    {
+        return $this->hasMany(Rental::class, 'userId', 'id');
+    }
+
 }

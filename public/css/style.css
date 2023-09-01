@@ -691,3 +691,16 @@ img {
     border-radius: 5px;
     font-size: 16px;*/
 }
+
+/* --- Table --- */
+
+.table th,
+.table td {
+    padding: 10px;
+	text-align: center;
+}
+
+/* Add space between table rows */
+.table tbody tr {
+    margin-bottom: 10px;
+}
