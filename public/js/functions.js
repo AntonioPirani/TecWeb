@@ -80,6 +80,28 @@ function doFormValidation(actionUrl, formId) {
     });
 }
 
+//Statistiche Condivise per Mese
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("month-form");
+    const tableContainer = document.getElementById("table-container");
+    const monthName = document.getElementById("month-name");
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const selectedMonth = form.querySelector("select[name='month']").value;
+
+        fetch(`/shared/rentals?month=${selectedMonth}`)
+            .then((response) => response.text())
+            .then((html) => {
+                // Update the table content and month name
+                tableContainer.innerHTML = html;
+                monthName.textContent = document.querySelector(`select[name='month'] option[value='${selectedMonth}']`).textContent;
+            })
+            .catch((error) => console.error(error));
+    });
+});
+
+
 
 
 

@@ -55,4 +55,9 @@ class Auto extends Model {
     //     return $this->hasOne(Category::class, 'catId', 'catId');
     // }
 
+    public function prenotazioni()
+    {
+        return $this->hasMany(Rental::class, 'autoTarga', 'targa');
+    }
+
 }

@@ -25,6 +25,20 @@
                 </div>
             </div>
         </div>
+
+        <!-- Statistics Management Column -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Statistiche</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a href="{{ route('rentals') }}" title="Controlla le statistiche per un mese specifico">Prenotazioni per mese</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @endsection

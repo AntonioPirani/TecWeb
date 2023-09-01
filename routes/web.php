@@ -118,7 +118,7 @@ Route::delete('/admin/deletefaq', [FaqController::class, 'delete'])
 Route::get('/admin/monthly-stats', [StatsController::class, 'monthlyStatistics'])
         ->name('monthly-stats');
 
-        /* --- Auto --- */
+        /* --- Rotte Private Condivise: Auto e Statistiche --- */
 
 Route::middleware(['checkStaffOrAdmin', 'auth'])->group(function () {
         Route::get('/shared/addauto', [AutoController::class, 'add'])
@@ -138,6 +138,9 @@ Route::middleware(['checkStaffOrAdmin', 'auth'])->group(function () {
 
         Route::delete('/shared/deleteauto', [AutoController::class, 'delete'])
                 ->name('deleteauto');
+
+        Route::get('/shared/rentals', [StatsController::class, 'rentalsPerMonth'])
+                ->name('rentals');
 });
 
         /* --- Elimina Utente --- */
@@ -147,8 +150,6 @@ Route::get('/delete-user', [UserController::class, 'delete'])
 
 Route::delete('/delete-user', [UserController::class, 'deleteUser'])
         ->name('delete-user');
-
-
 
 /*  Rotte aggiunte da Breeze
 

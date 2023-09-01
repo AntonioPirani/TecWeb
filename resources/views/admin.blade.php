@@ -69,6 +69,9 @@
                         <li class="list-group-item">
                             <a href="{{ route('monthly-stats') }}" title="Controlla le statistiche mensili">Statistiche mensili</a>
                         </li>
+                        <li class="list-group-item">
+                            <a href="{{ route('rentals') }}" title="Controlla le statistiche per un mese specifico">Prenotazioni per mese</a>
+                        </li>
                     </ul>
                 </div>
             </div>
