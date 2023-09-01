@@ -39,6 +39,11 @@ class UserController extends Controller
         $targa = $request->input('autoTarga');
         $inizio = new DateTime($request->input('dataInizio'));
         $fine = new DateTime($request->input('dataFine'));
+        if ($inizio < new DateTime(now())) {
+            return redirect()->back()->with('error', 'La data di inizio è passata');
+        } elseif ($fine < $inizio) {
+            return redirect()->back()->with('error', 'La data di fine é precedente alla data di inizio');
+        }
         /*
 
                 $allPrenotazioni = Prenotazione::where('autoTarga', $targa)->get();
@@ -110,27 +115,30 @@ class UserController extends Controller
 
     public function updatePrenotazione(Request $request)
     {
-        $targa= Prenotazione::where('id', $request->input('id'))->value('autoTarga');
-        $inizio =new DateTime($request->input('dataInizio')) ;
-        $fine =new DateTime($request->input('dataFine')) ;
-//        return response()->json([$targa,$inizio,$fine]);//targa inizio e fine giusti(dalla richiesta di modifica)
-//        foreach ($booking as $item) {
+        $targa = Prenotazione::where('id', $request->input('id'))->value('autoTarga');
+        $inizio = new DateTime($request->input('dataInizio'));
+        $fine = new DateTime($request->input('dataFine'));
+        if ($inizio < new DateTime(now())) {
+            return redirect()->back()->with('error', 'La data di inizio è passata');
+        } elseif ($fine < $inizio) {
+            return redirect()->back()->with('error', 'La data di fine é precedente alla data di inizio');
+        }
 
-//            $targa = $booking->find('autoTarga');
-
-
-            if ($this->isCarAvailable($targa, $inizio, $fine)) {
-                if (!$booking = Prenotazione::where('id', $request->input('id'))) {
-                    // Handle the case where the booking record was not found
-                    return redirect('/user')->with('error', 'Booking not found');
-                }else{$booking->update([
+        if ($this->isCarAvailable($targa, $inizio, $fine)
+        ) {
+            if (!$booking = Prenotazione::where('id', $request->input('id'))) {
+                // Handle the case where the booking record was not found
+                return redirect()->back()->with('error', 'Booking not found');
+            } else {
+                $booking->update([
                     'dataInizio' => $inizio,
                     'dataFine' => $fine,
                     'statoPrenotazione' => 'modificata']);
-                return redirect('/user')->with('success', 'Prenotazione aggiornata!');}
-            } elseif(!$this->isCarAvailable($targa, $inizio, $fine)) {
-                return redirect('user')->with('error', 'La data scelta non e disponibile perché si sovrappone con un\'altra prenotazione della macchina selezionata');
+                return redirect('user')->with('success', 'Prenotazione aggiornata!');
             }
+        } elseif (!$this->isCarAvailable($targa, $inizio, $fine)) {
+            return redirect()->back()->with('error', 'La data scelta non e disponibile perché si sovrappone con un\'altra prenotazione della macchina selezionata');
+        }
 //        }
 
     }
