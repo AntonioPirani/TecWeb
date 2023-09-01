@@ -23,6 +23,9 @@ class Prenotazione extends Model{
     protected $fillable = ['dataInizio','dataFine','statoPrenotazione'];
 
     protected $guarded =['autoTarga','userId'];
+    protected $casts = [
+        'dataInizio'=>'datetime:Y-m-d',
+        'dataFine'=>'datetime:Y-m-d'];
 
    public function getLastBookings($limit){
        return $this->orderBy('timestamps','desc')->limit($limit)->get(); //aggiungere al controller delle prenotazion

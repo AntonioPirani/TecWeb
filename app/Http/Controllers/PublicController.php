@@ -39,11 +39,7 @@ class PublicController extends Controller
         if($maxPrice){$query->where('prezzoGiornaliero', '<=', $request->input('maxPrice'));}
         if($posti){$query->where('posti',$request->input('posti'));}
 
-        $filteredAuto = $query->paginate(3);
-
-
-
-
+        $filteredAuto = $query->paginate();
 //        elseif($request->has('minPrice') and $request->isNotFilled('maxPrice') and $request->isNotFilled('posti')){
 //            $filteredAuto = Auto::where('prezzoGiornaliero', '>=', $request->input('minPrice'))->paginate(3);
 //        }
@@ -56,8 +52,6 @@ class PublicController extends Controller
 //        elseif($request->has('posti') and $request->isNotFilled('maxPrice') and $request->isNotFilled('minPrice')){
 //            $filteredAuto = Auto::where('posti', $request->input('posti'))->paginate(3);
 //        }
-
-
         if ($filteredAuto->isEmpty()){return redirect(route('auto'))->with('error','Attenzione! Nessuna auto soddisfa i filtri inseriti');}
         return view('catalog', ['products' => $filteredAuto]);
     }

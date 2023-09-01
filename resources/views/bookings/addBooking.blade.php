@@ -42,7 +42,7 @@
             @csrf
 
             <div class="form-group">
-                <label for="startDate">Inizio nolleggio:
+                <label for="dataInizio">Inizio nolleggio:
                     <input type="date" name="dataInizio" class="form-control" required>
                 </label>
             </div>
@@ -51,6 +51,8 @@
                     <input type="date" name="dataFine" class="form-control" required>
                 </label>
             </div>
+{{--            //TODO check che data fine sia dopo la data di inizio--}}
+
             <div class="form-group">
                 <input type="hidden" name="autoTarga" value="{{$targa}}" class="form-control" required>
             </div>

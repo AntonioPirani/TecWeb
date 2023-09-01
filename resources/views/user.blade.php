@@ -30,7 +30,6 @@
                                     @php
                                         $controller=new \App\Http\Controllers\UserController();
                                         $auto = $controller->getAutofromTarga($prenotazione->autoTarga)
-
                                     @endphp
                                     @include('helpers/productImg', ['attrs' => 'imagefrm', 'imgFile' => $auto->foto])
                                 </div>
@@ -43,6 +42,8 @@
                                                     Fine prenotazione:{{$prenotazione->dataFine}}<br>
                                                     ID prenotazione:{{$prenotazione->id}}<br>
                                                     Stato prenotazione: {{$prenotazione->statoPrenotazione}}
+                                                    @isset($costoTotale)
+                                                        Costo totale prenotazione: {{$costoTotale}}<br>@endisset
                                                 </p>
                                             </td>
                                             <td>
