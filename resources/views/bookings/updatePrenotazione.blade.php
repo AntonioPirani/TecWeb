@@ -43,13 +43,14 @@
             @csrf
 
             <input type="hidden" name="id" value="{{$id}}">
+
             <div class="form-group">
-                <label for="startDate">Inizio nolleggio:</label>
-                <input type="date" name="dataInizio" class="form-control" required>
+                <label for="dataInizio">Inizio nolleggio:
+                <input type="date" name="dataInizio" class="form-control" required></label>
             </div>
             <div class="form-group">
-                <label for="finishDate">Fine nolleggio:</label>
-                <input type="date" name="dataFine" class="form-control" required>
+                <label for="dataFine">Fine nolleggio:
+                <input type="date" name="dataFine" class="form-control" required></label>
             </div>
 
             <input type="hidden" name="statoPrenotazione" value="modificata">

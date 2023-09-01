@@ -28,8 +28,6 @@ class UserController extends Controller
     }
 
 
-
-
     public function storePrenotazione(Request $request)
     {
         $validatedData = $request->validate([
@@ -39,21 +37,24 @@ class UserController extends Controller
             'statoPrenotazione' => 'required|string']);
 
         $targa = $request->input('autoTarga');
-        $inizio =  new DateTime($request->input('dataInizio'));
+        $inizio = new DateTime($request->input('dataInizio'));
         $fine = new DateTime($request->input('dataFine'));
-        $allPrenotazioni = Prenotazione::where('autoTarga', $targa)->get();
+        /*
 
-        foreach ($allPrenotazioni as $prenotazione) {
-            if ($inizio >= $prenotazione->dataInizio
-                and $inizio <= $prenotazione->dataFine) {
-                //la data di inizio si trova in mezzo al periodo di nolleggio di un altra prenotazione
-                return redirect('user')->with('error', 'La data scelta non e disponibile perché si sovrappone con un\'altra prenotazione della macchina selezionata');
-            } elseif ($inizio <= $prenotazione->dataInizio and $fine >= $prenotazione->dataInizio) {
-                //la data di fine si trova in mezzo al periodo di nolleggio di unaltra prenotazione
-                return redirect('user')->with('error', 'La data scelta non e disponibile perché si sovrappone con un\'altra prenotazione della macchina selezionata');
-            }
-        }
+                $allPrenotazioni = Prenotazione::where('autoTarga', $targa)->get();
 
+                foreach ($allPrenotazioni as $prenotazione) {
+                    if ($inizio >= $prenotazione->dataInizio
+                        and $inizio <= $prenotazione->dataFine) {
+                        //la data di inizio si trova in mezzo al periodo di nolleggio di un altra prenotazione
+                        return redirect('user')->with('error', 'La data scelta non e disponibile perché si sovrappone con un\'altra prenotazione della macchina selezionata');
+                    } elseif ($inizio <= $prenotazione->dataInizio and $fine >= $prenotazione->dataInizio) {
+                        //la data di fine si trova in mezzo al periodo di nolleggio di unaltra prenotazione
+                        return redirect('user')->with('error', 'La data scelta non e disponibile perché si sovrappone con un\'altra prenotazione della macchina selezionata');
+                    }
+                }*/
+
+        if (UserController:: isCarAvailable($targa, $inizio, $fine)) {
 
             $booking = new Prenotazione;
             $booking->fill($validatedData);
@@ -61,15 +62,17 @@ class UserController extends Controller
             $booking->userId = Auth::user()->id;
 
             if ($booking->save()) {
-    //            Prenotazione inserita
+                //            Prenotazione inserita
                 Log::info('Prenotazione aggiunta' . $booking->primaryKey);
                 return view('bookings.completedBooking', ['prenotazione' => $booking]);
             } else {
-    //            Hold on, wait a minute, something ain't right
+                //            Hold on, wait a minute, something ain't right
                 Log::error('Failed to add booking');
                 return response()->json(['message' => 'Failed to add booking'], 500);
             }
-
+        } else {
+            return redirect('user')->with('error', 'La data scelta non e disponibile perché si sovrappone con un\'altra prenotazione della macchina selezionata');
+        }
     }
 
     public function addPrenotazione($targa)
@@ -107,20 +110,29 @@ class UserController extends Controller
 
     public function updatePrenotazione(Request $request)
     {
+        $targa= Prenotazione::where('id', $request->input('id'))->value('autoTarga');
+        $inizio =new DateTime($request->input('dataInizio')) ;
+        $fine =new DateTime($request->input('dataFine')) ;
+//        return response()->json([$targa,$inizio,$fine]);//targa inizio e fine giusti(dalla richiesta di modifica)
+//        foreach ($booking as $item) {
+
+//            $targa = $booking->find('autoTarga');
 
 
-        $booking = Prenotazione::where('id', $request->input('id'));
-        if (!$booking) {
-            // Handle the case where the booking record was not found
-            return redirect('/user')->with('error', 'Booking not found');
-        }
-        $booking->update([
-            'dataInizio' => $request->input('dataInizio'),
-            'dataFine' => $request->input('dataFine'),
-            'statoPrenotazione' => $request->input('statoPrenotazione')]);
+            if ($this->isCarAvailable($targa, $inizio, $fine)) {
+                if (!$booking = Prenotazione::where('id', $request->input('id'))) {
+                    // Handle the case where the booking record was not found
+                    return redirect('/user')->with('error', 'Booking not found');
+                }else{$booking->update([
+                    'dataInizio' => $inizio,
+                    'dataFine' => $fine,
+                    'statoPrenotazione' => 'modificata']);
+                return redirect('/user')->with('success', 'Prenotazione aggiornata!');}
+            } elseif(!$this->isCarAvailable($targa, $inizio, $fine)) {
+                return redirect('user')->with('error', 'La data scelta non e disponibile perché si sovrappone con un\'altra prenotazione della macchina selezionata');
+            }
+//        }
 
-
-        return redirect('/user')->with('success', 'Prenotazione aggiornata!');
     }
 
 
@@ -148,22 +160,16 @@ class UserController extends Controller
     {
         $available = true;
 
-        //seleziona tutte le prenotazioni di una stessa auto
         $allPrenotazioni = Prenotazione::where('autoTarga', $targa)->get();
 
         foreach ($allPrenotazioni as $prenotazione) {
-            if ($inizio > $prenotazione->dataInizio
-                and $inizio < $prenotazione->dataFine) {
+            if ($inizio >= $prenotazione->dataInizio
+                and $inizio <= $prenotazione->dataFine) {
                 //la data di inizio si trova in mezzo al periodo di nolleggio di un altra prenotazione
-
                 $available = false;
-                break;
-//                return false;
-            } elseif ($inizio<$prenotazione->dataInizio and $fine > $prenotazione->dataInizio) {
+            } elseif ($inizio <= $prenotazione->dataInizio and $fine >= $prenotazione->dataInizio) {
                 //la data di fine si trova in mezzo al periodo di nolleggio di unaltra prenotazione
                 $available = false;
-                break;
-//                return false;
             }
         }
         return $available;

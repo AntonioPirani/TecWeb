@@ -31,8 +31,8 @@
                         @endif
 
                         @if (session('error'))
-                            <div class="alert alert-danger">
-                                <center>{{ session('error') }}</center>
+                            <div class="error-message">
+                                <span class="formerror">{{ session('error') }}</span>
                             </div>
                         @endif
                         @yield('content')
