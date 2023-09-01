@@ -34,8 +34,8 @@ class UserController extends Controller
     {
         $validatedData = $request->validate([
             'autoTarga' => 'required|string',
-            'dataInizio' => 'required|date',
-            'dataFine' => 'required|date',
+            'dataInizio' => 'required|date|before:dataFine',
+            'dataFine' => 'required|date|after:dataInizio',
             'statoPrenotazione' => 'required|string']);
 
         $targa = $request->input('autoTarga');

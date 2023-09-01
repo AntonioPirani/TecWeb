@@ -46,12 +46,18 @@
                     <input type="date" name="dataInizio" class="form-control" required>
                 </label>
             </div>
+            @error('dataInizio')
+            <span class="formerror">La data di inizio nolleggio deve essere prima della data di fine nolleggio</span>
+            @enderror
             <div class="form-group">
                 <label for="dataFine">Fine nolleggio:
                     <input type="date" name="dataFine" class="form-control" required>
                 </label>
             </div>
-{{--            //TODO check che data fine sia dopo la data di inizio--}}
+
+            @error('dataFine')
+                <span class="formerror">La data di fine nolleggio deve essere dopo la data di inizio nolleggio</span>
+            @enderror
 
             <div class="form-group">
                 <input type="hidden" name="autoTarga" value="{{$targa}}" class="form-control" required>

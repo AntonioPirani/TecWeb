@@ -26,8 +26,10 @@ Route::get('/selTopCat/{topCatId}', [PublicController::class, 'showCatalog2'])
 
 Route::get('/selTopCat/{topCatId}/selCat/{catId}', [PublicController::class, 'showCatalog3'])
         ->name('catalog3'); */
-Route::get('/applyFilters',[PublicController::class,'filters'])
-    ->name('filtri');
+Route::get('/filtroPrezzo',[PublicController::class,'filtraPrezzo'])
+    ->name('prezzo');
+Route::get('/filtroPosti',[PublicController::class,'filtraPosti'])
+    ->name('posti');
 
 Route::get('/addPrenotazione/{targa}',[UserController::class,'addPrenotazione'])
         ->name('addPrenotazione')->middleware('can:isUser');
