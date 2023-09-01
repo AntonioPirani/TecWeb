@@ -14,17 +14,21 @@ return new class extends Migration
     public function up()
     {
         Schema::create('utenti', function (Blueprint $table) {
-            $table->id(); // Make userId the primary key
+            $table->id();
             $table->string('nome');
             $table->string('cognome');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('username', 20);
             $table->string('password');
-            $table->string('role', 10)->default('utente'); //admin, staff, utente
+            $table->date('dataNascita')->default('2000-01-01');
+            $table->string('occupazione')->default('N/A');
+            $table->string('indirizzo')->default('N/A');
+            $table->string('role', 10)->default('user'); //admin, staff, user
             $table->rememberToken();
             $table->timestamps();
-        });        
+        });
+               
     }
 
     /**
