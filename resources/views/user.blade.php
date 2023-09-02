@@ -38,8 +38,8 @@
                                         <tr>
                                             <td><p class="meta">
                                                     <strong>Dettagli prenotazione</strong><br>
-                                                    Inizio prenotazione:{{$prenotazione->dataInizio}}<br>
-                                                    Fine prenotazione:{{$prenotazione->dataFine}}<br>
+                                                    Inizio prenotazione:{{$prenotazione->dataInizio->format('Y-m-d')}}<br>
+                                                    Fine prenotazione:{{$prenotazione->dataFine->format('Y-m-d')}}<br>
                                                     ID prenotazione:{{$prenotazione->id}}<br>
                                                     Stato prenotazione: {{$prenotazione->statoPrenotazione}}
                                                     @isset($costoTotale)

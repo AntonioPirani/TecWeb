@@ -39,7 +39,7 @@
             <p>Qui puoi modificare la tua prenotazione con id: {{$id}}</p>
           @php
                 $messaggio='';$warning='';
-                $targa=\App\Models\Resources\Prenotazione::where('id',$id)->get('autoTarga');
+                $targa=\App\Models\Resources\Prenotazione::where('id',$id)->value('autoTarga');
                 $allPrenotazioni=\App\Models\Resources\Prenotazione::where('autoTarga',$targa)->get();
 
                 if($allPrenotazioni->isEmpty()){$messaggio='Questa auto non ha prenotazioni in previsto,scegli le date che preferisci';}
