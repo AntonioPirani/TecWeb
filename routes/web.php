@@ -6,6 +6,8 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\StatsController;
+use App\Http\Controllers\AutoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -110,6 +112,52 @@ Route::get('/admin/getfaqdetails', [FaqController::class, 'getFaqDetails'])
 
 Route::delete('/admin/deletefaq', [FaqController::class, 'delete'])
         ->name('deletefaq');
+
+        /* --- Statistiche --- */
+
+Route::get('/admin/monthly-stats', [StatsController::class, 'monthlyStatistics'])
+        ->name('monthly-stats');
+
+        /* --- Rotte Private Condivise: Auto e Statistiche --- */
+
+Route::middleware(['checkStaffOrAdmin', 'auth'])->group(function () {
+        Route::get('/shared/addauto', [AutoController::class, 'add'])
+                ->name('addauto');
+
+        Route::post('/shared/storeauto', [AutoController::class, 'store'])
+                ->name('storeauto');
+
+        Route::get('/shared/editauto', [AutoController::class, 'edit'])
+                ->name('editauto');
+
+        Route::post('/shared/updateauto', [AutoController::class, 'update'])
+                ->name('updateauto');
+
+        Route::get('/shared/getautodetails', [AutoController::class, 'getAutoDetails'])
+                ->name('getautodetails');
+
+        Route::delete('/shared/deleteauto', [AutoController::class, 'delete'])
+                ->name('deleteauto');
+
+        Route::get('/shared/rentals', [StatsController::class, 'rentalsPerMonth'])
+                ->name('rentals');
+});
+
+        /* --- Elimina Utente --- */
+
+Route::get('/delete-user', [UserController::class, 'delete'])
+        ->name('delete-user');
+
+Route::delete('/delete-user', [UserController::class, 'deleteUser'])
+        ->name('delete-user');
+
+        /* --- Modifica Utente --- */
+
+Route::get('/user/edit', [UserController::class, 'edit'])
+        ->name('edituser');
+
+Route::put('/user/edit', [UserController::class, 'editUser'])
+        ->name('edituser');
 
 
 /*  Rotte aggiunte da Breeze

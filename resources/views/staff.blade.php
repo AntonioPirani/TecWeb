@@ -8,12 +8,38 @@
     <p>Benvenuto {{ Auth::user()->nome }} {{ Auth::user()->cognome }}</p>
     <p>Seleziona la funzione da attivare</p>
 
-    <ul>
-        <li><button><a href="{{ route('newproduct') }}" title="Inserisce nuovi prodotti">Inserisci</a></button></li>
-        <li><button><a href="{{ route('staff') }}" title="Inserisce nuovi prodotti"> Modifica</a></button></li>
-        <li><button><a href="{{ route('staff') }}" title="Cancella o prodotti">Cancella</a></li>
-    </ul>
+    <div class="row">
+        <!-- Car Management Column -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Gestione Auto</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a href="{{ route('addauto') }}" title="Inserisci una nuova auto">Inserisci Auto</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="{{ route('editauto') }}" title="Modifica o elimina una auto">Gestisci Auto</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
+        <!-- Statistics Management Column -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Statistiche</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a href="{{ route('rentals') }}" title="Controlla le statistiche per un mese specifico">Prenotazioni per mese</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
 

@@ -16,19 +16,16 @@
                     <h4 class="card-title">Gestione Auto</h4>
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <a href="{{ route('newproduct') }}" title="Inserisci una nuova auto">Inserisci Auto</a>
+                            <a href="{{ route('addauto') }}" title="Inserisci una nuova auto">Inserisci Auto</a>
                         </li>
                         <li class="list-group-item">
-                            <a href="{{ route('admin') }}" title="Modifica una auto">Modifica Auto</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="{{ route('admin') }}" title="Elimina una auto">Cancella Auto</a>
+                            <a href="{{ route('editauto') }}" title="Modifica o elimina una auto">Gestisci Auto</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
-
+        
         <!-- Staff Management Column -->
         <div class="col-md-6">
             <div class="card">
@@ -50,18 +47,50 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Gestione Staff</h4>
+                    <h4 class="card-title">Gestione FAQ</h4>
                     <ul class="list-group">
                         <li class="list-group-item">
                             <a href="{{ route('addfaq') }}" title="Aggiungi una nuova FAQ">Aggiungi FAQ</a>
                         </li>
                         <li class="list-group-item">
-                            <a href="{{ route('editfaq') }}" title="Modifica o elimina delle FAQ esistenti">Gestisci FAQ</a>
+                            <a href="{{ route('editfaq') }}" title="Gestisci le FAQ esistenti">Gestisci FAQ</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
+
+        <!-- Statistics Management Column -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Statistiche</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a href="{{ route('monthly-stats') }}" title="Controlla le statistiche mensili">Statistiche mensili</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="{{ route('rentals') }}" title="Controlla le statistiche per un mese specifico">Prenotazioni per mese</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Client Deletion Column -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Eliminazione Utenti Registrati</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a href="{{ route('delete-user') }}" title="Elimina un cliente registrato tramite username">Elimina Utente</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 @endsection

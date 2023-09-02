@@ -25,7 +25,6 @@ class Auto extends Model {
         'potenza',
         'tipoCambio',
         'optional',
-        'disponibilita',
         'foto'
     ];
 
@@ -54,5 +53,10 @@ class Auto extends Model {
     // public function prodCat() {
     //     return $this->hasOne(Category::class, 'catId', 'catId');
     // }
+
+    public function prenotazioni()
+    {
+        return $this->hasMany(Rental::class, 'autoTarga', 'targa');
+    }
 
 }

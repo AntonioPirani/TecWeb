@@ -23,6 +23,9 @@ class User extends Authenticatable
         'username',
         'password',
         'role',
+        'dataNascita',
+        'occupazione',
+        'indirizzo',
     ];
 
     //Offset error
@@ -62,6 +65,22 @@ class User extends Authenticatable
           'data_di_nascita' => 'date'*/
     ];
 
+    //Per i file in resources\views\shared
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isStaff()
+    {
+        return $this->role === 'staff';
+    }
+
+    public function isUser()
+    {
+        return $this->role === 'user';
+    }
+
     /*
     Se lascio questo codice mi da errore dicendo che role viene accesso prima della inizializzazione dello user
 
@@ -77,6 +96,11 @@ class User extends Authenticatable
     public function hasRole($role) {
         $role = (array)$role;
         return in_array($this->role, $role);
+    }
+
+    public function prenotazioni()
+    {
+        return $this->hasMany(Rental::class, 'userId', 'id');
     }
 
 }
