@@ -19,7 +19,7 @@ class PublicController extends Controller
     public function showAuto() {
 
         $autos = Auto::paginate(3);
-        return view('catalog', ['products' => $autos]);
+        return view('catalog', ['products' => $autos]); //TODO mostra solo le auto prenotabili in un periodo di tempo
 
     }
 

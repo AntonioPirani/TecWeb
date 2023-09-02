@@ -33,7 +33,6 @@
                         $('#potenza').val(response.potenza);
                         $('#tipoCambio').val(response.tipoCambio);
                         $('#optional').val(response.optional);
-                        $('#disponibilita').val(response.disponibilita);
 
                         $('#targa').val(targa);
 
@@ -41,7 +40,7 @@
                     },
                     error: function (error) {
                         $('#autoDetailsSection').hide();
-                        $('#resultMessage').html('<div class="alert alert-danger">Auto not found</div>');
+                        $('#resultMessage').html('<div class="alert alert-danger">Auto non trovata o non disponibile</div>');
                     }
                 });
             });

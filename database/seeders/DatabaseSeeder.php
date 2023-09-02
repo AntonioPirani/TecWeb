@@ -25,35 +25,35 @@ class DatabaseSeeder extends Seeder
 
         $data = [
             ['targa' => 'AB123CD', 'modello' => 'Mirage', 'marca' => 'Mitsubishi', 'posti' => 5,
-                'prezzoGiornaliero' => 97.50, 'potenza' => 100, 'tipoCambio' => 'manuale', 'optional' => 'bluetooth', 'disponibilita' => 1, 'foto' => 'Mitsubishi_Mirage.jpg'],
+                'prezzoGiornaliero' => 97.50, 'potenza' => 100, 'tipoCambio' => 'manuale', 'optional' => 'bluetooth', 'foto' => 'Mitsubishi_Mirage.jpg'],
             ['targa' => 'CD987RS', 'modello' => 'Versa', 'marca' => 'Nissan', 'posti' => 5,
-                'prezzoGiornaliero' => 119.00, 'potenza' => 140, 'tipoCambio' => 'manuale', 'optional' => 'bluetooth', 'disponibilita' => 1, 'foto' => 'Nissan_Versa.jpg'],
+                'prezzoGiornaliero' => 119.00, 'potenza' => 140, 'tipoCambio' => 'manuale', 'optional' => 'bluetooth', 'foto' => 'Nissan_Versa.jpg'],
             ['targa' => 'DE456FG', 'modello' => 'Corolla', 'marca' => 'Toyota', 'posti' => 5,
-                'prezzoGiornaliero' => 111.00, 'potenza' => 110, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth', 'disponibilita' => 1, 'foto' => 'Toyota_Corolla.jpg'],
+                'prezzoGiornaliero' => 111.00, 'potenza' => 110, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth', 'foto' => 'Toyota_Corolla.jpg'],
             ['targa' => 'EF321AB', 'modello' => 'Leaf', 'marca' => 'Nissan', 'posti' => 5,
-                'prezzoGiornaliero' => 131.50, 'potenza' => 120, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth', 'disponibilita' => 1, 'foto' => 'Nissan_Leaf.jpg'],
+                'prezzoGiornaliero' => 131.50, 'potenza' => 120, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth', 'foto' => 'Nissan_Leaf.jpg'],
             ['targa' => 'GH876PQ', 'modello' => 'BMW X3', 'marca' => 'BMW', 'posti' => 5,
-                'prezzoGiornaliero' => 204.70, 'potenza' => 100, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps, sedili in pelle, guida assisitita', 'disponibilita' => 1, 'foto' => 'BMW_X3.jpg'],
+                'prezzoGiornaliero' => 204.70, 'potenza' => 100, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps, sedili in pelle, guida assisitita', 'foto' => 'BMW_X3.jpg'],
             ['targa' => 'IJ654KL', 'modello' => 'RAV4', 'marca' => 'Toyota', 'posti' => 4,
-                'prezzoGiornaliero' => 145.00, 'potenza' => 110, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps, telecamera di retromarcia', 'disponibilita' => 1, 'foto' => 'Toyota_Rav4.jpg'],
+                'prezzoGiornaliero' => 145.00, 'potenza' => 110, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps, telecamera di retromarcia', 'foto' => 'Toyota_Rav4.jpg'],
             ['targa' => 'KL432IJ', 'modello' => 'Camry', 'marca' => 'Toyota', 'posti' => 7,
-                'prezzoGiornaliero' => 130.00, 'potenza' => 160, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps', 'disponibilita' => 1, 'foto' => 'Toyota_Camry.jpg'],
+                'prezzoGiornaliero' => 130.00, 'potenza' => 160, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps', 'foto' => 'Toyota_Camry.jpg'],
             ['targa' => 'MN098OP', 'modello' => 'Prius', 'marca' => 'Toyota', 'posti' => 5,
-                'prezzoGiornaliero' => 112.00, 'potenza' => 110, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps', 'disponibilita' => 1, 'foto' => 'Toyota_Prius.jpg'],
+                'prezzoGiornaliero' => 112.00, 'potenza' => 110, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps', 'foto' => 'Toyota_Prius.jpg'],
             ['targa' => 'OP765MN', 'modello' => 'Yaris', 'marca' => 'Toyota', 'posti' => 5,
-                'prezzoGiornaliero' => 104.00, 'potenza' => 90, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps', 'disponibilita' => 1, 'foto' => 'Toyota_Yaris.jpg'],
+                'prezzoGiornaliero' => 104.00, 'potenza' => 90, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps', 'foto' => 'Toyota_Yaris.jpg'],
             ['targa' => 'PQ543GH', 'modello' => 'Corolla', 'marca' => 'Toyota', 'posti' => 5,
-                'prezzoGiornaliero' => 120.00, 'potenza' => 110, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps, sensori di prossimita', 'disponibilita' => 1, 'foto' => 'Toyota_Corolla.jpg'],
+                'prezzoGiornaliero' => 120.00, 'potenza' => 110, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps, sensori di prossimita', 'foto' => 'Toyota_Corolla.jpg'],
             ['targa' => 'TR543SI', 'modello' => 'A5Sportback', 'marca' => 'Audi', 'posti' => 5,
-                'prezzoGiornaliero' => 170.80, 'potenza' => 150, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps, guida assistita, pacchetto sportivo', 'disponibilita' => 1, 'foto' => 'Audi_A5_Sportback.jpg'],
+                'prezzoGiornaliero' => 170.80, 'potenza' => 150, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps, guida assistita, pacchetto sportivo', 'foto' => 'Audi_A5_Sportback.jpg'],
             ['targa' => 'SD02998', 'modello' => 'Portofino', 'marca' => 'Ferrari', 'posti' => 2,
-                'prezzoGiornaliero' => 305.00, 'potenza' => 465, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps, tettuccio apribile, cerchi in lega', 'disponibilita' => 1, 'foto' => 'Ferrari_Portofino.jpg'],
+                'prezzoGiornaliero' => 305.00, 'potenza' => 465, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps, tettuccio apribile, cerchi in lega', 'foto' => 'Ferrari_Portofino.jpg'],
             ['targa' => 'HF987KK', 'modello' => 'Colorado', 'marca' => 'Chevrolet', 'posti' => 4,
-                'prezzoGiornaliero' => 160.40, 'potenza' => 150, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps', 'disponibilita' => 1, 'foto' => 'Chevrolet_Colorado.jpg'],
+                'prezzoGiornaliero' => 160.40, 'potenza' => 150, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps', 'foto' => 'Chevrolet_Colorado.jpg'],
             ['targa' => 'PO112SD', 'modello' => 'Fortwo', 'marca' => 'Smart', 'posti' => 2,
-                'prezzoGiornaliero' => 130.00, 'potenza' => 90, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth', 'disponibilita' => 1, 'foto' => 'Smart_Fortwo.jpg'],
+                'prezzoGiornaliero' => 130.00, 'potenza' => 90, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth', 'foto' => 'Smart_Fortwo.jpg'],
             ['targa' => 'LE299IL', 'modello' => 'ModelX', 'marca' => 'Tesla', 'posti' => 5,
-                'prezzoGiornaliero' => 1450.00, 'potenza' => 130, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps, guida assistita', 'disponibilita' => 1, 'foto' => 'Tesla_Model_X.jpg']
+                'prezzoGiornaliero' => 1450.00, 'potenza' => 130, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps, guida assistita', 'foto' => 'Tesla_Model_X.jpg']
 
         ];
 
@@ -64,6 +64,7 @@ class DatabaseSeeder extends Seeder
             ['domanda' => 'Quali documenti devo presentare al momento del ritiro dell\'auto?', 'risposta' => 'Al momento del ritiro dell\'auto, dovrai presentare la tua patente di guida valida, una carta di credito a tuo nome e una conferma di prenotazione.'],
             ['domanda' => 'È possibile noleggiare un\'auto per un solo giorno?', 'risposta' => 'Sì, offriamo tariffe giornaliere per il noleggio auto. Puoi prenotare un\'auto per il periodo che meglio si adatta alle tue esigenze, che sia un solo giorno o più settimane.'],
             ['domanda' => 'È possibile noleggiare un\'auto e restituirla in una città diversa?', 'risposta' => 'Sì, offriamo opzioni di noleggio con restituzione in una città diversa. Tuttavia, potrebbe essere applicata una tariffa aggiuntiva per questa opzione, nota come "one-way fee".'],
+            ['domanda' => 'Qual è l\'eta minima per richiedere una auto a noleggio?', 'risposta' => '18 anni '],
         ]);
     }
 }

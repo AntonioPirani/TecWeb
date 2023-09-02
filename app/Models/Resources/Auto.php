@@ -25,7 +25,6 @@ class Auto extends Model {
         'potenza',
         'tipoCambio',
         'optional',
-        'disponibilita',
         'foto'
     ];
 
