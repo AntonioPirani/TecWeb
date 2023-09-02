@@ -151,6 +151,15 @@ Route::get('/delete-user', [UserController::class, 'delete'])
 Route::delete('/delete-user', [UserController::class, 'deleteUser'])
         ->name('delete-user');
 
+        /* --- Modifica Utente --- */
+
+Route::get('/user/edit', [UserController::class, 'edit'])
+        ->name('edituser');
+
+Route::put('/user/edit', [UserController::class, 'editUser'])
+        ->name('edituser');
+
+
 /*  Rotte aggiunte da Breeze
 
 Route::get('/', function () {
