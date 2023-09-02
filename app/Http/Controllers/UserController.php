@@ -42,9 +42,9 @@ class UserController extends Controller
         $userId = Auth::user()->id;
         $inizio = new DateTime($request->input('dataInizio'));
         $fine = new DateTime($request->input('dataFine'));
-        if ($inizio < new DateTime(now())) {
+        if ($inizio <= new DateTime(now())) {
             return redirect()->back()->with('error', 'La data di inizio è passata');
-        } elseif ($fine < $inizio) {
+        }elseif ($fine < $inizio) {
             return redirect()->back()->with('error', 'La data di fine é precedente alla data di inizio');
         }
 
@@ -249,10 +249,10 @@ class UserController extends Controller
             'indirizzo' => 'required|string|max:255',
             'new_password' => 'nullable|string|min:8|confirmed', // Validate the new password
         ]);
-    
+
         // Update the user's profile fields
         $userData->update($validatedData);
-    
+
         // Update the password if a new one is provided
         if ($request->filled('new_password')) {
             $userData->update([

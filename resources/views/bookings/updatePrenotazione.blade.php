@@ -50,8 +50,8 @@
                         $messaggio =$messaggio . " \n ";
                     }
                 }
-
-                if($prenotazioniUtente=\App\Models\Resources\Prenotazione::where('userId',\Illuminate\Support\Facades\Auth::user()->id)->get()){
+                $prenotazioniUtente=\App\Models\Resources\Prenotazione::where('userId',\Illuminate\Support\Facades\Auth::user()->id)->get();
+                if($prenotazioniUtente->isNotEmpty()){
                     $warning ="Attenzione, hai già delle prenotazioni in programma che vedi qui di seguito: ";
                     foreach ($prenotazioniUtente as $prenotazione){
                         $warning .= " dal "  . $prenotazione->dataInizio->format('Y-m-d') . " al " . $prenotazione->dataFine->format('Y-m-d') . " , " ;

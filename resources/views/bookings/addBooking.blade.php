@@ -13,11 +13,11 @@
                     type: "POST",
                     url: "{{ route('storePrenotazione')}}" ,
                     data: $(this).serialize(),
-                    success: function (response) {
+                    success: function (success) {
                         // Display the success message
                         $('#resultMessage').html('<div class="alert alert-success">Booking added successfully</div>');
 
-                        window.location.href = "{{ route('user') }}";
+                        // console.log('Response:', response);
                     },
                     error: function (error) {
                         // Display the error message
@@ -39,7 +39,7 @@
             @php
                 $messaggio='';$warning='';
                 $allPrenotazioni=\App\Models\Resources\Prenotazione::where('autoTarga',$targa)->get();
-                ;
+
                 if($allPrenotazioni->isEmpty()){$messaggio='Questa auto non ha prenotazioni in previsto,scegli le date che preferisci';}
                 else{
                     $messaggio ='Questa auto è già prenotata:';
@@ -50,8 +50,8 @@
                     $messaggio =$messaggio . 'seleziona una data in cui l\'auto non è già prenotata';
 
                 }
-
-                if($prenotazioniUtente=\App\Models\Resources\Prenotazione::where('userId',\Illuminate\Support\Facades\Auth::user()->id)->get()){
+                $prenotazioniUtente=\App\Models\Resources\Prenotazione::where('userId',\Illuminate\Support\Facades\Auth::user()->id)->get();
+                if($prenotazioniUtente->isNotEmpty()){
                     $warning ="Attenzione, hai già delle prenotazioni in programma che vedi qui di seguito: ";
                     foreach ($prenotazioniUtente as $prenotazione){
                         $warning .= " dal "  . $prenotazione->dataInizio->format('Y-m-d') . " al " . $prenotazione->dataFine->format('Y-m-d') . " , " ;
