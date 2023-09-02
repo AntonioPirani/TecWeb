@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller {
 
@@ -92,6 +93,41 @@ class UserController extends Controller {
 
         return redirect('/admin')->with('status', 'User deleted successfully');
     }
+
+    public function edit()
+    {
+        return view('edituser');
+    }
+
+    public function editUser(Request $request)
+    {
+        $user = Auth::user();
+        $userData = User::find($user->id);
+
+        $validatedData = $request->validate([
+            'nome' => 'required|string|max:255',
+            'cognome' => 'required|string|max:255',
+            'username' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'dataNascita' => 'required|date',
+            'occupazione' => 'required|string|max:255',
+            'indirizzo' => 'required|string|max:255',
+            'new_password' => 'nullable|string|min:8|confirmed', // Validate the new password
+        ]);
+    
+        // Update the user's profile fields
+        $userData->update($validatedData);
+    
+        // Update the password if a new one is provided
+        if ($request->filled('new_password')) {
+            $userData->update([
+                'password' => Hash::make($request->input('new_password')),
+            ]);
+        }
+
+        return redirect()->route('user')->with('success', 'Profile updated successfully.');
+    }
+
 
 
 
