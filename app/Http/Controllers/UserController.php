@@ -32,45 +32,48 @@ class UserController extends Controller
 
     public function storePrenotazione(Request $request)
     {
-        $validatedData = $request->validate([
-            'autoTarga' => 'required|string',
-            'dataInizio' => 'required|date|before:dataFine',
-            'dataFine' => 'required|date|after:dataInizio',
-            'statoPrenotazione' => 'required|string']);
-
-        $targa = $request->input('autoTarga');
-        $userId = Auth::user()->id;
-        $inizio = new DateTime($request->input('dataInizio'));
-        $fine = new DateTime($request->input('dataFine'));
-        if ($inizio <= new DateTime(now())) {
-            return redirect()->back()->with('error', 'La data di inizio è passata');
-        }elseif ($fine < $inizio) {
-            return redirect()->back()->with('error', 'La data di fine é precedente alla data di inizio');
-        }
 
 
-        if ($this->isCarAvailable($targa, $inizio, $fine) and !$this->UserOverlappingBookings($userId, $inizio, $fine)) {
+            $validatedData = $request->validate([
+                'autoTarga' => 'required|string',
+                'dataInizio' => 'required|date|before:dataFine',
+                'dataFine' => 'required|date|after:dataInizio',
+                'statoPrenotazione' => 'required|string']);
 
-            $booking = new Prenotazione;
-            $booking->fill($validatedData);
-            $booking->autoTarga = $request->input('autoTarga');
-            $booking->userId = Auth::user()->id;
-
-            if ($booking->save()) {
-                //            Prenotazione inserita
-                Log::info('Prenotazione aggiunta' . $booking->primaryKey);
-                return view('bookings.completedBooking', ['prenotazione' => $booking]);
-            } else {
-                //            Hold on, wait a minute, something ain't right
-                Log::error('Failed to add booking');
-                return response()->json(['message' => 'Failed to add booking'], 500);
+            $targa = $request->input('autoTarga');
+            $userId = Auth::user()->id;
+            $inizio = new DateTime($request->input('dataInizio'));
+            $fine = new DateTime($request->input('dataFine'));
+            if ($inizio <= new DateTime(now())) {
+                return redirect()->back()->with('error', 'La data di inizio è passata');
+            } elseif ($fine < $inizio) {
+                return redirect()->back()->with('error', 'La data di fine é precedente alla data di inizio');
             }
-        } elseif (!$this->isCarAvailable($targa, $inizio, $fine)) {
-            return redirect()->back()->with('error', 'La data scelta non e disponibile perché si sovrappone con un\'altra prenotazione della macchina selezionata');
-        }elseif ($this->isCarAvailable($userId, $inizio, $fine)) {//questa condizione e falsa quando le date si overlappano
-            return redirect()->back()->with('error', 'La data scelta non e disponibile perché la data richiesta per la modifica
+
+
+            if ($this->isCarAvailable($targa, $inizio, $fine) and !$this->UserOverlappingBookings($userId, $inizio, $fine)) {
+
+                $booking = new Prenotazione;
+                $booking->fill($validatedData);
+                $booking->autoTarga = $request->input('autoTarga');
+                $booking->userId = Auth::user()->id;
+
+                if ($booking->save()) {
+                    //            Prenotazione inserita
+                    Log::info('Prenotazione aggiunta' . $booking->primaryKey);
+                    return view('bookings.completedBooking', ['prenotazione' => $booking]);
+                } else {
+                    //            Hold on, wait a minute, something ain't right
+                    Log::error('Failed to add booking');
+                    return response()->json(['message' => 'Failed to add booking'], 500);
+                }
+            } elseif (!$this->isCarAvailable($targa, $inizio, $fine)) {
+                return redirect()->back()->with('error', 'La data scelta non e disponibile perché si sovrappone con un\'altra prenotazione della macchina selezionata');
+            } elseif ($this->isCarAvailable($userId, $inizio, $fine)) {//questa condizione e falsa quando le date si overlappano
+                return redirect()->back()->with('error', 'La data scelta non e disponibile perché la data richiesta per la modifica
             della prenotazione si sovrappone con un\'altra delle tue prenotazioni già in programma');
-        }
+            }
+
     }
 
     public function addPrenotazione($targa)

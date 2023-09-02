@@ -4,7 +4,7 @@
     <script src="{{ asset('js/functions.js') }}" ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <script>
+   {{-- <script>
         $(document).ready(function () {
             $('#newBookingForm').on('submit', function (e) {
                 e.preventDefault();
@@ -13,9 +13,10 @@
                     type: "POST",
                     url: "{{ route('storePrenotazione')}}" ,
                     data: $(this).serialize(),
-                    success: function (success) {
+                    success: function (view) {
                         // Display the success message
-                        $('#resultMessage').html('<div class="alert alert-success">Booking added successfully</div>');
+                        // $('#resultMessage').html('<div class="alert alert-success">Booking added successfully</div>');
+                        $('#target-element').html(view);
 
                         // console.log('Response:', response);
                     },
@@ -26,10 +27,8 @@
                 });
             });
         });
-    </script>
-
+    </script>--}}
 @endsection()
-
 
 @section('content')
     <div class="static">
