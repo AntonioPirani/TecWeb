@@ -181,7 +181,7 @@ class UserController extends Controller
         $overlapping = false;
 
         $allPrenotazioni = Prenotazione::where('userId', $userId)->get();
-        echo $allPrenotazioni;
+//        echo $allPrenotazioni;
 
         foreach ($allPrenotazioni as $prenotazione) {
             if ($inizio >= $prenotazione->dataInizio
