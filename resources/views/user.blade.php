@@ -65,6 +65,7 @@
                                             </a>
                                         </button>
                                     </li>
+                                    <br>
                                     <li>
                                         <button>
                                             <a href="{{route('modifyPrenotazione',['id'=>$prenotazione->id])}}">
