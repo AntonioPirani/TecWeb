@@ -37,6 +37,7 @@ class UserController extends Controller
             'statoPrenotazione' => 'required|string']);
 
         $targa = $request->input('autoTarga');
+        $userId = Auth::user()->id;
         $inizio = new DateTime($request->input('dataInizio'));
         $fine = new DateTime($request->input('dataFine'));
         if ($inizio < new DateTime(now())) {
@@ -46,7 +47,7 @@ class UserController extends Controller
         }
 
 
-        if (UserController:: isCarAvailable($targa, $inizio, $fine)) {
+        if ($this->isCarAvailable($targa, $inizio, $fine) and !$this->UserOverlappingBookings($userId, $inizio, $fine)) {
 
             $booking = new Prenotazione;
             $booking->fill($validatedData);
@@ -62,8 +63,11 @@ class UserController extends Controller
                 Log::error('Failed to add booking');
                 return response()->json(['message' => 'Failed to add booking'], 500);
             }
-        } else {
-            return redirect('user')->with('error', 'La data scelta non e disponibile perché si sovrappone con un\'altra prenotazione della macchina selezionata');
+        } elseif (!$this->isCarAvailable($targa, $inizio, $fine)) {
+            return redirect()->back()->with('error', 'La data scelta non e disponibile perché si sovrappone con un\'altra prenotazione della macchina selezionata');
+        }elseif ($this->isCarAvailable($userId, $inizio, $fine)) {//questa condizione e falsa quando le date si overlappano
+            return redirect()->back()->with('error', 'La data scelta non e disponibile perché la data richiesta per la modifica
+            della prenotazione si sovrappone con un\'altra delle tue prenotazioni già in programma');
         }
     }
 
@@ -112,7 +116,7 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'La data di fine é precedente alla data di inizio');
         }
 
-        if ($this->isCarAvailable($targa, $inizio, $fine) and  !$this->UserOverlappingBookings($userId,$inizio,$fine)) {
+        if ($this->isCarAvailable($targa, $inizio, $fine) and !$this->UserOverlappingBookings($userId, $inizio, $fine)) {
             if (!$booking = Prenotazione::where('id', $request->input('id'))) {
                 // Handle the case where the booking record was not found
                 return redirect()->back()->with('error', 'Booking not found');
@@ -125,7 +129,7 @@ class UserController extends Controller
             }
         } elseif (!$this->isCarAvailable($targa, $inizio, $fine)) {
             return redirect()->back()->with('error', 'La data scelta non e disponibile perché si sovrappone con un\'altra prenotazione della macchina selezionata');
-        }elseif ($this->UserOverlappingBookings($userId,$inizio,$fine)) {//questa condizione e vera quando le date si overlappano
+        }elseif ($this->isCarAvailable($userId, $inizio, $fine)) {//questa condizione e falsa quando le date si overlappano
             return redirect()->back()->with('error', 'La data scelta non e disponibile perché la data richiesta per la modifica
             della prenotazione si sovrappone con un\'altra delle tue prenotazioni già in programma');
         }
@@ -177,6 +181,7 @@ class UserController extends Controller
         $overlapping = false;
 
         $allPrenotazioni = Prenotazione::where('userId', $userId)->get();
+        echo $allPrenotazioni;
 
         foreach ($allPrenotazioni as $prenotazione) {
             if ($inizio >= $prenotazione->dataInizio

@@ -36,7 +36,31 @@
     <div class="static">
         <h3>Modifica prenotazione</h3>
         <div>
-            <p>Qui puoi modificare la tua prenotazione</p>
+            <p>Qui puoi modificare la tua prenotazione con id: {{$id}}</p>
+          @php
+                $messaggio='';$warning='';
+                $targa=\App\Models\Resources\Prenotazione::where('id',$id)->get('autoTarga');
+                $allPrenotazioni=\App\Models\Resources\Prenotazione::where('autoTarga',$targa)->get();
+
+                if($allPrenotazioni->isEmpty()){$messaggio='Questa auto non ha prenotazioni in previsto,scegli le date che preferisci';}
+                else{
+                    $messaggio ='Questa auto è già prenotata';
+                    foreach ($allPrenotazioni as $prenotazione){
+                        $messaggio =$messaggio . ' dal ' . $prenotazione->dataInizio->format('Y-m-d') . ' al ' . $prenotazione->dataFine->format('Y-m-d')  ;
+                        $messaggio =$messaggio . " \n ";
+                    }
+                }
+
+                if($prenotazioniUtente=\App\Models\Resources\Prenotazione::where('userId',\Illuminate\Support\Facades\Auth::user()->id)->get()){
+                    $warning ="Attenzione, hai già delle prenotazioni in programma che vedi qui di seguito: ";
+                    foreach ($prenotazioniUtente as $prenotazione){
+                        $warning .= " dal "  . $prenotazione->dataInizio->format('Y-m-d') . " al " . $prenotazione->dataFine->format('Y-m-d') . " , " ;
+                    }
+                    $warning =$warning .  'ricorda che non puoi fare una prenotazione con data sovrapposta ad una prenotazione già in programma';
+                }else{$warning =$warning . 'Non hai altre prenotazioni in programma scegli la data che preferisci';}
+            @endphp
+            @if($messaggio!=='') <p>{{$messaggio}}</p>@endif
+            @if($warning!=='') <p>{{$warning}}</p>@endif
         </div>
 
         <form id="modificaPrenotazione" method="POST" action="{{ route('updatePrenotazione') }}">

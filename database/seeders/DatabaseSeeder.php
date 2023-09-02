@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
             ['nome' => 'Luca', 'cognome' => 'Sabatini', 'email' => 'luca@luca.it', 'username' => 'lucaluca',
                 'password' => Hash::make('lucaluca'), 'role' => 'user'],
             ['nome' => 'Mario', 'cognome' => 'Rossi', 'email' => 'mario@rossi.it', 'username' => 'adminadmin',
-                'password' => Hash::make('adminadmin'), 'role' => 'admin',]
+                'password' => Hash::make('adminadmin'), 'role' => 'admin',],
+            ['nome' => 'Francesco', 'cognome' => 'Virgolini', 'email' => 'fra@virgo.it', 'username' => 'fravirgo',
+                'password' => Hash::make('fravirgo'), 'role' => 'user',]
         ]);
 
         $data = [
