@@ -12,17 +12,7 @@
                 $.ajax({
                     type: "POST",
                     url: "{{ route('storePrenotazione')}}" ,
-                    data: $(this).serialize(),
-                    success: function (response) {
-                        // Display the success message
-                        $('#resultMessage').html('<div class="alert alert-success">Booking added successfully</div>');
-
-                        window.location.href = "{{ route('user') }}";
-                    },
-                    error: function (error) {
-                        // Display the error message
-                        $('#resultMessage').html('<div class="alert alert-danger">Failed to add booking</div>');
-                    }
+                    data: $(this).serialize()
                 });
             });
         });
@@ -50,8 +40,8 @@
                     $messaggio =$messaggio . 'seleziona una data in cui l\'auto non è già prenotata';
 
                 }
-
-                if($prenotazioniUtente=\App\Models\Resources\Prenotazione::where('userId',\Illuminate\Support\Facades\Auth::user()->id)->get()){
+                $prenotazioniUtente=\App\Models\Resources\Prenotazione::where('userId',\Illuminate\Support\Facades\Auth::user()->id)->get();
+                if($prenotazioniUtente->isNotEmpty()){
                     $warning ="Attenzione, hai già delle prenotazioni in programma che vedi qui di seguito: ";
                     foreach ($prenotazioniUtente as $prenotazione){
                         $warning .= " dal "  . $prenotazione->dataInizio->format('Y-m-d') . " al " . $prenotazione->dataFine->format('Y-m-d') . " , " ;

@@ -12,18 +12,8 @@
                 $.ajax({
                     type: "POST",
                     url: "{{ route('updatePrenotazione')}}",
-                    data: $(this).serialize(),
-                    success: function (response) {
-                        // Display the success message
-                        $('#resultMessage').html('<p>Booking modified successfully</p>');
+                    data: $(this).serialize()
 
-                        window.location.href = "{{ route('auto') }}";
-                    },
-                    error: function (error) {
-                        // Display the error message
-                        $('#resultMessage').html('<div class="alert alert-danger">Failed to modify booking</div>');
-                        window.location.href = "{{ route('auto') }}";
-                    }
                 });
             });
         });
@@ -50,8 +40,8 @@
                         $messaggio =$messaggio . " \n ";
                     }
                 }
-
-                if($prenotazioniUtente=\App\Models\Resources\Prenotazione::where('userId',\Illuminate\Support\Facades\Auth::user()->id)->get()){
+                $prenotazioniUtente=\App\Models\Resources\Prenotazione::where('userId',\Illuminate\Support\Facades\Auth::user()->id)->get();
+                if($prenotazioniUtente->isNotEmpty()){
                     $warning ="Attenzione, hai già delle prenotazioni in programma che vedi qui di seguito: ";
                     foreach ($prenotazioniUtente as $prenotazione){
                         $warning .= " dal "  . $prenotazione->dataInizio->format('Y-m-d') . " al " . $prenotazione->dataFine->format('Y-m-d') . " , " ;
