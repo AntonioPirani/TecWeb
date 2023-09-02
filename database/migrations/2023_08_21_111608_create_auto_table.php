@@ -22,7 +22,6 @@ return new class extends Migration
             $table->bigInteger('potenza')->unsigned();
             $table->string('tipoCambio', 10);
             $table->string('optional', 100);
-            $table->boolean('disponibilita')->default(false)->index();
             $table->text('foto')->nullable();
         });
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Resources\Auto;
+use App\Models\Resources\Prenotazione;
 
 class AutoController extends Controller
 {
@@ -31,7 +32,6 @@ class AutoController extends Controller
         $auto->potenza = $validatedData['potenza'];
         $auto->tipoCambio = $validatedData['tipoCambio'];
         $auto->optional = $validatedData['optional'];
-        $auto->disponibilita = 1;
         //$auto->foto = $validatedData['foto'];
 
         if ($request->hasFile('foto')) {
@@ -62,17 +62,18 @@ class AutoController extends Controller
     public function getAutoDetails(Request $request)
     {
         $targa = $request->input('targa');
+        $today = now()->toDateString(); 
 
         $auto = Auto::where('targa', $targa)
-        ->where('disponibilita', 1)
-        ->first();
+            ->first();
 
-        if ($auto) {
+        if ($auto && $this->isCarAvailable($targa, $today, $today)) {
             return response()->json($auto);
         } else {
-            return response()->json(['message' => 'Auto non trovata o non modificabile'], 404);
+            return response()->json(['message' => 'Auto non trovata o non disponibile'], 404);
         }
     }
+
 
     public function edit()
     {
@@ -172,5 +173,24 @@ class AutoController extends Controller
         } else {
             return response()->json(['message' => 'Auto targa not found'], 404);
         }
+    }
+
+    public function isCarAvailable($targa, $inizio, $fine)
+    {
+        $available = true;
+
+        $allPrenotazioni = Prenotazione::where('autoTarga', $targa)->get();
+
+        foreach ($allPrenotazioni as $prenotazione) {
+            if ($inizio >= $prenotazione->dataInizio
+                and $inizio <= $prenotazione->dataFine) {
+                //la data di inizio si trova in mezzo al periodo di nolleggio di un altra prenotazione
+                $available = false;
+            } elseif ($inizio <= $prenotazione->dataInizio and $fine >= $prenotazione->dataInizio) {
+                //la data di fine si trova in mezzo al periodo di nolleggio di unaltra prenotazione
+                $available = false;
+            }
+        }
+        return $available;
     }
 }
