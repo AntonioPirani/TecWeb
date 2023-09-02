@@ -12,7 +12,9 @@
         <div id="wrapper">
             <div id="header">
                 <div id="logoImg">
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo">
+                    <a href="{{route('auto')}}">
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo" >
+                    </a>
                 </div>
             </div>
 
@@ -25,6 +27,17 @@
             <div id="page">
                 <div id="page-bgtop">
                     <div id="page-bgbtm">
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                <center>{{ session('success') }}</center>
+                            </div>
+                        @endif
+
+                        @if (session('error'))
+                            <div class="error-message">
+                                <span class="formerror">{{ session('error') }}</span>
+                            </div>
+                        @endif
                         @yield('content')
                         <div style="clear: both;">&nbsp;</div>
                     </div>

@@ -28,12 +28,28 @@ Route::get('/selTopCat/{topCatId}', [PublicController::class, 'showCatalog2'])
 
 Route::get('/selTopCat/{topCatId}/selCat/{catId}', [PublicController::class, 'showCatalog3'])
         ->name('catalog3'); */
+Route::get('/filtroPrezzo',[PublicController::class,'filtraPrezzo'])
+    ->name('prezzo');
+Route::get('/filtroPosti',[PublicController::class,'filtraPosti'])
+    ->name('posti');
 
 Route::get('/addPrenotazione/{targa}',[UserController::class,'addPrenotazione'])
-        ->name('addPrenotazione');
+        ->name('addPrenotazione')->middleware('can:isUser');
 
 Route::post('/storePrenotazione',[UserController::class,'storePrenotazione'])
     ->name('storePrenotazione');
+
+Route::get('/deletePrenotazione/{id}',[UserController::class,'deletePrenotazione'])
+    ->name('deletePrenotazione')->middleware('can:isUser');
+
+Route::post('/cancellaPrenotazione',[UserController::class,'cancellaPrenotazione'])
+    ->name('cancellaPrenotazione');
+
+Route::get('/modifyPrenotazione/{id}',[UserController::class,'modifyPrenotazione'])
+    ->name('modifyPrenotazione')->middleware('can:isUser');
+
+Route::post('/updatePrenotazione',[UserController::class,'updatePrenotazione'])
+    ->name('updatePrenotazione');
 
 Route::get('/admin', [AdminController::class, 'index'])
         ->name('admin');

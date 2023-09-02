@@ -339,6 +339,15 @@ a:hover {
     display: flex;
     align-items: center;
 }
+.prod .product-details {
+    display: flex;
+}
+
+.prod .column {
+    flex: 1;
+    padding: 10px;
+}
+
 
 .prod .image {
     flex: 1;
@@ -675,21 +684,14 @@ img {
 	color: black;
 }
 
-#button {
-    .button-container {
-        margin-bottom: 20px; /* Add space below the buttons */
-    }
-
-    .button {
-        padding: 10px 20px; /* Adjust padding to control the space within the buttons */
-    }
-    /*background-color: #c9e9d2;
+button {
+    background-color: #c9e9d2;
     color: rgba(94, 113, 211, 0.98);
     border: none;
     padding: 10px 20px;
     cursor: pointer;
     border-radius: 5px;
-    font-size: 16px;*/
+    font-size: 16px;
 }
 
 /* --- Table --- */

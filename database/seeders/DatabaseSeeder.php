@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
             ['nome' => 'Luca', 'cognome' => 'Sabatini', 'email' => 'luca@luca.it', 'username' => 'lucaluca',
                 'password' => Hash::make('lucaluca'), 'role' => 'user'],
             ['nome' => 'Mario', 'cognome' => 'Rossi', 'email' => 'mario@rossi.it', 'username' => 'adminadmin',
-                'password' => Hash::make('adminadmin'), 'role' => 'admin',]
+                'password' => Hash::make('adminadmin'), 'role' => 'admin',],
+            ['nome' => 'Francesco', 'cognome' => 'Virgolini', 'email' => 'fra@virgo.it', 'username' => 'fravirgo',
+                'password' => Hash::make('fravirgo'), 'role' => 'user',]
         ]);
 
         $data = [
@@ -53,7 +55,8 @@ class DatabaseSeeder extends Seeder
             ['targa' => 'PO112SD', 'modello' => 'Fortwo', 'marca' => 'Smart', 'posti' => 2,
                 'prezzoGiornaliero' => 130.00, 'potenza' => 90, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth', 'foto' => 'Smart_Fortwo.jpg'],
             ['targa' => 'LE299IL', 'modello' => 'ModelX', 'marca' => 'Tesla', 'posti' => 5,
-                'prezzoGiornaliero' => 1450.00, 'potenza' => 130, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps, guida assistita', 'foto' => 'Tesla_Model_X.jpg']
+                'prezzoGiornaliero' => 145.00, 'potenza' => 130, 'tipoCambio' => 'automatico', 'optional' => 'bluetooth, gps, guida assistita', 'foto' => 'Tesla_Model_X.jpg']
+
 
         ];
 
