@@ -186,7 +186,6 @@ class UserController extends Controller
         $overlapping = false;
 
         $allPrenotazioni = Prenotazione::where('userId', $userId)->get();
-        echo $allPrenotazioni;
 
         foreach ($allPrenotazioni as $prenotazione) {
             if ($inizio >= $prenotazione->dataInizio
@@ -202,10 +201,14 @@ class UserController extends Controller
     }
 
     public function modifyOverlap($i1,$i2,$f1,$f2){
+        //i2 e f2 sono rispettivamente le date gia convertite usando newDateTime della prenotazione 'nuova' da inserire
+        //i1 f1 sono le date vecchie rispetto al quale si controlla overlap
+        //quindi se sono in mezzo al periodo gia presente cioe tra i1 e f1 da errore e lo stesso se si overlappano in altri modi
         $overlap = false;
-        if($i1<=$i2 and $i2<=$f1){$overlap=true;}
-        if($i1<=$f2 and $f2<=$f1){$overlap=true;}
-        return $overlap;
+        if($i1<=$i2 and $i2<=$f1){$overlap=true;}// data inizio dentro il periodo vecchio
+        if($i1<=$f2 and $f2<=$f1){$overlap=true;}//data di fine dentro il periodo vecchio
+        if($i2<=$i1 and $f2>=$f1){$overlap=true;}//il periodo vecchio e "compreso" nel nuovo
+        return $overlap;//overlap e falso se non si overlappano
     }
 
 }

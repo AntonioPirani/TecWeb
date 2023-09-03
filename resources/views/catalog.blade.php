@@ -173,6 +173,36 @@
             <br>
             <button id="bottoneAnd">Applica Filtro Posti e Prezzo</button>
         </form>
+
+        <form id="formDate" action="{{route('data')}}">
+            @csrf
+            <br>
+            <h2>Filtro Data</h2>
+            <p>Inserisci data di inizio e fine nolleggio per filtrare le auto in base a esse</p>
+            <div class="filter">
+                <label>
+                    <input type="date" name="dataInizio" class="form-control"  required>
+                </label>
+            </div>
+
+
+            <div class="filter">
+                <label>
+                    <input type="date" name="dataFine" class="form-control"  required>
+                </label>
+            </div>
+            <br>
+            @if (session('success-data'))
+                <span class="formerror">{{ session('success-data') }}</span>
+            @endif
+            @if (session('error-data'))
+                <span class="formerror">{{ session('error-data') }}</span>
+            @endif
+            <br>
+            <button  id="bottoneData">Applica Filtro Data</button>
+        </form>
+
+
     </div>
     <!-- fine sezione laterale -->
 @endsection
