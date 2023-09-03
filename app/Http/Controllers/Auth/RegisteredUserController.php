@@ -35,6 +35,7 @@ class RegisteredUserController extends Controller
         $indirizzo = $this->combineAddress(
             $request->via,
             $request->citta,
+            $request->provincia,
             $request->stato
         );
 
@@ -57,9 +58,9 @@ class RegisteredUserController extends Controller
         return redirect(RouteServiceProvider::HOME);
     }
 
-    private function combineAddress($via, $citta, $stato)
+    private function combineAddress($via, $citta, $provincia, $stato)
     {
-        return "{$via}, {$citta}, {$stato}";
+        return "{$via}, {$citta}, {$provincia}, {$stato}";
     }
 
 }
