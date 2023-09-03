@@ -14,17 +14,17 @@ return new class extends Migration
      */
     public function up()
     {
-
-
-        Schema::create('citta', function (Blueprint $table) {
-            $jsonFile = 'public/italy_cities.json';
-            $data = json_decode(file_get_contents($jsonFile), true);
-
-            foreach ($data as $item) {
-                Citta::create($item);
+        Schema::create('cittas', function (Blueprint $table) {
             $table->id();
+            $table->string('istat')->unique();
+            $table->string('comune');
+            $table->string('regione');
+            $table->string('provincia');
+            $table->string('prefisso');
+            $table->string('cod_fisco');
+            $table->double('superficie');
+            $table->integer('num_residenti');
             $table->timestamps();
-            }
         });
     }
 

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Citta extends Model
 {
-//    use HasFactory;
+    use HasFactory;
     protected $fillable = [
         "istat",
 		"comune",
