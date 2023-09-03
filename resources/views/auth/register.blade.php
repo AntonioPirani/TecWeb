@@ -211,7 +211,7 @@ $(document).ready(function () {
 
             <div class="wrap-input">
                 {{ Form::label('occupazione', 'Occupazione', ['class' => 'label-input']) }}
-                {{ Form::select('occupazione', ['option1' => 'Studente', 'option2' => 'Lavoratore', 'option3' => 'Pensionato'], null, ['class' => 'input', 'id' => 'occupazione', 'placeholder' => 'Seleziona Occupazione']) }}
+                {{ Form::select('occupazione', ['Studente' => 'Studente', 'Lavoratore' => 'Lavoratore', 'Pensionato' => 'Pensionato'], null, ['class' => 'input', 'id' => 'occupazione', 'placeholder' => 'Seleziona Occupazione']) }}
                 @if ($errors->first('occupazione'))
                 <ul class="errors">
                     @foreach ($errors->get('occupazione') as $message)

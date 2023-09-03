@@ -31,7 +31,7 @@ class CittaController extends Controller
         // Transform the data to include both 'value' and 'text' attributes
         $formattedCities = $citta->map(function ($city) {
             return [
-                'value' => $city->istat, // Use a suitable field as the 'value'
+                'value' => $city->comune, // Use a suitable field as the 'value'
                 'text' => $city->comune, // Use a suitable field as the 'text'
             ];
         });
