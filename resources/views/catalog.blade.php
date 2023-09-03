@@ -91,6 +91,39 @@
 
     <!-- fine sezione prodotti -->
     <div id="sidebar">
+        <form id="bigForm" action="{{route('bigFilter')}}">
+            <br>
+            <h2>Filtro BIG</h2>
+            <p>In questo fitro puoi selezionare le auto in base sia al prezzo che alla data di prenotazione</p>
+            <div class="filter">
+                <label>
+                    <input type="number" name="minPrice" min="0" class="form-control" placeholder="Inserisci prezzo minimo"
+                           required>
+                </label>
+            </div>
+
+            <div class="filter">
+                <label>
+                    <input type="number" name="maxPrice" class="form-control" placeholder="Inserisci prezzo massimo" required>
+                </label>
+            </div><br>
+            <p>Inserisci data di inizio e fine nolleggio per filtrare le auto in base a esse</p>
+            <div class="filter">
+                <label>
+                    <input type="date" name="dataInizio" class="form-control"  required>
+                </label>
+            </div>
+
+
+            <div class="filter">
+                <label>
+                    <input type="date" name="dataFine" class="form-control"  required>
+                </label>
+            </div>
+
+            <br>
+            <button id="bottoneBig">Applica Filtro Posti e data</button>
+        </form>
 
         <form id="formPrezzo" action="{{route('prezzo')}}">
             @csrf

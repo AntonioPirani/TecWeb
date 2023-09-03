@@ -108,5 +108,33 @@ class PublicController extends Controller
         return view('catalog', ['products' => $filtered]);
     }
 
+    public function dataANDprezzo(Request $request){
+        $allPrenotazioni = Prenotazione::all();
+        if ($allPrenotazioni->isEmpty()){return redirect()->back()->with('error','Al momento non esiste nessuna prenotazione nel nostro database, puoi prenotare qualsiasi auto');}
+        $fissaInizio = new DateTime($request->input('dataInizio'));//le date fisse inserite dall'utente che devono filtrare le auto
+        $fissaFine = new DateTime($request->input('dataFine'));
+        if ($fissaInizio < new DateTime(now())) {
+            return redirect()->back()->with('error', 'La data di inizio è passata');
+        } elseif ($fissaFine < $fissaInizio) {
+            return redirect()->back()->with('error', 'La data di fine é precedente alla data di inizio');
+        }
+        $controller = new UserController();
+        $idArray=array();
+
+        foreach ($allPrenotazioni as $item) {
+            if ($controller->modifyOverlap(new DateTime($item->dataInizio), $fissaInizio, new DateTime($item->dataFine), $fissaFine)) {
+                //se item arriva qui vuol dire che non e' disponibile nel periodo inserito dall'utente
+                //perche la funzione overlap restituisce falso quando non si overlappano le date
+                $idArray[]=$item->autoTarga;
+
+            }
+        }
+        $filtered=Auto::whereNotIn('targa',$idArray)
+            ->whereBetween('prezzoGiornaliero',[$request->input('minPrice'),$request->input('maxPrice')])
+            ->orderBy('prezzoGiornaliero','desc')->paginate();
+
+        return view('catalog', ['products' => $filtered]);
+    }
+
 
 }

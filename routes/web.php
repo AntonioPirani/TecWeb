@@ -39,6 +39,8 @@ Route::get('/filtroAnd',[PublicController::class,'filtroAnd'])
 
 Route::get('/filtroData',[PublicController::class,'filtroData'])
     ->name('data');
+Route::get('/bigFilter',[PublicController::class,'dataANDprezzo'])
+    ->name('bigFilter');
 
 Route::get('/addPrenotazione/{targa}',[UserController::class,'addPrenotazione'])
         ->name('addPrenotazione')->middleware('can:isUser');
