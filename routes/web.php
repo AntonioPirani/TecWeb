@@ -30,8 +30,12 @@ Route::get('/selTopCat/{topCatId}/selCat/{catId}', [PublicController::class, 'sh
         ->name('catalog3'); */
 Route::get('/filtroPrezzo',[PublicController::class,'filtraPrezzo'])
     ->name('prezzo');
+
 Route::get('/filtroPosti',[PublicController::class,'filtraPosti'])
     ->name('posti');
+
+Route::get('/filtroAnd',[PublicController::class,'filtroAnd'])
+    ->name('andFilter');
 
 Route::get('/addPrenotazione/{targa}',[UserController::class,'addPrenotazione'])
         ->name('addPrenotazione')->middleware('can:isUser');

@@ -3,7 +3,7 @@
     <script src="{{ asset('js/functions.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <script>
+    {{--<script>
         // Add a click event handler for the "filtroPrezzo" button
         document.getElementById('bottonePrezzo').addEventListener('auxclick', function () {
             // Add your code to perform the "filtroPrezzo" action here
@@ -41,7 +41,7 @@
             });
             alert('Filter by Seats action');
         });
-    </script>
+    </script>--}}
 @endsection
 
 @section('title', 'Catalogo Prodotti')
@@ -91,6 +91,7 @@
 
     <!-- fine sezione prodotti -->
     <div id="sidebar">
+
         <form id="formPrezzo" action="{{route('prezzo')}}">
             @csrf
 
@@ -103,12 +104,19 @@
                 </label>
             </div>
 
+
             <div class="filter">
                 <label>
                     <input type="number" name="maxPrice" class="form-control" placeholder="Inserisci prezzo massimo" required>
                 </label>
             </div>
             <br>
+            @if (session('success-prezzo'))
+                <span class="formerror">{{ session('success-prezzo') }}</span>
+            @endif
+            @if (session('error-prezzo'))
+                <span class="formerror">{{ session('error-prezzo') }}</span>
+            @endif
             <button  id="bottonePrezzo">Applica Filtro Prezzo</button>
         </form>
 
@@ -126,7 +134,44 @@
             </div>
 
             <br>
+            @if (session('success-posti'))
+                <span class="formerror">{{ session('success-posti') }}</span>
+            @endif
+            @if (session('error-posti'))
+                <span class="formerror">{{ session('error-posti') }}</span>
+            @endif
             <button id="bottonePosti">Applica Filtro Posti</button>
+        </form>
+        <form id="AndForm" action="{{route('andFilter')}}">
+            <br>
+            <h2>Filtro mixed</h2>
+            <p>In questo fitro puoi selezionare le auto in base sia al prezzo che al numero di posti</p>
+            <div class="filter">
+                <label>
+                    <input type="number" name="minPrice" min="0" class="form-control" placeholder="Inserisci prezzo minimo"
+                           required>
+                </label>
+            </div>
+
+            <div class="filter">
+                <label>
+                    <input type="number" name="maxPrice" class="form-control" placeholder="Inserisci prezzo massimo" required>
+                </label>
+            </div><br>
+
+            <div class="filter">
+                <label for="posti">Numero di posti:
+                    <input type="number" name="posti" class="form-control" placeholder="esempio: 4" required>
+                </label>
+            </div>
+            @if (session('success-mixed'))
+                <span class="formerror">{{ session('success-mixed') }}</span>
+            @endif
+            @if (session('error-mixed'))
+                <span class="formerror">{{ session('error-mixed') }}</span>
+            @endif
+            <br>
+            <button id="bottoneAnd">Applica Filtro Posti e Prezzo</button>
         </form>
     </div>
     <!-- fine sezione laterale -->

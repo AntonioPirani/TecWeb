@@ -19,10 +19,7 @@ class UserController extends Controller
     {
 
         $allPrenotazioni = Prenotazione::where('userId', Auth::user()->id)->get();
-//        foreach ($allPrenotazioni as $prenotazione) {
-//            $numGiorni  = ($prenotazione->dataFine->diff($prenotazione->dataInizio));
-//            $costoTot = ($prenotazione->prezzoGiornaliero*$numGiorni);
-//        }
+
         return view('user', ['booking' => $allPrenotazioni]);
 
     }

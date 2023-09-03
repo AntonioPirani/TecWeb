@@ -7,6 +7,7 @@ use App\Models\Resources\Auto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use mysql_xdevapi\Collection;
+use function GuzzleHttp\Promise\all;
 
 
 class PublicController extends Controller
@@ -33,12 +34,12 @@ class PublicController extends Controller
             'minPrice' => 'required|numeric',
             'maxPrice' => 'required|numeric'
         ]);
-        if ($request->input('maxPrice')<$request->input('minPrice')) {
-            return redirect(route('auto'))->with('error', 'Attenzione! I prezzi non sono inseriti correttamente');
+        if ($request->input('maxPrice') < $request->input('minPrice')) {
+            return redirect(route('auto'))->with('error-prezzo', 'Attenzione! I prezzi non sono inseriti correttamente');
         }
         $filteredAuto = Auto::whereBetween('prezzoGiornaliero', [$request->input('minPrice'), $request->input('maxPrice')])->paginate();
         if ($filteredAuto->isEmpty()) {
-            return redirect(route('auto'))->with('error', 'Attenzione! Nessuna auto soddisfa i filtri inseriti');
+            return redirect(route('auto'))->with('error-prezzo', 'Attenzione! Nessuna auto soddisfa i filtri inseriti');
         }
         return view('catalog', ['products' => $filteredAuto]);
     }
@@ -52,10 +53,24 @@ class PublicController extends Controller
 
 
         if ($filteredAuto->isEmpty()) {
-            return redirect(route('auto'))->with('error', 'Attenzione! Nessuna auto soddisfa i filtri inseriti');
+            return redirect(route('auto'))->with('error-posti', 'Attenzione! Nessuna auto soddisfa i filtri inseriti');
         }
 
         return view('catalog', ['products' => $filteredAuto]);
+    }
+
+    public function filtroAnd(Request $request)
+    {
+        if(!$request->validate([
+           'minPrice','maxPrice','posti'=>'required|numeric'])){
+            return redirect()->back()->with('error-mixed','i valori inseriti non sono corretti');
+        }
+        $selectedAuto = Auto::whereBetween('prezzoGiornaliero', [$request->input('minPrice'), $request->input('maxPrice')]);
+        $finalCollection = $selectedAuto->where('posti', $request->input('posti'))->paginate();
+        if($finalCollection->isEmpty()){
+            return redirect()->back()->with('error-mixed','Nessuna auto soddisfa i requisiti inseriti');
+        }
+        return view('catalog', ['products' => $finalCollection]);
     }
 
 
