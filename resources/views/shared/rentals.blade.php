@@ -3,29 +3,32 @@
 @section('title', 'Prenotazioni Per Mese')
 
 @section('content')
+    <div class="static">
+        <h1>Rentals for {{ date('F', mktime(0, 0, 0, $month, 1)) }} {{ date('Y') }}</h1>
+        <form action="{{ route('rentals') }}" method="GET">
+            @csrf
+            <label for="month">Seleziona un Mese:</label>
+            <select name="month" id="month">
+                <option value="1">Gennaio</option>
+                <option value="2">Febbraio</option>
+                <option value="3">Marzo</option>
+                <option value="4">Aprile</option>
+                <option value="5">Maggio</option>
+                <option value="6">Giugno</option>
+                <option value="7">Luglio</option>
+                <option value="8">Agosto</option>
+                <option value="9">Settembre</option>
+                <option value="10">Ottobre</option>
+                <option value="11">Novembre</option>
+                <option value="12">Dicembre</option>
+            </select>
+            <button type="submit">Get Rentals</button>
+        </form>
 
-<script src="{{ asset('js/functions.js') }}"></script>
-
-<div class="static">
-    <h1>Prenotazioni Auto per <span id="month-name">{{ date('F', mktime(0, 0, 0, $month, 1)) }}</span> {{ date('Y') }}</h1>
-    <form id="month-form">
-        @csrf
-        <label for="month">Seleziona un Mese:</label>
-        <select name="month" id="month">
-            @foreach(range(1, 12) as $monthNumber)
-                <option value="{{ $monthNumber }}" {{ $month == $monthNumber ? 'selected' : '' }}>
-                    {{ date('F', mktime(0, 0, 0, $monthNumber, 1)) }}
-                </option>
-            @endforeach
-        </select>
-        <button type="submit">Visualizza</button>
-    </form>
-
-    <div id="table-container">
         <table class="table">
             <thead>
                 <tr>
-                    <th>Utente</th>
+                    <th>User</th>
                     <th>Modello</th>
                     <th>Marca</th>
                     <th>Targa</th>
@@ -47,6 +50,4 @@
             </tbody>
         </table>
     </div>
-</div>
-
 @endsection

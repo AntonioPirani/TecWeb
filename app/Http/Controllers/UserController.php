@@ -10,6 +10,8 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
@@ -209,6 +211,71 @@ class UserController extends Controller
         if($i1<=$f2 and $f2<=$f1){$overlap=true;}//data di fine dentro il periodo vecchio
         if($i2<=$i1 and $f2>=$f1){$overlap=true;}//il periodo vecchio e "compreso" nel nuovo
         return $overlap;//overlap e falso se non si overlappano
+    }
+
+    public function delete()
+    {
+        return view('delete_user');
+    }
+
+    public function deleteUser(Request $request)
+    {
+        $username = $request->input('username');
+
+        // Find the user by username
+        $user = User::where('username', $username)->first();
+
+        if (!$user) {
+            return back()->with('error', 'Utente non trovato');
+        }
+
+        // Check for references in other tables
+        $references = DB::table('prenotazioni')
+            ->where('userId', $user->id)
+            ->count();
+
+        if ($references > 0) {
+            return back()->with('error', 'L\'utente ha prenotazioni attive, non può essere eliminato');
+        }
+
+        // No references found, proceed with the user deletion
+        $user->delete();
+
+        return redirect('/admin')->with('status', 'User deleted successfully');
+    }
+
+    public function edit()
+    {
+        return view('edituser');
+    }
+
+    public function editUser(Request $request)
+    {
+        $user = Auth::user();
+        $userData = User::find($user->id);
+
+        $validatedData = $request->validate([
+            'nome' => 'required|string|max:255',
+            'cognome' => 'required|string|max:255',
+            'username' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'dataNascita' => 'required|date',
+            'occupazione' => 'required|string|max:255',
+            'indirizzo' => 'required|string|max:255',
+            'new_password' => 'nullable|string|min:8|confirmed', // Validate the new password
+        ]);
+    
+        // Update the user's profile fields
+        $userData->update($validatedData);
+    
+        // Update the password if a new one is provided
+        if ($request->filled('new_password')) {
+            $userData->update([
+                'password' => Hash::make($request->input('new_password')),
+            ]);
+        }
+
+        return redirect()->route('user')->with('success', 'Profile updated successfully.');
     }
 
 }
