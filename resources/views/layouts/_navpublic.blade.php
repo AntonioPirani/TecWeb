@@ -4,7 +4,7 @@
     <li><a href="{{ route('auto') }}" title="Home">Catalogo</a></li>
     <li><a href="{{ route('where') }}" title="Dove trovarci">Dove Siamo</a></li>
     <li><a href="{{ route('who') }}" title="Il nostro profilo aziendale">Chi siamo</a></li>
-    <li><a href="mailto:info@acme.it" title="Mandaci un messaggio">Contattaci</a></li> <!-- la messaggistica va su questa rotta-->
+    <li><a href="mailto:info@Nolleggiauto.it" title="Mandaci una mail">Inviaci una mail</a></li> <!-- la messaggistica va su questa rotta-->
     <li><a href="{{ route('faqs') }}" title="Le domande più frequenti">FAQs</a></li>
     <!-- rotte per user admin e staff-->
 

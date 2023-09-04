@@ -9,6 +9,7 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\StatsController;
 use App\Http\Controllers\AutoController;
 use App\Http\Controllers\CittaController;
+use App\Http\Controllers\MessaggiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -111,6 +112,20 @@ Route::view('/where', 'where')
 Route::view('/who', 'who')
         ->name('who');
 
+        /*MessaggiController*/
+Route::get('/checkMessaggiAdmin',[MessaggiController::class,'inboxAdmin'])
+    ->name('inboxAdmin');
+
+Route::get('/rispondiAdmin',[MessaggiController::class,'rispondiAdmin'])
+    ->name('rispondiAdmin');
+
+Route::get('/messaging', [MessaggiController::class, 'index'])
+
+    ->name('messaging');
+
+Route::post('/send-message-to-admin', [MessaggiController::class, 'sendMessageToAdmin'])
+
+    ->name('sendMessageToAdmin');
 
 
         /* --- FAQS --- */

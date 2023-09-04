@@ -16,8 +16,9 @@ return new class extends Migration
         Schema::create('messaggi', function (Blueprint $table) {
             $table->id();
             $table->integer('userId');
-            $table->string('userMessage');
-            $table->string('adminResponse');
+            $table->boolean('hasResponse');
+            $table->string('userMessage')->default("");
+            $table->string('adminResponse')->default("");
             $table->timestamps();
         });
     }
