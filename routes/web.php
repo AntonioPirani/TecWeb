@@ -20,15 +20,12 @@ use App\Http\Controllers\CittaController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+                    /*CATALOGO*/
 Route::get('/', [PublicController::class, 'showAuto'])
         ->name('auto');
-/*
-Route::get('/selTopCat/{topCatId}', [PublicController::class, 'showCatalog2'])
-        ->name('catalog2');
 
-Route::get('/selTopCat/{topCatId}/selCat/{catId}', [PublicController::class, 'showCatalog3'])
-        ->name('catalog3'); */
+
+                    /*FILTRI*/
 Route::get('/filtroPrezzo',[PublicController::class,'filtraPrezzo'])
     ->name('prezzo');
 
@@ -40,9 +37,14 @@ Route::get('/filtroAnd',[PublicController::class,'filtroAnd'])
 
 Route::get('/filtroData',[PublicController::class,'filtroData'])
     ->name('data');
+
 Route::get('/bigFilter',[PublicController::class,'dataANDprezzo'])
     ->name('bigFilter');
 
+
+
+
+                    /*PRENOTAZIONI*/
 Route::get('/addPrenotazione/{targa}',[UserController::class,'addPrenotazione'])
         ->name('addPrenotazione')->middleware('can:isUser');
 
@@ -61,6 +63,9 @@ Route::get('/modifyPrenotazione/{id}',[UserController::class,'modifyPrenotazione
 Route::post('/updatePrenotazione',[UserController::class,'updatePrenotazione'])
     ->name('updatePrenotazione');
 
+
+
+                /*ADMIN*/
 Route::get('/admin', [AdminController::class, 'index'])
         ->name('admin');
 
@@ -88,17 +93,25 @@ Route::get('/admin/getstaffdetails', [StaffController::class, 'getStaffDetails']
 Route::delete('/admin/deletestaff', [StaffController::class, 'delete'])
         ->name('deletestaff');
 
+
+
+            /*HOMEPAGES USER E STAFF*/
 Route::get('/user', [UserController::class, 'index'])
         ->name('user')->middleware('can:isUser');
 
 Route::get('/staff', [StaffController::class, 'index'])
         ->name('staff')->middleware('can:isStaff');
 
+
+
+        /* --- NAVBAR --- */
 Route::view('/where', 'where')
         ->name('where');
 
 Route::view('/who', 'who')
         ->name('who');
+
+
 
         /* --- FAQS --- */
 
@@ -173,7 +186,7 @@ Route::put('/user/edit', [UserController::class, 'editUser'])
 
 Route::get('/get-provinces', [CittaController::class, 'getProvinces'])
         ->name('get-provinces');
-        
+
 Route::get('/get-cities/{province}', [CittaController::class, 'getCities'])
         ->name('get-cities');
 
