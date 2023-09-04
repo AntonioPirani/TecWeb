@@ -16,14 +16,27 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         DB::table('utenti')->insert([
+//            test
             ['nome' => 'Antonio', 'cognome' => 'Pirani', 'email' => 'anto@anto.it', 'username' => 'antoanto',
                 'password' => Hash::make('antoanto'), 'role' => 'staff'],
             ['nome' => 'Luca', 'cognome' => 'Sabatini', 'email' => 'luca@luca.it', 'username' => 'lucaluca',
                 'password' => Hash::make('lucaluca'), 'role' => 'user'],
-            ['nome' => 'Mario', 'cognome' => 'Rossi', 'email' => 'mario@rossi.it', 'username' => 'adminadmin',
-                'password' => Hash::make('adminadmin'), 'role' => 'admin',],
+
             ['nome' => 'Francesco', 'cognome' => 'Virgolini', 'email' => 'fra@virgo.it', 'username' => 'fravirgo',
-                'password' => Hash::make('fravirgo'), 'role' => 'user',]
+                'password' => Hash::make('fravirgo'), 'role' => 'user',],
+
+//            official
+            ['nome' => 'Marco', 'cognome' => 'Bezzecchi', 'email' => 'marco@bezzecchi.it', 'username' => 'clieclie',
+                'password' => Hash::make('EJLzkprs'), 'role' => 'user'],
+
+            ['nome' => 'Stefano', 'cognome' => 'Guglielmini', 'email' => 'ste@gu.it', 'username' => 'staffstaff',
+                'password' => Hash::make('EJLzkprs'), 'role' => 'staff'],
+
+            ['nome' => 'ad', 'cognome' => 'min', 'email' => 'admin@outlook.it', 'username' => 'adminadmin',
+                'password' => Hash::make('EJLzkprs'), 'role' => 'admin',]
+
+
+
         ]);
 
         $data = [
