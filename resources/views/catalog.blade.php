@@ -94,7 +94,7 @@
         <form id="bigForm" action="{{route('bigFilter')}}">
             <br>
             <h2>Filtro BIG</h2>
-            <p>In questo fitro puoi selezionare le auto in base sia al prezzo che alla data di prenotazione</p>
+            <p class="sm:items-center">In questo fitro puoi selezionare le auto in base sia al prezzo che alla data di prenotazione</p>
             <div class="filter">
                 <label>
                     <input type="number" name="minPrice" min="0" class="form-control" placeholder="Inserisci prezzo minimo"
@@ -107,7 +107,7 @@
                     <input type="number" name="maxPrice" class="form-control" placeholder="Inserisci prezzo massimo" required>
                 </label>
             </div><br>
-            <p>Inserisci data di inizio e fine nolleggio per filtrare le auto in base a esse</p>
+{{--            <p>Inserisci data di inizio e fine nolleggio per filtrare le auto in base a esse</p>--}}
             <div class="filter">
                 <label>
                     <input type="date" name="dataInizio" class="form-control"  required>
@@ -122,14 +122,14 @@
             </div>
 
             <br>
-            <button id="bottoneBig">Applica Filtro Posti e data</button>
+            <button id="bottoneBig">Applica Filtro BIG</button>
         </form>
 
         <form id="formPrezzo" action="{{route('prezzo')}}">
             @csrf
-
-            <h2>Filtro prezzo</h2>
-            <p>Inserisci il minimo e il massimo prezzo giornaliero che desideri</p>
+            <br>
+            <h2>Filtro prezzo</h2><br>
+{{--            <p>Inserisci il minimo e il massimo prezzo giornaliero che desideri</p>--}}
             <div class="filter">
                 <label>
                     <input type="number" name="minPrice" min="0" class="form-control" placeholder="Inserisci prezzo minimo"
@@ -158,8 +158,8 @@
             @csrf
 
             <br>
-            <h2>Filtro posti</h2>
-            <p>Inserisci il numero di posti che desideri nella tua auto a nolleggio</p>
+            <h2>Filtro posti</h2><br>
+{{--            <p>Inserisci il numero di posti che desideri nella tua auto a nolleggio</p>--}}
             <div class="filter">
                 <label for="posti">Numero di posti:
                     <input type="number" name="posti" class="form-control" placeholder="esempio: 4" required>
