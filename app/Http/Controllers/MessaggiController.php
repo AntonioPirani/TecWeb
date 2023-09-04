@@ -24,7 +24,6 @@ class MessaggiController extends Controller
             ->first();
 
 
-
         if ($latestUserMessageWithAdminResponse) {
 
             $userMessage = $latestUserMessageWithAdminResponse->userMessage;
@@ -86,8 +85,15 @@ class MessaggiController extends Controller
     public
     function rispondiAdmin(Request $request)
     {
-        $messaggio = Messaggi::where('id', $request->input('messageId'));
-        $messaggio->update('response', $request->input('response'));
-        $messaggio->hasResponse = true;
+
+        $messaggio = Messaggi::where('id', $request->input('messageId'))->get();//return $messaggio->get('hasResponse');
+        if ($messaggio->isNotEmpty()) {
+            Messaggi::where('id', $request->input('messageId'))->update(['adminResponse'=>$request->input('response'),'hasResponse'=>true]);
+
+        }else {return redirect()->back()->with('error','Messaggio non trovato');}
+
+
+
+        return redirect()->route('inboxAdmin');
     }
 }

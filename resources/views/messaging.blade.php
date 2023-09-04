@@ -65,23 +65,32 @@
 
     {{--    parte admin--}}
     @can('isAdmin')
-
         @php
-
-            $inbox = Messaggi::all();
+        $controller=new \App\Http\Controllers\UserController();
          @endphp
+        @if (session('success'))
+            <span class="formerror">{{ session('success') }}</span>
+        @endif
+        @if (session('error'))
+            <span class="formerror">{{ session('error') }}</span>
+        @endif
+
         {{--        rotta che stampa gli id di tutti quelli che mandano messaggi --}}
         @foreach($inbox as $item)
+            @php
+                $utente=$controller->getUtentefromID($item->userId);
+            @endphp
             <form id="formRispondi" action='{{route('rispondiAdmin')}}'>
                 <div>
                     <p>
-                        <strong>{{User::where('id',$item->userId)->get('Nome','Cognome')}}</strong><br>
+                        <strong>{{$utente->nome}} {{$utente->cognome}}</strong><br>
+                        <strong>ID:{{$item->userId}}</strong><br>
                         {{$item->userMessage}}<br>
                     </p>
                 </div>
-                <input type="hidden" name="mesasgeId" value="{{$item->id}}">
+                <input type="hidden" name="messageId" value="{{$item->id}}">
                 <input type="hidden" name="userId" value="{{$item->userId}}">
-                <input type="hidden" name="user" value="{{User::where('id',$item->userId)->get('Nome','Cognome')}}">
+                <input type="hidden" name="user" value="{{$utente}}">
                 <label>
                     <input type="text" name="response" placeholder="Inserici la tua risposta a questo messaggio">
                 </label>
