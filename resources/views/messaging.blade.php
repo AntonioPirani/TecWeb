@@ -65,46 +65,65 @@
 
     {{--    parte admin--}}
     @can('isAdmin')
-        @php
-        $controller=new \App\Http\Controllers\UserController();
-         @endphp
-        @if (session('success'))
-            <span class="formerror">{{ session('success') }}</span>
-        @endif
-        @if (session('error'))
-            <span class="formerror">{{ session('error') }}</span>
-        @endif
-
-        {{--        rotta che stampa gli id di tutti quelli che mandano messaggi --}}
-        @foreach($inbox as $item)
+        <div class="static">
+            {{--Sezione per errori eventuali--}}
             @php
-                $utente=$controller->getUtentefromID($item->userId);
+                $controller=new \App\Http\Controllers\UserController();
             @endphp
-            <form id="formRispondi" action='{{route('rispondiAdmin')}}'>
-                <div>
-                    <p>
-                        <strong>{{$utente->nome}} {{$utente->cognome}}</strong><br>
-                        <strong>ID:{{$item->userId}}</strong><br>
-                        {{$item->userMessage}}<br>
-                    </p>
-                </div>
-                <input type="hidden" name="messageId" value="{{$item->id}}">
-                <input type="hidden" name="userId" value="{{$item->userId}}">
-                <input type="hidden" name="user" value="{{$utente}}">
-                <label>
-                    <input type="text" name="response" placeholder="Inserici la tua risposta a questo messaggio">
-                </label>
 
-                <button id="rispondi">
-                    @if($item->hasResponse)
-                        Aggiorna la risposta a questo messaggio
-                    @else
-                        Rispondi a questo messaggio
-                    @endif
-                </button>
-            </form>
-        @endforeach
-        {{--        seleziona un messaggio--}}
-        {{--        inserisce risposta oppure modifica la risposta--}}
+
+
+            <h3>Inbox</h3>
+            @if (session('success'))
+                <span style="background-color: #dff0d8; color: #26c929; border: 1px solid #daebf4; padding: 3px;">{{ session('success') }}</span>
+            @endif
+            @if (session('error'))
+                <span class="formerror">{{ session('error') }}</span>
+            @endif
+            {{--        rotta che stampa gli id di tutti quelli che mandano messaggi --}}
+
+            @foreach($inbox as $item)
+                @php
+                    $utente=$controller->getUtentefromID($item->userId);
+                @endphp
+                <div class="oneitem">
+                    <form id="formRispondi" action='{{route('rispondiAdmin')}}'>
+                        <div>
+                            {{--                            questiondiv--}}
+                            <div class="question" style="background-color: #f0f0f0; text-align: left;">
+                                <p style="font-weight: bold; margin: 0;">
+                                    <strong>{{$utente->nome}} {{$utente->cognome}}</strong><br>
+                                    <strong>ID:{{$item->userId}}</strong><br></p>
+                                <p style="margin: 0;">{{$item->userMessage}}<br></p>
+                            </div>
+
+                            @if($item->hasResponse)
+                                <div class="answer" style="background-color: #e1f7d5; text-align: right;">
+                                    <p style="font-weight: bold; margin: 0;"><strong>Admin:</strong></p>
+                                    <p style="margin: 0;">Response: {{$item->adminResponse}}</p>
+                                </div>
+
+                            @endif
+                        </div>
+
+                        <input type="hidden" name="messageId" value="{{$item->id}}">
+                        <input type="hidden" name="userId" value="{{$item->userId}}">
+                        <input type="hidden" name="user" value="{{$utente}}">
+                        <label>
+                            <input style="width: 300px; height: 50px;" type="text" name="response"
+                                   placeholder="Inserici la tua risposta a questo messaggio">
+                        </label>
+
+                        <button id="rispondi">
+                            @if($item->hasResponse)
+                                Aggiorna la risposta a questo messaggio
+                            @else
+                                Rispondi a questo messaggio
+                            @endif
+                        </button>
+                    </form>
+                </div>
+            @endforeach
+        </div>
     @endcan
 @endsection

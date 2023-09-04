@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Resources\Messaggi;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -77,23 +78,25 @@ class MessaggiController extends Controller
     public
     function inboxAdmin(Request $request)
     {
-        $inbox = Messaggi::all();
+        $inbox = Messaggi::orderBy('userId')->get();
 //        return $inbox;
         return view('messaging', ['inbox' => $inbox]);
     }
 
-    public
-    function rispondiAdmin(Request $request)
+    public function rispondiAdmin(Request $request)
     {
 
-        $messaggio = Messaggi::where('id', $request->input('messageId'))->get();//return $messaggio->get('hasResponse');
+        if($request->isNotFilled('response')){return redirect()->back()->with('error', 'Nessuna risposta inserita');}
+        $messaggio = Messaggi::where('id', $request->input('messageId'))->get();
         if ($messaggio->isNotEmpty()) {
-            Messaggi::where('id', $request->input('messageId'))->update(['adminResponse'=>$request->input('response'),'hasResponse'=>true]);
+            Messaggi::where('id', $request->input('messageId'))->update(['adminResponse' => $request->input('response'), 'hasResponse' => true]);
 
-        }else {return redirect()->back()->with('error','Messaggio non trovato');}
+        } else {
+            return redirect()->back()->with('error', 'Nessun messaggio nel tuo InBox');
+        }
+        $utente=User::select('nome','cognome')->where('id',$request->input('userId'))->get();
+//        $nome=$utente->get('nome');
 
-
-
-        return redirect()->route('inboxAdmin');
+        return redirect()->route('inboxAdmin')->with('success', 'Risposta inviata correttamente a' . $utente);
     }
 }
