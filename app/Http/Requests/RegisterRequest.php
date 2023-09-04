@@ -41,6 +41,7 @@ class RegisterRequest extends FormRequest {
             'via' => ['required', 'string', 'max:255'],
             'citta' => ['required', 'string', 'max:255'],
             'stato' => ['required', 'string', 'max:255'],
+            'provincia' => ['required', 'string', 'max:255'],
         ];
     }
 

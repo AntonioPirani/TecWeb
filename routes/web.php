@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\StatsController;
 use App\Http\Controllers\AutoController;
+use App\Http\Controllers\CittaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -167,6 +168,14 @@ Route::get('/user/edit', [UserController::class, 'edit'])
 
 Route::put('/user/edit', [UserController::class, 'editUser'])
         ->name('edituser');
+
+        /* --- Indirizzi DB --- */
+
+Route::get('/get-provinces', [CittaController::class, 'getProvinces'])
+        ->name('get-provinces');
+        
+Route::get('/get-cities/{province}', [CittaController::class, 'getCities'])
+        ->name('get-cities');
 
 
 /*  Rotte aggiunte da Breeze
