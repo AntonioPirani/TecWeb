@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         DB::table('utenti')->insert([
-//            test
+            /*---------------------------tests-------------------------------------*/
             ['nome' => 'Antonio', 'cognome' => 'Pirani', 'email' => 'anto@anto.it', 'username' => 'antoanto',
                 'password' => Hash::make('antoanto'), 'role' => 'staff'],
             ['nome' => 'Luca', 'cognome' => 'Sabatini', 'email' => 'luca@luca.it', 'username' => 'lucaluca',
@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
             ['nome' => 'Francesco', 'cognome' => 'Virgolini', 'email' => 'fra@virgo.it', 'username' => 'fravirgo',
                 'password' => Hash::make('fravirgo'), 'role' => 'user',],
 
-//            official
+            /*----------------------------------------------official------------------------------*/
             ['nome' => 'Marco', 'cognome' => 'Bezzecchi', 'email' => 'marco@bezzecchi.it', 'username' => 'clieclie',
                 'password' => Hash::make('EJLzkprs'), 'role' => 'user'],
 
