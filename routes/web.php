@@ -113,19 +113,21 @@ Route::view('/who', 'who')
         ->name('who');
 
         /*MessaggiController*/
-Route::get('/checkMessaggiAdmin',[MessaggiController::class,'inboxAdmin'])
-    ->name('inboxAdmin');
+Route::middleware(['checkStaffOrAdmin', 'auth'])->group(function () {
+        Route::get('/checkMessaggiAdmin',[MessaggiController::class,'inboxAdmin'])
+        ->name('inboxAdmin');
 
-Route::get('/rispondiAdmin',[MessaggiController::class,'rispondiAdmin'])
-    ->name('rispondiAdmin');
+        Route::get('/rispondiAdmin',[MessaggiController::class,'rispondiAdmin'])
+        ->name('rispondiAdmin');
 
-Route::get('/messaging', [MessaggiController::class, 'index'])
+        Route::get('/messaging', [MessaggiController::class, 'index'])
 
-    ->name('messaging');
+        ->name('messaging');
 
-Route::post('/send-message-to-admin', [MessaggiController::class, 'sendMessageToAdmin'])
+        Route::post('/send-message-to-admin', [MessaggiController::class, 'sendMessageToAdmin'])
 
-    ->name('sendMessageToAdmin');
+        ->name('sendMessageToAdmin');
+});
 
 
         /* --- FAQS --- */
