@@ -29,21 +29,25 @@
                                 <div class="image">
                                     @php
                                         $controller=new \App\Http\Controllers\UserController();
-                                        $auto = $controller->getAutofromTarga($prenotazione->autoTarga)
+                                        $auto = $controller->getAutofromTarga($prenotazione->autoTarga);
+                                        $interval=$prenotazione->dataFine->diff($prenotazione->dataInizio);
+                                        $nDays=$interval->days;
+                                        $costoTotale=$nDays *$auto->prezzoGiornaliero;
                                     @endphp
                                     @include('helpers/productImg', ['attrs' => 'imagefrm', 'imgFile' => $auto->foto])
                                 </div>
                                 <div class="info">
                                     <table>
                                         <tr>
-                                            <td><p class="meta">
+                                            <td><p class="meta" >
                                                     <strong>Dettagli prenotazione</strong><br>
-                                                    Inizio prenotazione:{{$prenotazione->dataInizio->format('Y-m-d')}}<br>
-                                                    Fine prenotazione:{{$prenotazione->dataFine->format('Y-m-d')}}<br>
+                                                    Data Inizio:{{$prenotazione->dataInizio->format('Y-m-d')}}<br>
+                                                    Data Fine:{{$prenotazione->dataFine->format('Y-m-d')}}<br>
                                                     ID prenotazione:{{$prenotazione->id}}<br>
-                                                    Stato prenotazione: {{$prenotazione->statoPrenotazione}}
+                                                    Status: {{$prenotazione->statoPrenotazione}}
                                                     @isset($costoTotale)
-                                                        Costo totale prenotazione: {{$costoTotale}}<br>@endisset
+                                                        <br>
+                                                        <span style=" color: #F93D00;">Costo totale: {{$costoTotale}} €</span><br>@endisset
                                                 </p>
                                             </td>
                                             <td>
