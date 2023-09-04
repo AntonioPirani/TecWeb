@@ -113,7 +113,7 @@ Route::view('/who', 'who')
         ->name('who');
 
         /*MessaggiController*/
-Route::middleware(['checkStaffOrAdmin', 'auth'])->group(function () {
+Route::middleware(['messageMiddleware', 'auth'])->group(function () {
         Route::get('/checkMessaggiAdmin',[MessaggiController::class,'inboxAdmin'])
         ->name('inboxAdmin');
 
