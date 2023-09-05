@@ -10,14 +10,22 @@ class FaqController extends Controller
 {
     public function index()
     {
-        $faqs = Faq::all(); // Retrieve all FAQs
+        $faqs = Faq::all(); // Ritorna tutte le FAQs
 
         return view('faqs', compact('faqs'));
     }
 
+    /**
+     * Gestisce la creazione di una nuova faq.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
     public function store(Request $request)
     {
-        //dd($request->all());
+        //dd($request->all());  //debug
         $validatedData = $request->validate([
             'domanda' => 'required|string|max:255',
             'risposta' => 'required|string|max:255',
@@ -28,13 +36,13 @@ class FaqController extends Controller
         $faq->risposta = $validatedData['risposta'];
 
         if ($faq->save()) {
-            Log::info('New faq added: ' . $faq->id);
-            return response()->json(['message' => 'Faq added successfully']);
+            Log::info('Nuova FAQ aggiunta: ' . $faq->id);   //Debug nel Log: storage/logs/laravel.log
+            return response()->json(['message' => 'Faq aggiunta correttamente']);
         } 
 
         else {
             Log::error('Failed to add faq');
-            return response()->json(['message' => 'Failed to add faq'], 500);
+            return response()->json(['message' => 'Errore nell\'aggiunta della faq'], 500);
         }
     }
     
@@ -43,17 +51,23 @@ class FaqController extends Controller
         return view('faq.addfaq');
     }
 
+    /**
+     * Restituisce i dettagli di una faq da cercare tramite id.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function getFaqDetails(Request $request)
     {
         $id = $request->input('id');
 
         $faq = Faq::where('id', $id)
-        ->first();
+            ->first();
 
         if ($faq) {
             return response()->json($faq);
         } else {
-            return response()->json(['message' => 'Faq not found'], 404);
+            return response()->json(['message' => 'Faq non trovata'], 404);
         }
     }
 
@@ -73,16 +87,16 @@ class FaqController extends Controller
         $faq = Faq::where('id', $id)->first();
 
         if (!$faq) {
-            return response()->json(['message' => 'Faq not found'], 404);
+            return response()->json(['message' => 'Faq non trovata'], 404);
         }
 
         $faq->domanda = $validatedData['domanda'];
         $faq->risposta = $validatedData['risposta'];
 
         if ($faq->save()) {
-            return response()->json(['message' => 'Faq updated successfully']);
+            return response()->json(['message' => 'Faq aggiornata correttamente']);
         } else {
-            return response()->json(['message' => 'Failed to update faq'], 500);
+            return response()->json(['message' => 'Errore nell\'update della faq'], 500);
         }
     }
 
@@ -94,12 +108,12 @@ class FaqController extends Controller
 
         if ($faq) {
             if ($faq->delete()) {
-                return response()->json(['message' => 'Faq deleted successfully']);
+                return response()->json(['message' => 'Faq eliminata correttamente']);
             } else {
-                return response()->json(['message' => 'Failed to delete faq'], 500);
+                return response()->json(['message' => 'Errore nella eliminazione della faq'], 500);
             }
         } else {
-            return response()->json(['message' => 'Faq not found'], 404);
+            return response()->json(['message' => 'Faq non trovata'], 404);
         }
     }
 

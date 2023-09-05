@@ -17,7 +17,7 @@ class StaffController extends Controller
     {
         //dd($request->all());
 
-        // Validate the form data
+        //Validazione dei dati immessi tramite form
         $validatedData = $request->validate([
             'nome' => 'required|string|max:255',
             'cognome' => 'required|string|max:255',
@@ -26,7 +26,7 @@ class StaffController extends Controller
             'password' => 'required|string|min:8',
         ]);
 
-        // Create a new staff member
+        // Nuovo staff
         $staffMember = new User;
         $staffMember->nome = $validatedData['nome'];
         $staffMember->cognome = $validatedData['cognome'];
@@ -34,14 +34,13 @@ class StaffController extends Controller
         $staffMember->email = $validatedData['email'];
         $staffMember->password = bcrypt($validatedData['password']);
         $staffMember->role = 'staff';
-        // Set other fields as needed
 
         if ($staffMember->save()) {
-            // Staff member successfully saved
+            // Successo
             Log::info('Staff member added: ' . $staffMember->id);
             return response()->json(['message' => 'Staff member added successfully']);
         } else {
-            // Something went wrong
+            // Errore
             Log::error('Failed to add staff member');
             return response()->json(['message' => 'Failed to add staff member'], 500);
         }
@@ -57,15 +56,14 @@ class StaffController extends Controller
         $username = $request->input('username');
 
         $staffMember = User::where('username', $username)
-        ->where('role', 'staff') // Add this condition to filter by role
+        ->where('role', 'staff') // Ritorna solo gli user con ruolo staff
         ->first();
 
         if ($staffMember) {
-            // Return the staff member details as JSON
+            // In formato JSON
             return response()->json($staffMember);
         } else {
-            // Staff member not found, return a 404 response
-            return response()->json(['message' => 'Staff member not found'], 404);
+            return response()->json(['message' => 'Staff non trovato'], 404);
         }
     }
 

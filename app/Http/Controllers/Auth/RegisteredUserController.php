@@ -23,7 +23,8 @@ class RegisteredUserController extends Controller
     }
 
     /**
-     * Handle an incoming registration request.
+     * Gestisce la creazione di un nuovo utente.
+     * L'indirizzo è la combinazione di 4 parametri presi singolarmente dalla form
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse

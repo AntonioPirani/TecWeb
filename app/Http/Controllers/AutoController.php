@@ -8,6 +8,11 @@ use App\Models\Resources\Prenotazione;
 
 class AutoController extends Controller
 {
+    /**
+     * Salvataggio della auto nel database
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -19,7 +24,6 @@ class AutoController extends Controller
             'potenza' => 'required|string|max:255',
             'tipoCambio' => 'required|string|max:255',
             'optional' => 'required|string|max:255',
-            //'disponibilita' => 'required|string|max:255',
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -32,8 +36,8 @@ class AutoController extends Controller
         $auto->potenza = $validatedData['potenza'];
         $auto->tipoCambio = $validatedData['tipoCambio'];
         $auto->optional = $validatedData['optional'];
-        //$auto->foto = $validatedData['foto'];
 
+        // Salvataggio della immagine
         if ($request->hasFile('foto')) {
             $image = $request->file('foto');
             $imageName = $image->getClientOriginalName();
@@ -59,6 +63,11 @@ class AutoController extends Controller
         return view('shared.addauto');
     }
 
+    /**
+     * Restituisce se disponibile al momento di richiesta e se trovata l'auto con la targa desiderata
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function getAutoDetails(Request $request)
     {
         $targa = $request->input('targa');
@@ -80,6 +89,11 @@ class AutoController extends Controller
         return view('shared.editauto');
     }
 
+    /**
+     * Aggiornamento dati dalla auto trovata con il metodo getAutoDetails
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request)
     {
         $validatedData = $request->validate([
@@ -91,7 +105,6 @@ class AutoController extends Controller
             'potenza' => 'required|string|max:255',
             'tipoCambio' => 'required|string|max:255',
             'optional' => 'required|string|max:255',
-            //'disponibilita' => 'required|string|max:255',
             'foto' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -102,11 +115,11 @@ class AutoController extends Controller
             return response()->json(['message' => 'Auto targa not found'], 404);
         }
 
-        // Check if there's an existing image
+        // Controlla se c'è una foto associata alla auto 
         if (!is_null($auto->foto)) {
             $existingImagePath = public_path('images/autos/') . $auto->foto;
             
-            // Delete the existing image file from the server
+            // Se la foto esiste viene eliminata dalla cartella autos
             if (file_exists($existingImagePath)) {
                 unlink($existingImagePath);
             }
@@ -120,14 +133,13 @@ class AutoController extends Controller
         $auto->potenza = $validatedData['potenza'];
         $auto->tipoCambio = $validatedData['tipoCambio'];
         $auto->optional = $validatedData['optional'];
-        //$auto->disponibilita = 1;
         
-        // Check if 'existingFoto' field exists in the request
+        // Controlla se nella richiesta c'è il campo existingFoto
         if ($request->has('existingFoto')) {
-            // Use the existing image filename
+            // Usa il nome della foto esistente
             $auto->foto = $request->input('existingFoto');
         } else {
-            // Process the uploaded image as you do for a new image
+            // Carica la nuova foto
             if ($request->hasFile('foto')) {
                 $image = $request->file('foto');
                 $imageName = $image->getClientOriginalName();
@@ -135,9 +147,6 @@ class AutoController extends Controller
 
                 $destinationPath = public_path() . '/images/autos';
                 $image->move($destinationPath, $imageName);
-            } else {
-                // Handle the case where no image is provided or needed.
-                // You can decide to leave it as is or perform any other actions.
             }
         }
 
@@ -148,18 +157,22 @@ class AutoController extends Controller
         }
     }
 
-
+    /**
+     * Eliminazione auto dal database
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function delete(Request $request)
     {
         $targa = $request->input('targa');
         $auto = Auto::where('targa', $targa)->first();
 
         if ($auto) {
-            // Check if there's an associated image
+            // Controlla se c'è una immagine
             if (!is_null($auto->foto)) {
                 $existingImagePath = public_path('images/autos/') . $auto->foto;
                 
-                // Delete the associated image file from the server
+                // E in caso affermativo la elimina dalla cartella autos
                 if (file_exists($existingImagePath)) {
                     unlink($existingImagePath);
                 }
@@ -174,7 +187,13 @@ class AutoController extends Controller
             return response()->json(['message' => 'Auto targa not found'], 404);
         }
     }
-
+    
+    /**
+     * Ritorna la disponibilità della auto in base alla targa (se trovata) e in base alla data immessa
+     * 
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function isCarAvailable($targa, $inizio, $fine)
     {
         $available = true;
