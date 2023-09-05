@@ -19,5 +19,5 @@ class Citta extends Model
         'num_residenti',
     ];
 
-    
+
 }

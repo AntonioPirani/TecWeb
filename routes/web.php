@@ -70,12 +70,6 @@ Route::post('/updatePrenotazione',[UserController::class,'updatePrenotazione'])
 Route::get('/admin', [AdminController::class, 'index'])
         ->name('admin');
 
-Route::get('/admin/newproduct', [AdminController::class, 'addProduct'])
-        ->name('newproduct');
-
-Route::post('/admin/newproduct', [AdminController::class, 'storeProduct'])
-        ->name('newproduct.store');
-
 Route::get('/admin/addstaff', [StaffController::class, 'add'])
         ->name('addstaff');
 

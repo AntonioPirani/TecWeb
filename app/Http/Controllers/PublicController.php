@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Catalog;
 use App\Models\Resources\Auto;
 use App\Models\Resources\Prenotazione;
 use DateTime;
@@ -11,13 +10,6 @@ use Illuminate\Http\Request;
 
 class PublicController extends Controller
 {/*finale*/
-
-    protected $_catalogModel;
-
-    public function __construct()
-    {
-        $this->_catalogModel = new Catalog;
-    }
 
     public function showAuto()
     {

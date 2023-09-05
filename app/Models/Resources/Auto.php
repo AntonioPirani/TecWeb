@@ -28,35 +28,9 @@ class Auto extends Model {
         'foto'
     ];
 
-
-
-   /*  // Restituisce tutte le auto
-    public function getAllAuto()
+    public function prenotazione()
     {
-        return Auto::select()->get();
-    }
-
-    // Restituisce tutte le auto con un certo numero di posti (per il filtro aggiuntivo)
-    public function getAutoByNumeroPosti($numeroPosti)
-    {
-        return Auto::where('numero_posti', $numeroPosti)->get();
-    }
-
-    // Restituisce tutte le auto entro un certo tipo di prezzo (per il primo filtro)
-    public function getAutoByPrezzo($prezzoMinimo, $prezzoMassimo)
-    {
-        return self::whereBetween('prezzo_giornaliero', [$prezzoMinimo, $prezzoMassimo])->get();
-    } */
-
-
-    // // Realazione One-To-One con Category
-    // public function prodCat() {
-    //     return $this->hasOne(Category::class, 'catId', 'catId');
-    // }
-
-    public function prenotazioni()
-    {
-        return $this->hasMany(Rental::class, 'autoTarga', 'targa');
+        return $this->hasMany(Prenotazione::class, 'autoTarga', 'targa');
     }
 
 }
