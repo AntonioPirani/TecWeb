@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('nome');
             $table->string('cognome');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('username', 20);
             $table->string('password');
             $table->date('dataNascita')->default('2000-01-01');
@@ -28,7 +27,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
-               
+
     }
 
     /**
