@@ -14,7 +14,7 @@ class PublicController extends Controller
     public function showAuto()
     {
 
-        $autos = Auto::orderBy('prezzoGiornaliero', 'desc')->paginate(3);
+        $autos = Auto::orderBy('prezzoGiornaliero', 'desc')->paginate(5);
         return view('catalog', ['products' => $autos]);
 
     }
@@ -39,10 +39,7 @@ class PublicController extends Controller
 
     public function filtraPosti(Request $request)
     {
-        if ($request->validate([
-            'posti' => 'required|numeric'])) {
-            return redirect()->back()->with('error-posti', 'i valori inseriti non sono corretti');
-        }
+        
 
         //seleziona le auto che soddisfano il numero di posti
         $filteredAuto = Auto::where('posti', $request->input('posti'))->paginate();
