@@ -148,6 +148,7 @@ class PublicController extends Controller
                 //perche la funzione overlap restituisce falso quando non si overlappano le date
                 $idArray[] = $item->autoTarga;
 
+
             }
         }
 
@@ -155,9 +156,9 @@ class PublicController extends Controller
         $filtered = Auto::whereNotIn('targa', $idArray)
             ->whereBetween('prezzoGiornaliero', [$request->input('minPrice'), $request->input('maxPrice')])
             ->orderBy('prezzoGiornaliero', 'desc')->paginate();
-
+        if ($filtered->isEmpty()) {
+            return redirect()->back()->with('error', 'Nessuna auto soddisfa i filtri inseriti');
+        }
         return view('catalog', ['products' => $filtered]);
     }
-
-
 }
