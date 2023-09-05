@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Resources\Citta; 
 
 class CittaController extends Controller
 {
+    //ottieni le province ordinate in ordine alfabetico
     public function getProvinces()
     {
         $province = Citta::distinct()
             ->orderBy('provincia', 'asc')
             ->pluck('provincia');
 
+        //setta i valori per la view
         $provinces = [];
         foreach ($province as $prov) {
             $provinces[] = [
@@ -20,19 +21,20 @@ class CittaController extends Controller
                 'text' => $prov,
             ];
         }
-
+        //ritorna i dati per la view
         return response()->json(['provinces' => $provinces]);
     }
 
+    //ottieni le citta sotto la provincia immessa
     public function getCities($province)
     {
         $citta = Citta::where('provincia', $province)->get();
 
-        // Transform the data to include both 'value' and 'text' attributes
+        // trasforma i dati in un formato compatibile con la view
         $formattedCities = $citta->map(function ($city) {
             return [
-                'value' => $city->comune, // Use a suitable field as the 'value'
-                'text' => $city->comune, // Use a suitable field as the 'text'
+                'value' => $city->comune, 
+                'text' => $city->comune,
             ];
         });
 

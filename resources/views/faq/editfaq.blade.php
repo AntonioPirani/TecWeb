@@ -17,70 +17,65 @@
 
     $(document).ready(function () {
         $('#lookupButton').on('click', function () {
-            // Get the FAQ ID entered by the user
+            //Id della faq inserita dall'admin
             var id = $('#lookupId').val();
 
-            // Make an AJAX request to fetch FAQ details
+            //chiama il controller per restituire i dettagli della faq se trovata
             $.ajax({
                 type: "GET",
-                url: "{{ route('getfaqdetails') }}", // Create this route in your routes file
+                url: "{{ route('getfaqdetails') }}",
                 data: { id: id },
                 success: function (response) {
-                    // Display FAQ details and show the edit form
+                    //Mostra i dettagli della faq
                     $('#faqDetailsSection').show();
 
-                    // Populate the fields in the edit form with FAQ details
+                    //Setta i valori dei campi della faq nei campi del form
                     $('#domanda').val(response.domanda);
                     $('#risposta').val(response.risposta);
                     $('#id').val(id);
 
-                    // Update the success message
-                    $('#resultMessage').html('<div class="alert alert-success">FAQ found</div>');
+                    // Messaggio di conferma
+                    $('#resultMessage').html('<div class="alert alert-success">FAQ trovata</div>');
                 },
                 error: function (error) {
-                    // Display an error message if the FAQ is not found
-                    $('#faqDetailsSection').hide(); // Hide the edit form
-                    $('#resultMessage').html('<div class="alert alert-danger">FAQ not found</div>');
+                    // La faq non è stata trovata 
+                    $('#faqDetailsSection').hide(); // Nascondi il form di modifica (se prima era stata trovata un'altra faq)
+                    $('#resultMessage').html('<div class="alert alert-danger">FAQ non trovata</div>');
                 }
             });
         });
 
-        // Submit the edit form via AJAX when the form is submitted
-        $('#editFaqForm').on('submit', function (e) {
-            e.preventDefault();
+        // Quando viene inviato il form di modifica della faq
+        $('#editFaqForm').on('submit', function (e) {   // e = eventHandler
+            e.preventDefault(); // Evita il comportamento di default del form (ad es: ricarica completa della pagina)
 
             $.ajax({
                 type: "POST",
                 url: "{{ route('updatefaq') }}",
                 data: $(this).serialize(),
                 success: function (response) {
-                    // Display the success message
-                    $('#resultMessage').html('<div class="alert alert-success">FAQ updated successfully</div>');
+                    $('#resultMessage').html('<div class="alert alert-success">Faq aggiornata con successo</div>');
                 },
                 error: function (error) {
-                    // Display the error message
-                    $('#resultMessage').html('<div class="alert alert-danger">Failed to update FAQ</div>');
+                    $('#resultMessage').html('<div class="alert alert-danger">Errore nell\'aggiornamento della faq</div>');
                 }
             });
         });
 
         $('#deleteFaqButton').on('click', function () {
-            if (confirm("Are you sure you want to delete this FAQ?")) {
-                // Get the FAQ ID from the hidden input field
+            if (confirm("Sei sicuto di voler eliminare questa FAQ?")) {
                 var id = $('#id').val();
 
-                // Make an AJAX request to delete the FAQ
                 $.ajax({
                     type: "DELETE",
-                    url: "{{ route('deletefaq') }}", // Create this route in your routes file
+                    url: "{{ route('deletefaq') }}",
                     data: { id: id },
                     success: function (response) {
-                        // Redirect to the /admin page on successful deletion
+                        // Una volta eliminata, ritora alla pagina admin
                         window.location.href = "{{ route('admin') }}";
                     },
                     error: function (error) {
-                        // Display an error message
-                        $('#resultMessage').html('<div class="alert alert-danger">Failed to delete FAQ</div>');
+                        $('#resultMessage').html('<div class="alert alert-danger">Errore nella cancellazione faq</div>');
                     }
                 });
             }
@@ -95,25 +90,21 @@
 <div class="static">
     <h3>Modifica FAQ</h3>
 
-    <!-- Input field to enter the FAQ ID for lookup -->
     <div class="form-group">
         <label for="id">FAQ ID</label>
         <input type="text" id="lookupId" class="form-group" required>
         <button id="lookupButton" class="btn btn-primary">Cerca FAQ</button>
     </div>
 
-    <!-- Section for displaying FAQ details and edit form (initially hidden) -->
+    <!-- Sezione inizialmente nascosta -->
     <div id="faqDetailsSection" style="display: none;">
         <h4>Dettagli FAQ</h4>
 
-        <!-- New form for editing FAQ details -->
         <form id="editFaqForm" method="POST" action="{{ route('updatefaq') }}">
             @csrf
 
-            <!-- Hidden input field for the FAQ ID -->
             <input type="hidden" name="id" id="id">
 
-            <!-- Fields to edit FAQ details -->
             <div class="form-group">
                 <label for="domanda">Domanda</label>
                 <input type="text" name="domanda" id="domanda" class="form-control" required>

@@ -238,14 +238,14 @@ class UserController extends Controller
     {
         $username = $request->input('username');
 
-        // Find the user by username
+        // Ricerca dell'utente tramite username
         $user = User::where('username', $username)->first();
 
         if (!$user) {
             return back()->with('error', 'Utente non trovato');
         }
 
-        // Check for references in other tables
+        // Controlla se l'utente ha relazioni nella tabella prenotazioni
         $references = DB::table('prenotazioni')
             ->where('userId', $user->id)
             ->count();
@@ -254,7 +254,7 @@ class UserController extends Controller
             return back()->with('error', 'L\'utente ha prenotazioni attive, non può essere eliminato');
         }
 
-        // No references found, proceed with the user deletion
+        //cancella l'utente se non sono state trovate prenotazioni attive (relazione con Prenotazioni)
         $user->delete();
 
         return redirect('/admin')->with('status', 'User deleted successfully');
@@ -278,20 +278,20 @@ class UserController extends Controller
             'dataNascita' => 'required|date',
             'occupazione' => 'required|string|max:255',
             'indirizzo' => 'required|string|max:255',
-            'new_password' => 'nullable|string|min:8|confirmed', // Validate the new password
+            'new_password' => 'nullable|string|min:8|confirmed',
         ]);
 
-        // Update the user's profile fields
+        // Aggiorna i dati dell'utente
         $userData->update($validatedData);
 
-        // Update the password if a new one is provided
+        // Aggiorna la password se il campo nuova password è stato riempito
         if ($request->filled('new_password')) {
             $userData->update([
                 'password' => Hash::make($request->input('new_password')),
             ]);
         }
 
-        return redirect()->route('user')->with('success', 'Profile updated successfully.');
+        return redirect()->route('user')->with('success', 'Profilo aggiornato correttamente');
     }
 
 }

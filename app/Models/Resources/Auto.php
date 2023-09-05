@@ -27,7 +27,7 @@ class Auto extends Model {
         'optional',
         'foto'
     ];
-
+    //relazione Eloquent con la tabella Prenotazioni
     public function prenotazione()
     {
         return $this->hasMany(Prenotazione::class, 'autoTarga', 'targa');

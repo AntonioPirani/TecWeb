@@ -38,11 +38,11 @@ class StaffController extends Controller
         if ($staffMember->save()) {
             // Successo
             Log::info('Staff member added: ' . $staffMember->id);
-            return response()->json(['message' => 'Staff member added successfully']);
+            return response()->json(['message' => 'Staff aggiunto con successo']);
         } else {
             // Errore
             Log::error('Failed to add staff member');
-            return response()->json(['message' => 'Failed to add staff member'], 500);
+            return response()->json(['message' => 'Errore nell\'aggiunta dello staff'], 500);
         }
     }
     
@@ -74,7 +74,7 @@ class StaffController extends Controller
 
     public function update(Request $request)
     {
-        // Validate the form data
+        // Validazione dei dati immessi tramite form
         $validatedData = $request->validate([
             'nome' => 'required|string|max:255',
             'cognome' => 'required|string|max:255',
@@ -82,26 +82,26 @@ class StaffController extends Controller
             'password' => 'required|string|min:8',
         ]);
 
-        // Find the staff member by username
+        // Cerca lo staff con lo username inserito
         $username = $request->input('username');
         $staffMember = User::where('username', $username)->first();
 
         if (!$staffMember) {
-            return response()->json(['message' => 'Staff member not found'], 404);
+            return response()->json(['message' => 'Staff non trovato'], 404);
         }
 
-        // Update staff member details
+        // Aggiorna i dati dello staff
         $staffMember->nome = $validatedData['nome'];
         $staffMember->cognome = $validatedData['cognome'];
         $staffMember->email = $validatedData['email'];
         $staffMember->password = bcrypt($validatedData['password']);
 
         if ($staffMember->save()) {
-            // Staff member successfully updated
-            return response()->json(['message' => 'Staff member updated successfully']);
+            // Successo
+            return response()->json(['message' => 'Staff aggiornato con successo']);
         } else {
-            // Something went wrong
-            return response()->json(['message' => 'Failed to update staff member'], 500);
+            // Errore
+            return response()->json(['message' => 'Errore nell\'aggiornamento dello staff'], 500);
         }
     }
 
@@ -112,17 +112,17 @@ class StaffController extends Controller
         $staffMember = User::where('username', $username)->first();
 
         if ($staffMember) {
-            // Delete the staff member
+            // Staff member trovato
             if ($staffMember->delete()) {
-                // Deletion successful
-                return response()->json(['message' => 'Staff member deleted successfully']);
+                // Cancella lo staff member
+                return response()->json(['message' => 'Staff cancellato correttamente']);
             } else {
-                // Something went wrong
-                return response()->json(['message' => 'Failed to delete staff member'], 500);
+                // Errore
+                return response()->json(['message' => 'Errore nella eliminazione dello staff'], 500);
             }
         } else {
-            // Staff member not found
-            return response()->json(['message' => 'Staff member not found'], 404);
+            // Staff non trovato
+            return response()->json(['message' => 'Staff non trovato'], 404);
         }
     }
 

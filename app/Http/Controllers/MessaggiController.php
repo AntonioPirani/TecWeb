@@ -11,69 +11,49 @@ use Illuminate\Support\Facades\Auth;
 class MessaggiController extends Controller
 {
     public function index()
-
     {
-
+        //prende lo user id dell'utente loggato
         $userId = auth()->user()->id;
 
-
-        // Find the latest message from the user with an admin response
-
+        //Ritorna l'ultimo messaggio dell'utente che ha la risposta dell'admin non vuota
         $latestUserMessageWithAdminResponse = Messaggi::where('userId', $userId)
             ->whereNotNull('adminResponse')
             ->latest()
             ->first();
 
-
+        //Se trova il messaggio setta la risposta utente e la risposta admin
         if ($latestUserMessageWithAdminResponse) {
-
             $userMessage = $latestUserMessageWithAdminResponse->userMessage;
-
             $adminResponse = $latestUserMessageWithAdminResponse->adminResponse;
-
+            //restituisce la vista con le risposte
             return view('messaging', compact('userMessage', 'adminResponse'));
-
-        } else {
-
+        } 
+        //altrimenti non ha trovato nessun messaggio e setta le risposte a no risposta
+        else {
             $userMessage = "No risposta";
-
             $adminResponse = "No risposta";
-
+            //restituisce la vista senza risposte
             return view('messaging', compact('userMessage', 'adminResponse'));
-
         }
-
     }
 
-
+    //metodo POST per salvare il messaggio inviato da utente verso admin
     public function sendMessageToAdmin(Request $request)
-
     {
-
         $userId = auth()->user()->id;
-
         $userMessage = $request->input('userMessage');
 
-
-        // Save the user's message to the database
-
+        // Salva il messaggio inviato dall'utente nel db
         $message = new Messaggi([
-
             'userId' => $userId,
-
             'userMessage' => $userMessage,
-
-            'hasResponse' => false,
-
+            'hasResponse' => false, //l'admin deve rispondere
         ]);
 
         $message->save();
 
-
         return redirect()->back()->with('success', 'Messaggio inviato con successo');
-
     }
-
 
     public
     function inboxAdmin(Request $request)

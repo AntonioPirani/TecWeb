@@ -10,21 +10,22 @@
 
 <script>
 $(document).ready(function () {
-    console.log('JavaScript is loaded.');
+    //console.log('JavaScript is loaded.');
 
-    var baseUrl = '{{ asset('') }}'; // Get the base URL
+    var baseUrl = '{{ asset('') }}'; // URL base
 
-    // Store the original HTML for provincia and citta fields
+    // Salva il valore di provincia e citta in modo da poterli ripristinare in caso di cambio di stato
     var originalProvinciaHtml = $('#provincia').prop('outerHTML');
     var originalCittaHtml = $('#citta').prop('outerHTML');
 
-    // Disable the "Registra" button by default
+    // Il bottone per la registrazione è disattivato per default, verrà attivato in seguito
     $('#registra-button').prop('disabled', true);
 
+    // quando il campo stato cambia:
     $('#stato').change(function () {
         var selectedStato = $(this).val();
         if (selectedStato === 'Italia') {
-            // Enable and populate the provincia select field
+            // Attiva il campo provincia e popola le opzioni
             $('#provincia').replaceWith(originalProvinciaHtml);
             $('#provincia').prop('disabled', false);
 
@@ -32,36 +33,39 @@ $(document).ready(function () {
             $('#citta').replaceWith(originalCittaHtml);
             $('#citta').prop('disabled', false);
 
-            // Fetch and populate provinces
+            // funzione per popolare le province
             $.ajax({
-                url: baseUrl + 'get-provinces',
+                url: baseUrl + 'get-provinces', //url da chiamare
                 method: 'GET',
                 success: function (data) {
                     var provinciaSelect = $('#provincia');
-                    provinciaSelect.empty(); // Clear existing options
+                    provinciaSelect.empty(); //svuota il campo
                     
+                    //aggingi al dropdown le province in base al formato restituito dal controller
                     $.each(data.provinces, function(index, province) {
                         provinciaSelect.append(new Option(province.text, province.value));
                     });
                 },
+                //province non trovate
                 error: function () {
                     console.log('Error fetching provinces.');
                 }
             });
 
-            // When a province is selected, enable the city field
+            // quando il campo provincia cambia:
             $('#provincia').change(function () {
                 var selectedProvince = $(this).val();
                 if (selectedProvince) {
                     $('#citta').prop('disabled', false);
                     var citiesUrl = baseUrl + 'get-cities/' + selectedProvince;
 
+                    //stesso procedimento di prima, ma per le citta
                     $.ajax({
                         url: citiesUrl,
                         method: 'GET',
                         success: function (data) {
                             var cittaSelect = $('#citta');
-                            cittaSelect.empty(); // Clear existing options
+                            cittaSelect.empty(); 
 
                             $.each(data.citta, function(index, city) {
                                 cittaSelect.append(new Option(city.text, city.value));
@@ -76,15 +80,14 @@ $(document).ready(function () {
                 }
             });
         } else {
-            // If a country other than Italy is selected, transform the provincia and citta fields into text inputs
+            // Se non è selezionato lo stato Italia, trasforma i dropdown menu di provincia e citta in input text
             $('#provincia').replaceWith('<input type="text" id="provincia" name="provincia" class="input" placeholder="Inserisci Provincia">');
             $('#citta').replaceWith('<input type="text" id="citta" name="citta" class="input" placeholder="Inserisci Citta">');
         }
     });
 
-    // Rest of your code...
-
-    // Function to check form completion and enable/disable the "Registra" button
+    // Funzione che abilita/disabilita il bottone di registrazione in base al completamento della form. Se tutti i campi sono compilati
+    // il bottone viene abilitato, altrimenti viene disabilitato.
     function checkFormCompletion() {
         var selectedStato = $('#stato').val();
         var nome = $('#nome').val();
@@ -99,6 +102,7 @@ $(document).ready(function () {
         var citta = $('#citta').val();
         var via = $('#via').val();
 
+        //se i campi non sono vuoti abilita il bottone
         if (
             nome && cognome && email && username && password && confirmPassword &&
             dataNascita && occupazione && selectedStato &&
@@ -113,13 +117,12 @@ $(document).ready(function () {
         }
     }
 
-    // Bind the checkFormCompletion function to various form input events
+    // Ascolta se i campi della form cambiano e chiama la funzione checkFormCompletion()
     $('#stato, #nome, #cognome, #email, #username, #password, #password-confirm, #dataNascita, #occupazione, #provincia, #citta, #via').on('change keyup', function () {
         checkFormCompletion();
     });
 });
 </script>
-
 
 @endsection
 

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class CheckStaffOrAdmin
 {
     /**
-     * Handle an incoming request.
+     * Utilizzato per definire l'accesso alle pagine condivise tra admin e staff
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next

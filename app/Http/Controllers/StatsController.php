@@ -17,32 +17,33 @@ class StatsController extends Controller
      */
     public function monthlyStatistics()
     {
-        
+        //Prendi l'anno corrente
         $currentYear = date('Y');
 
-        // Query the "Prenotazioni" table to retrieve rental records for the current year.
+        // Esegui la query per ottenere le prenotazioni per ogni mese dell'anno corrente.
         $rentals = DB::table('prenotazioni')
             ->select(DB::raw('MONTH(dataInizio) AS month'), DB::raw('COUNT(*) as total'))
             ->whereYear('dataInizio', $currentYear)
             ->groupBy(DB::raw('MONTH(dataInizio)'))
             ->get();
 
-        // Initialize an array to store monthly rental totals.
+        // Vettore Prenotazioni totali
         $monthlyRentals = [];
 
-        // Create an array with months as keys and total rentals as values.
+        // associa i valori al vettore e calcola il totale delle prenotazioni per ogni mese
         foreach ($rentals as $rental) {
             $month = $rental->month;
             $totalRentals = $rental->total;
             $monthlyRentals[$month] = $totalRentals;
         }
 
-        // Loop through the months of the current year and display rental totals.
+        // Stampa e salva il numero di prenotazioni per ogni mese
         for ($month = 1; $month <= 12; $month++) {
-            $totalRentals = $monthlyRentals[$month] ?? 0;
-            //echo "Month: $month, Total Rentals: $totalRentals\n";
+            $totalRentals = $monthlyRentals[$month] ?? 0;   // ?? 0: se non trova il valore, setta 0
+            //echo "Mese: $month, Prenotazioni Totali: $totalRentals\n";
         }
 
+        //ritorna la view con il vettore di dati
         return view('monthly-stats', ['monthlyRentals' => $monthlyRentals]);
     }
 
@@ -55,10 +56,10 @@ class StatsController extends Controller
      */
     public function rentalsPerMonth(Request $request)
     {
-        // Check if the 'month' input is present in the request; otherwise, default to the current month.
-        $month = $request->input('month', date('n')); // 'n' returns the current month (1-12).
+        // se il mese immesso è presente nella richiesta usa quello, altrimenti usa il mese corrente
+        $month = $request->input('month', date('n')); // date('n') restituisce il mese corrente in formato numerico
 
-        // Use Eloquent relationships to load user and auto data.
+        // Relazione tra Prenotazione e User e Auto realizzata tramite Eloquent per ritornare le prenotazioni in base alle date inserite
         $prenotazioni = Prenotazione::with('user', 'auto')
             ->where(function ($query) use ($month) {
                 $query->whereMonth('dataInizio', $month)
@@ -66,8 +67,6 @@ class StatsController extends Controller
             })
             ->whereYear('dataInizio', date('Y'))
             ->get();
-
-
 
         return view('shared.rentals', compact('prenotazioni', 'month'));
     }

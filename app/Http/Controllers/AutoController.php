@@ -107,12 +107,12 @@ class AutoController extends Controller
             'optional' => 'required|string|max:255',
             'foto' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
+        // Controlla se l'auto con la targa immessa esiste
         $targa = $request->input('targa');
         $auto = Auto::where('targa', $targa)->first();
 
         if (!$auto) {
-            return response()->json(['message' => 'Auto targa not found'], 404);
+            return response()->json(['message' => 'Auto non trovata'], 404);
         }
 
         // Controlla se c'è una foto associata alla auto 
@@ -125,6 +125,7 @@ class AutoController extends Controller
             }
         }
 
+        //riempe l'oggetto auto con i nuovi dati
         $auto->targa = $validatedData['targa'];
         $auto->modello = $validatedData['modello'];
         $auto->marca = $validatedData['marca'];
@@ -151,9 +152,9 @@ class AutoController extends Controller
         }
 
         if ($auto->save()) {
-            return response()->json(['message' => 'Auto updated successfully']);
+            return response()->json(['message' => 'Auto aggiornata con successo']);
         } else {
-            return response()->json(['message' => 'Failed to update auto'], 500);
+            return response()->json(['message' => 'Errore nell\'aggiornamento auto'], 500);
         }
     }
 
@@ -179,12 +180,12 @@ class AutoController extends Controller
             }
 
             if ($auto->delete()) {
-                return response()->json(['message' => 'Auto deleted successfully']);
+                return response()->json(['message' => 'Auto cancellata con successo']);
             } else {
-                return response()->json(['message' => 'Failed to delete auto'], 500);
+                return response()->json(['message' => 'Errore nella eliminazione auto'], 500);
             }
         } else {
-            return response()->json(['message' => 'Auto targa not found'], 404);
+            return response()->json(['message' => 'Auto non trovata'], 404);
         }
     }
     

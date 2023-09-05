@@ -18,6 +18,8 @@ class Prenotazione extends Model{
         'dataInizio'=>'datetime:Y-m-d',
         'dataFine'=>'datetime:Y-m-d'];
 
+    //relazioni eloquent 
+
    public function user()
     {
         return $this->belongsTo(User::class, 'userId', 'id');
