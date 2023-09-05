@@ -21,7 +21,7 @@ class StatsController extends Controller
         $currentYear = date('Y');
 
         // Query the "Prenotazioni" table to retrieve rental records for the current year.
-        $rentals = DB::table('Prenotazioni')
+        $rentals = DB::table('prenotazioni')
             ->select(DB::raw('MONTH(dataInizio) AS month'), DB::raw('COUNT(*) as total'))
             ->whereYear('dataInizio', $currentYear)
             ->groupBy(DB::raw('MONTH(dataInizio)'))
