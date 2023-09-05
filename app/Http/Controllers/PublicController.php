@@ -21,13 +21,6 @@ class PublicController extends Controller
 
     public function filtraPrezzo(Request $request)
     {
-        //validazione della richiesta
-        if ($request->validate([
-            'minPrice' => 'required|numeric',
-            'maxPrice' => 'required|numeric'])) {
-            return redirect(route('auto'))->with('error-prezzo', 'Attenzione! Prezzi non inseriti correttamente');
-        }
-
         //controlla se il prezzo massimo inserito e maggiore di quello minimo
         if ($request->input('maxPrice') < $request->input('minPrice')) {
             return redirect(route('auto'))->with('error-prezzo', 'Attenzione! Il prezzo minimo è maggiore del prezzo massimo');

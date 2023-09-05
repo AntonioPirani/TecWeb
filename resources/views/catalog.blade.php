@@ -2,46 +2,6 @@
 @section('scripts')
     <script src="{{ asset('js/functions.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    {{--<script>
-        // Add a click event handler for the "filtroPrezzo" button
-        document.getElementById('bottonePrezzo').addEventListener('auxclick', function () {
-            // Add your code to perform the "filtroPrezzo" action here
-            $.ajax({
-                type: "GET",
-                url: "{{ route('prezzo')}}",
-                data: document.getElementById('formPrezzo').serialize(),
-                success: function (response) {
-                    // Handle the success response for "filtroPrezzo"
-                    alert('Filter by Price action success');
-                },
-                error: function (error) {
-                    // Handle the error response for "filtroPrezzo"
-                    alert('Filter by Price action error');
-                }
-            });
-            alert('Filter by Price action');
-        });
-
-        // Add a click event handler for the "filtroPosti" button
-        document.getElementById('bottonePosti').addEventListener('auxclick', function () {
-            // Add your code to perform the "filtroPosti" action here
-            $.ajax({
-                type: "GET",
-                url: "{{ route('posti')}}",
-                data: document.getElementById('formPosti').serialize(),
-                success: function (response) {
-                    // Handle the success response for "filtroPosti"
-                    alert('Filter by Seats action success');
-                },
-                error: function (error) {
-                    // Handle the error response for "filtroPosti"
-                    alert('Filter by Seats action error');
-                }
-            });
-            alert('Filter by Seats action');
-        });
-    </script>--}}
 @endsection
 
 @section('title', 'Catalogo Prodotti')
@@ -131,15 +91,15 @@
             <h2>Filtro prezzo</h2><br>
 {{--            <p>Inserisci il minimo e il massimo prezzo giornaliero che desideri</p>--}}
             <div class="filter">
-                <label>
-                    <input type="number" name="minPrice" min="0" class="form-control" placeholder="Inserisci prezzo minimo"
+                <label for="minPrice">
+                    <input type="number" name="minPrice" class="form-control" placeholder="Inserisci prezzo minimo"
                     required>
                 </label>
             </div>
 
 
             <div class="filter">
-                <label>
+                <label for="maxPrice">
                     <input type="number" name="maxPrice" class="form-control" placeholder="Inserisci prezzo massimo" required>
                 </label>
             </div>
@@ -152,8 +112,6 @@
             @endif
             <button  id="bottonePrezzo">Applica Filtro Prezzo</button>
         </form>
-
-
         <form id="formPosti" action="{{route('posti')}}">
             @csrf
 
