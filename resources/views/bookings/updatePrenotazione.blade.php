@@ -4,31 +4,6 @@
     <script src="{{ asset('js/functions.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    {{--<script>
-        $(document).ready(function () {
-            $('#modificaPrenotazione').on('submit', function (e) {
-                e.preventDefault();
-
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('updatePrenotazione')}}",
-                    data: $(this).serialize(),
-                    success: function (response) {
-                        // Display the success message
-                        $('#resultMessage').html('<p>Booking modified successfully</p>');
-
-                        window.location.href = "{{ route('auto') }}";
-                    },
-                    error: function (error) {
-                        // Display the error message
-                        $('#resultMessage').html('<div class="alert alert-danger">Failed to modify booking</div>');
-                        window.location.href = "{{ route('auto') }}";
-                    }
-                });
-            });
-        });
-    </script>--}}
-
 @endsection()
 
 
@@ -38,6 +13,10 @@
         <div>
             <p>Qui puoi modificare la tua prenotazione con id: {{$id}}</p>
           @php
+              //in questa sezione di php viene verificato se:
+                //-lutente ha gia prenotazioni ed in caso stampa le date cosi da evitare che prenoti di nuovo in quelle date
+                //-la macchina selezionata in base alla targa ha gia delle prenotazioni e quindi stampa le date delle
+                // prenotazioni per far si che lutente eviti di prenotare in quelle date
                 $messaggio='';$warning='';
                 $targa=\App\Models\Resources\Prenotazione::where('id',$id)->value('autoTarga');
                 $allPrenotazioni=\App\Models\Resources\Prenotazione::where('autoTarga',$targa)->get();

@@ -1,4 +1,4 @@
-
+{{--    pagina di conferma prenotazione--}}
 @extends('layouts.user')
 @section('title','Prenotazione completata')
 @section('content')

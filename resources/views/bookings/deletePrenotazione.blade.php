@@ -1,34 +1,9 @@
+{{--pagina dove lutente puo confermare di eliminare la prenotazione, si avvisa lutente che e' un azione irreversibile--}}
 @extends('layouts.user')
 @section('title','Delete Booking')
 @section('scripts')
-    <script src="{{ asset('js/functions.js') }}" ></script>
+    <script src="{{ asset('js/functions.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    {{--<script>
-        $(document).ready(function () {
-            $('#cancellaPrenotazione').on('submit', function (e) {
-                e.preventDefault();
-
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('cancellaPrenotazione',['id'=>$id])}}" ,
-                    data: $(this).serialize(),
-                    success: function (response) {
-                        // Display the success message
-                        $('#resultMessage').html('<p>Booking added successfully</p>');
-
-                        window.location.href = "{{ route('auto') }}";
-                    },
-                    error: function (error) {
-                        // Display the error message
-                        $('#resultMessage').html('<div class="alert alert-danger">Failed to delete booking</div>');
-                        window.location.href = "{{ route('auto') }}";
-                    }
-                });
-            });
-        });
-    </script>--}}
-
 @endsection()
 
 
