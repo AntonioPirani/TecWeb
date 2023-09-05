@@ -18,12 +18,9 @@ class UserController extends Controller
 {
 
     public function index()
-    {
-
+    {        //seleziona le prenotazioni dell utente in sessione
         $allPrenotazioni = Prenotazione::where('userId', Auth::user()->id)->get();
-
         return view('user', ['booking' => $allPrenotazioni]);
-
     }
 
 
@@ -35,10 +32,13 @@ class UserController extends Controller
             'dataFine' => 'required|date|after:dataInizio',
             'statoPrenotazione' => 'required|string']);
 
+        //dopo aver validato gli input inseriti nella pagina di addbooking, salva la targa, user id e data inizio fine
         $targa = $request->input('autoTarga');
         $userId = Auth::user()->id;
         $inizio = new DateTime($request->input('dataInizio'));
         $fine = new DateTime($request->input('dataFine'));
+
+        //esegue controlli sulla data per verificare la sua correttezza (data passata oppure inizio successivo alla fine)
         if ($inizio < new DateTime(now())) {
             return redirect()->back()->with('error', 'La data di inizio è passata');
         } elseif ($fine < $inizio) {
@@ -46,8 +46,14 @@ class UserController extends Controller
         }
 
 
+        //usa la funziona isCarAvailable per verificare che la macchina identificata tramite
+        // la targa non sia gia prenotata da unaltro utente nel periodo specificato che va da $inizio a $fine
+        //successivamente verifica tramite UserOverlappingBookings che lutente non abbia richiesto di fare
+        // un altra prenotazione in un periodo che si sovrappone ad una prenotazione gia confermata
         if ($this->isCarAvailable($targa, $inizio, $fine) and !$this->UserOverlappingBookings($userId, $inizio, $fine)) {
 
+            //dopo aver controllato la validita della richiesta in base alla macchina e alle prenotazioni gia presenti
+            //crea una nuova prenotazione e la salva
             $booking = new Prenotazione;
             $booking->fill($validatedData);
             $booking->autoTarga = $request->input('autoTarga');
@@ -56,15 +62,18 @@ class UserController extends Controller
             if ($booking->save()) {
                 //            Prenotazione inserita
                 Log::info('Prenotazione aggiunta' . $booking->primaryKey);
+
+                //redireziona alla pagina di prenotazione completata dove si effettua un breve recap della prenotazione
                 return view('bookings.completedBooking', ['prenotazione' => $booking]);
             } else {
-                //            Hold on, wait a minute, something ain't right
+                //    errore        Hold on, wait a minute, something ain't right
                 Log::error('Failed to add booking');
                 return response()->json(['message' => 'Failed to add booking'], 500);
             }
-        } elseif (!$this->isCarAvailable($targa, $inizio, $fine)) {
+        } elseif (!$this->isCarAvailable($targa, $inizio, $fine)) {//se la macchina e' occupata nel periodo in cui si chiede di prenotarla da un errore specifico
             return redirect()->back()->with('error', 'La data scelta non e disponibile perché si sovrappone con un\'altra prenotazione della macchina selezionata');
-        } elseif ($this->isCarAvailable($userId, $inizio, $fine)) {//questa condizione e falsa quando le date si overlappano
+        } elseif ($this->UserOverlappingBookings($userId, $inizio, $fine)) {//se lutente tenta di prenorare un altra auto in un periodo in cui ha gia una prenotazione viene stampato un errore specifico
+            //questa condizione e falsa quando le date si overlappano
             return redirect()->back()->with('error', 'La data scelta non e disponibile perché la data richiesta per la modifica
             della prenotazione si sovrappone con un\'altra delle tue prenotazioni già in programma');
         }
@@ -86,14 +95,9 @@ class UserController extends Controller
 
         if (Prenotazione::where('id', $request->input('id'))->delete()) {
 //            Prenotazione cancellata definitivamente
-            Log::info('Prenotazione cancellata');
-            session()->flash('success', 'Operation completed successfully.');
-
             return redirect()->route('user')->with('success', 'Prenotazione cancellata correttamente.');
         } else {
-//            Hold on, wait a minute, something ain't right
-            Log::error('Failed to delete booking');
-            session()->flash('message', 'Operation failed.');
+//            errore Hold on, wait a minute, something ain't right
             return redirect()->route('user')->with('error', 'Qualcosa è andato storto nel cancellare la prenotazione.');
         }
     }
@@ -105,24 +109,29 @@ class UserController extends Controller
 
     public function updatePrenotazione(Request $request)
     {
+        //seleziona la prenotazione che corrisponde al id e la targa giusta
         $targa = Prenotazione::where('id', $request->input('id'))->value('autoTarga');
-        $prenotazioneDaCambiare = Prenotazione::find( $request->input('id'));
+        $prenotazioneDaCambiare = Prenotazione::find($request->input('id'));
         $userId = Auth::user()->id;
         $inizio = new DateTime($request->input('dataInizio'));
         $fine = new DateTime($request->input('dataFine'));
+        //controlla se le date richieste sono valide ( data iniziale passata oppure fine<inizio
         if ($inizio < new DateTime(now())) {
             return redirect()->back()->with('error', 'La data di inizio è passata');
         } elseif ($fine < $inizio) {
             return redirect()->back()->with('error', 'La data di fine é precedente alla data di inizio');
         }
 
-        if($this->modifyOverlap(new DateTime($prenotazioneDaCambiare->dataInizio),$inizio,new DateTime($prenotazioneDaCambiare->dataFine),$fine)){
+        //verifica che il nuovo periodo nel quale si vuole prenotare la macchina non si vada a sovrapporre
+        // con quell vecchio in caso si chiede allutente di inserire una nuova prenotazione
+        if ($this->modifyOverlap(new DateTime($prenotazioneDaCambiare->dataInizio), $inizio, new DateTime($prenotazioneDaCambiare->dataFine), $fine)) {
             return redirect()->back()->with('error', "Attenzione! Il nuovo periodo di nolleggio che si vuole inserire si sovrappone al periodo originario.
-            \n Si consiglia di eliminare questa prenotazione ed inserirne una nuova"); }
+            \n Si consiglia di eliminare questa prenotazione ed inserirne una nuova");
+        }
 
+        //questa parte e del tutto simile alla funzione di inserimento prenotazione vista sopra
         if ($this->isCarAvailable($targa, $inizio, $fine) and !$this->UserOverlappingBookings($userId, $inizio, $fine)) {
             if (!$booking = Prenotazione::where('id', $request->input('id'))) {
-                // Handle the case where the booking record was not found
                 return redirect()->back()->with('error', 'Booking not found');
             } else {
                 $booking->update([
@@ -133,7 +142,7 @@ class UserController extends Controller
             }
         } elseif (!$this->isCarAvailable($targa, $inizio, $fine)) {
             return redirect()->back()->with('error', 'La data scelta non e disponibile perché si sovrappone con un\'altra prenotazione della macchina selezionata');
-        } elseif ($this->isCarAvailable($userId, $inizio, $fine)) {//questa condizione e falsa quando le date si overlappano
+        } elseif ($this->UserOverlappingBookings($userId, $inizio, $fine)) {//questa condizione e falsa quando le date si overlappano
             return redirect()->back()->with('error', 'La data scelta non e disponibile perché la data richiesta per la modifica
             della prenotazione si sovrappone con un\'altra delle tue prenotazioni già in programma');
         }
@@ -202,14 +211,21 @@ class UserController extends Controller
         return $overlapping;
     }
 
-    public function modifyOverlap($i1,$i2,$f1,$f2){
+    public function modifyOverlap($i1, $i2, $f1, $f2)
+    {
         //i2 e f2 sono rispettivamente le date gia convertite usando newDateTime della prenotazione 'nuova' da inserire
         //i1 f1 sono le date vecchie rispetto al quale si controlla overlap
         //quindi se sono in mezzo al periodo gia presente cioe tra i1 e f1 da errore e lo stesso se si overlappano in altri modi
         $overlap = false;
-        if($i1<=$i2 and $i2<=$f1){$overlap=true;}// data inizio dentro il periodo vecchio
-        if($i1<=$f2 and $f2<=$f1){$overlap=true;}//data di fine dentro il periodo vecchio
-        if($i2<=$i1 and $f2>=$f1){$overlap=true;}//il periodo vecchio e "compreso" nel nuovo
+        if ($i1 <= $i2 and $i2 <= $f1) {
+            $overlap = true;
+        }// data inizio dentro il periodo vecchio
+        if ($i1 <= $f2 and $f2 <= $f1) {
+            $overlap = true;
+        }//data di fine dentro il periodo vecchio
+        if ($i2 <= $i1 and $f2 >= $f1) {
+            $overlap = true;
+        }//il periodo vecchio e "compreso" nel nuovo
         return $overlap;//overlap e falso se non si overlappano
     }
 
@@ -264,10 +280,10 @@ class UserController extends Controller
             'indirizzo' => 'required|string|max:255',
             'new_password' => 'nullable|string|min:8|confirmed', // Validate the new password
         ]);
-    
+
         // Update the user's profile fields
         $userData->update($validatedData);
-    
+
         // Update the password if a new one is provided
         if ($request->filled('new_password')) {
             $userData->update([

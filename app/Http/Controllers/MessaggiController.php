@@ -78,25 +78,34 @@ class MessaggiController extends Controller
     public
     function inboxAdmin(Request $request)
     {
+        //seleziona tutti i messaggi ordinati per lid del utente in modo da vedere vicini tutti i messaggi di uno stesso utente
         $inbox = Messaggi::orderBy('userId')->get();
-//        return $inbox;
+        //se non ci sono messaggi restituisce un mess di errore
+        if ($inbox->isEmpty()) {
+            return redirect()->back()->with('error', 'Nessun messaggio nel tuo inbox ');
+        }
+        //restituisce la vista con il vettore dei messaggi
         return view('messaging', ['inbox' => $inbox]);
     }
 
     public function rispondiAdmin(Request $request)
     {
 
-        if($request->isNotFilled('response')){return redirect()->back()->with('error', 'Nessuna risposta inserita');}
+        //verifica che quando l'admin clicca rispondi o aggiorna risposta, abbia effettivamente inserito un messaggio di testo
+        if ($request->isNotFilled('response')) {
+            return redirect()->back()->with('error', 'Nessuna risposta inserita');
+        }
+
+        //seleziona il messaggio da aggiornare in base all'id e di conseguenza verifica all'interno del IF se esiste, in caso contrario stampa messaggio di errore
         $messaggio = Messaggi::where('id', $request->input('messageId'))->get();
         if ($messaggio->isNotEmpty()) {
+            //se arriva qua vuol dire che e' stato trovato il messaggio con id corrispondente e va ad aggiornare o inserire la risposta tramite update
             Messaggi::where('id', $request->input('messageId'))->update(['adminResponse' => $request->input('response'), 'hasResponse' => true]);
-
         } else {
-            return redirect()->back()->with('error', 'Nessun messaggio nel tuo InBox');
+            return redirect()->back()->with('error', 'Nessun messaggio trovato con l\'ID specificato');
         }
-        $utente=User::select('nome','cognome')->where('id',$request->input('userId'))->get();
-//        $nome=$utente->get('nome');
-
+        //seleziona il nome del utente che ha mandato il messaggio per restituirlo nel messaggio di conferma cosi che l'admin sa a chi ha riposto dopo aver inviato la risposta
+        $utente = User::select('nome', 'cognome')->where('id', $request->input('userId'))->get();
         return redirect()->route('inboxAdmin')->with('success', 'Risposta inviata correttamente a' . $utente);
     }
 }
