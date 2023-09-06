@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="static">
-        <h1>Rentals for {{ date('F', mktime(0, 0, 0, $month, 1)) }} {{ date('Y') }}</h1>
+        <h1>Prenotazioni per {{ date('F', mktime(0, 0, 0, $month, 1)) }} {{ date('Y') }}</h1>
         <form action="{{ route('rentals') }}" method="GET">
             @csrf
             <label for="month">Seleziona un Mese:</label>
