@@ -605,3 +605,15 @@ button {
 .table tbody tr {
     margin-bottom: 10px;
 }
+
+/* --- Messaggi --- */
+
+.question {
+    background-color: #f0f0f0;
+    text-align: left;
+}
+
+.answer {
+	background-color: #e1f7d5;
+	text-align: right;
+}

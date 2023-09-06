@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class MessaggiController extends Controller
 {
-    public function index()
+    /* public function index()
     {
         //prende lo user id dell'utente loggato
         $userId = auth()->user()->id;
@@ -35,6 +35,18 @@ class MessaggiController extends Controller
             //restituisce la vista senza risposte
             return view('messaging', compact('userMessage', 'adminResponse'));
         }
+    } */
+
+    public function index()
+    {
+        $userId = auth()->user()->id;
+
+        // Retrieve all messages sent by the user, ordered by timestamp (latest first)
+        $userMessages = Messaggi::where('userId', $userId)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('messaging', compact('userMessages'));
     }
 
     //metodo POST per salvare il messaggio inviato da utente verso admin

@@ -5,59 +5,45 @@
 {{-- parte user--}}
 @section('content')
     @can('isUser')
-        {{--        rotta che prende tutte le righe della tabella messaggi con l-id del utente e li stampa con un foreach (tipo le auto)--}}
+    {{--  rotta che prende tutte le righe della tabella messaggi con l-id del utente e li stampa con un foreach (tipo le auto)--}}
 
         <div class="static">
 
             <h3>Sezione Messaggi</h3>
+            <p>Premi sul bottono Invia per inviare un messaggio all'Amministratore</p>
 
-            <p>Premi su Aggiungi Domanda per inviare un messaggio all'Amministratore</p>
-
+            {{-- Form per mandare messaggi all'admin --}}
             <form method="POST" action="{{ route('sendMessageToAdmin') }}">
-
                 @csrf
-
-                <textarea name="userMessage" rows="4" placeholder="Scrivi la tua domanda qui"></textarea>
-
+                <textarea name="userMessage" rows="2" placeholder="Scrivi la tua domanda qui"></textarea>
                 <button type="submit">Invia</button>
-
             </form>
 
-
-            {{-- Display User's Message --}}
-
-            <div class="user-message">
-
-                <h2>Your Message</h2>
-
-                <p>{{ $userMessage }}</p>
-
-            </div>
-
-
-            {{-- Display Admin's Response --}}
-
-            @if (!empty($adminResponse))
-
-                <div class="admin-response">
-
-                    <h2>Admin's Response</h2>
-
-                    <p>{{ $adminResponse }}</p>
-
-                </div>
-
+            @if ($userMessages->isEmpty())
+                <p>Nessuna domanda e' stata scritta dall'utente</p>
             @else
-
-                <div class="admin-response">
-
-                    <h2>Admin's Response</h2>
-
-                    <p>No response from admin yet.</p>
-
+                <h3>Messaggi dell'utente</h3>
+                <div class="message-list">
+                    @foreach($userMessages as $message)
+                        <div class="oneitem">
+                            <div class="question">
+                                <strong>La tua domanda:</strong>
+                                <p>{{ $message->userMessage }}</p>
+                            </div>
+                            <div class="answer">
+                                @if (!empty($message->adminResponse))
+                                    <strong>Risposta dall'admin:</strong>
+                                    <p>{{ $message->adminResponse }}</p>
+                                @else
+                                    <em>Ancora nessuna risposta dall'admin</em>
+                                @endif
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
-
             @endif
+
+            
 
         </div>
     @endcan
@@ -90,7 +76,7 @@
                     <form id="formRispondi" action='{{route('rispondiAdmin')}}'>
                         <div>
                             {{--                            questiondiv--}}
-                            <div class="question" style="background-color: #f0f0f0; text-align: left;">
+                            <div class="question">
                                 <p style="font-weight: bold; margin: 0;">
                                     <strong>{{$utente->nome}} {{$utente->cognome}}</strong><br>
                                     <strong>ID:{{$item->userId}}</strong><br></p>
@@ -98,7 +84,7 @@
                             </div>
 
                             @if($item->hasResponse)
-                                <div class="answer" style="background-color: #e1f7d5; text-align: right;">
+                                <div class="answer">
                                     <p style="font-weight: bold; margin: 0;"><strong>Admin:</strong></p>
                                     <p style="margin: 0;">Response: {{$item->adminResponse}}</p>
                                 </div>
