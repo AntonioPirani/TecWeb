@@ -15,6 +15,7 @@
                     <a href="{{route('auto')}}">
                         <img src="{{ asset('images/logo.png') }}" alt="Logo" >
                     </a>
+                    <a href="{{ asset('documentazione/Relazione Tec Web.pdf') }}" target="_blank">Documentazione</a>
                 </div>
             </div>
 
