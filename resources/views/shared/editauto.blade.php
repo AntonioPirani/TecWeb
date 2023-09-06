@@ -151,7 +151,7 @@
                         <label for="foto" title="Per fare l'update è necessario ricaricare la foto immessa in fase di aggiunta in caso questa fosse la stessa">
                             Nuova Foto <i class="fas fa-info-circle" style="color: #007bff;"></i>
                         </label>
-                            <input type="file" name="foto" id="foto" class="form-control-file" required>
+                            <input type="file" name="foto" id="foto" class="form-control-file">
                         </div>
 
                         <button type="submit" class="btn btn-primary">Aggiorna Auto</button>

@@ -115,17 +115,22 @@ class AutoController extends Controller
             return response()->json(['message' => 'Auto non trovata'], 404);
         }
 
-        // Controlla se c'è una foto associata alla auto 
+        // Controlla se c'è una foto associata all'auto
         if (!is_null($auto->foto)) {
             $existingImagePath = public_path('images/autos/') . $auto->foto;
-            
-            // Se la foto esiste viene eliminata dalla cartella autos
-            if (file_exists($existingImagePath)) {
-                unlink($existingImagePath);
+
+            // Se c'è una nuova foto, elimina quella esistente
+            if ($request->hasFile('foto')) {
+                if (file_exists($existingImagePath)) {
+                    unlink($existingImagePath);
+                }
+            } else {
+                // Se non c'è una nuova foto, usa quella esistente
+                $validatedData['foto'] = $auto->foto;
             }
         }
 
-        //riempe l'oggetto auto con i nuovi dati
+        // Riempe l'oggetto auto con i nuovi dati
         $auto->targa = $validatedData['targa'];
         $auto->modello = $validatedData['modello'];
         $auto->marca = $validatedData['marca'];
@@ -134,21 +139,15 @@ class AutoController extends Controller
         $auto->potenza = $validatedData['potenza'];
         $auto->tipoCambio = $validatedData['tipoCambio'];
         $auto->optional = $validatedData['optional'];
-        
-        // Controlla se nella richiesta c'è il campo existingFoto
-        if ($request->has('existingFoto')) {
-            // Usa il nome della foto esistente
-            $auto->foto = $request->input('existingFoto');
-        } else {
-            // Carica la nuova foto
-            if ($request->hasFile('foto')) {
-                $image = $request->file('foto');
-                $imageName = $image->getClientOriginalName();
-                $auto->foto = $imageName;
 
-                $destinationPath = public_path() . '/images/autos';
-                $image->move($destinationPath, $imageName);
-            }
+        // Carica la nuova foto
+        if ($request->hasFile('foto')) {
+            $image = $request->file('foto');
+            $imageName = $image->getClientOriginalName();
+            $auto->foto = $imageName;
+
+            $destinationPath = public_path() . '/images/autos';
+            $image->move($destinationPath, $imageName);
         }
 
         if ($auto->save()) {
