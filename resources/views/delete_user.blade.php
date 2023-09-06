@@ -25,7 +25,7 @@
                                 <input type="text" name="username" id="username" class="form-control" required>
                             </div>
 
-                            <button type="submit" class="btn btn-danger">Delete User</button>
+                            <button type="submit" class="btn btn-danger">Elimina Utente</button>
                         </form>
                     </div>
                     @if(session('error'))

@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Add Staff Member')
+@section('title', 'Aggiungi Staff')
 
 @section('scripts')
 
@@ -39,7 +39,7 @@
 
 @section('content')
 <div class="static">
-    <h3>Add New Staff Member</h3>
+    <h3>Aggiungi un nuovo membro dello staff</h3>
 
     <form id="addStaffForm" method="POST" action="{{ route('storestaff') }}">
                 @csrf
@@ -71,7 +71,7 @@
 
         <!-- Add more form fields as needed -->
 
-        <button type="submit" class="btn btn-primary">Add Staff Member</button>
+        <button type="submit" class="btn btn-primary">Aggiungi Membro Staff</button>
     </form>
     <div id="resultMessage" style="margin-top: 20px;"></div>
 </div>

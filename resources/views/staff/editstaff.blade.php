@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Add Staff Member')
+@section('title', 'Gestisci Staff')
 
 @section('scripts')
 
